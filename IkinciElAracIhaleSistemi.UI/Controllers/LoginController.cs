@@ -25,7 +25,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			if (Request.Cookies["kullaniciBilgileri"] != null)
 			{
 				var httpCookie = Request.Cookies["kullaniciBilgileri"];
-				vm.KullaniciAdi = httpCookie.Values["username"];
+				vm.KullaniciAdi = httpCookie.Values["kullaniciadi"];
 			}
 			return View(vm);
 		}
@@ -44,13 +44,13 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
 	        Session.Add("girisYapanKullanici", kullanici);
 
-	        FormsAuthentication.SetAuthCookie(kullanici.KullaniciAdi + kullanici.RolId+ kullanici.KullaniciIsim, true);
+	        FormsAuthentication.SetAuthCookie(kullanici.KullaniciAdi, true);
 
 	        HttpCookie cookie = new HttpCookie("kullaniciBilgileri");
 	        if (loginVm.BeniHatirla)
 	        {
 		        cookie.Expires = DateTime.Now.AddDays(1);
-		        cookie.Values.Add("username", loginVm.KullaniciAdi);
+		        cookie.Values.Add("kullaniciadi", loginVm.KullaniciAdi);
 		        HttpContext.Response.Cookies.Add(cookie);
 	        }
 	        return RedirectToAction("Index", "Home");

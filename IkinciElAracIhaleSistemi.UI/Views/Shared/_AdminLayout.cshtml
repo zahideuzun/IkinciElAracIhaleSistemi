@@ -26,12 +26,12 @@
                 <a class="sidebar-brand brand-logo" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/index.html"><img src="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo.svg" alt="logo" /></a>
                 <a class="sidebar-brand brand-logo-mini" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/index.html"><img src="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo-mini.svg" alt="logo" /></a>
             </div>
-            @Html.Partial("/Views/Home/PartialSideBar.cshtml")
+            @RenderSection("SideBar", true)
         </nav>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:../../partials/_navbar.html -->
-            @Html.Partial("/Views/Home/PartialNavbar.cshtml")
+            @RenderSection("NavBar", true)
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">

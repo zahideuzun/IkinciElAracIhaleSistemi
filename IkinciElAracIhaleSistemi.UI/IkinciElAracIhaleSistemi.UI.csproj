@@ -17201,9 +17201,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\PartialSideBar.cshtml" />
     <Content Include="Views\Home\PartialFooter.cshtml" />
-    <Content Include="Views\Home\PartialNavbar.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
