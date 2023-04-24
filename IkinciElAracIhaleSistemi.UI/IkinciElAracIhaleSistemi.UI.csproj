@@ -11013,9 +11013,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\VM\KullaniciRolVM.cs" />
-    <Compile Include="Models\VM\LoginVM.cs" />
-    <Compile Include="Models\VM\SolMenuVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -17218,6 +17215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\corona-free-dark-bootstrap-admin-template-1.0.0\template\node_modules\%40gulp-sourcemaps\identity-map\node_modules\source-map\source-map.d.ts" />
@@ -18654,6 +18652,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemi.DAL\IkinciElAracIhaleSistemi.DAL.csproj">
+      <Project>{a92624af-9448-4ab4-8202-7e5fad97ef49}</Project>
+      <Name>IkinciElAracIhaleSistemi.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemi.Entities\IkinciElAracIhaleSistemi.Entities.csproj">
+      <Project>{d20d2860-06a7-4a7b-a614-6606397541bb}</Project>
+      <Name>IkinciElAracIhaleSistemi.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

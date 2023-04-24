@@ -1,10 +1,11 @@
-﻿using IkinciElAracIhaleSistemi.UI.Models.VM;
+﻿using IkinciElAracIhaleSistemi.Entities.VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using IkinciElAracIhaleSistemi.DAL.DAL;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
 {
@@ -32,25 +33,24 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Index(LoginVM loginVm)
         {
+	        KullaniciDAL kullaniciDal = new KullaniciDAL();
+	        var kullanici = kullaniciDal.KullaniciKontrol(loginVm);
 
-	        UserDAL userDal = new UserDAL();
-	        var user = userDal.CheckUser(loginVm);
-
-	        if (user == null)
+	        if (kullanici == null)
 	        {
 		        ViewBag.HataMesaji = "Kullanıcı adı veya şifre hatalı";
 		        return View("Index");
 	        }
 
-	        Session.Add("loginUser", user);
+	        Session.Add("girisYapanKullanici", kullanici);
 
-	        FormsAuthentication.SetAuthCookie(user.Username + user.RoleId, true);
+	        FormsAuthentication.SetAuthCookie(kullanici.KullaniciAdi + kullanici.RolId+ kullanici.KullaniciIsim, true);
 
 	        HttpCookie cookie = new HttpCookie("kullaniciBilgileri");
 	        if (loginVm.BeniHatirla)
 	        {
 		        cookie.Expires = DateTime.Now.AddDays(1);
-		        cookie.Values.Add("username", loginVm.Username);
+		        cookie.Values.Add("username", loginVm.KullaniciAdi);
 		        HttpContext.Response.Cookies.Add(cookie);
 	        }
 	        return RedirectToAction("Index", "Home");

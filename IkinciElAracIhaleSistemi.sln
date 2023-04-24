@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkinciElAracIhaleSistemi.UI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkinciElAracIhaleSistemi.DAL", "IkinciElAracIhaleSistemi.DAL\IkinciElAracIhaleSistemi.DAL.csproj", "{A92624AF-9448-4AB4-8202-7E5FAD97EF49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkinciElAracIhaleSistemi.Entities", "IkinciElAracIhaleSistemi.Entities\IkinciElAracIhaleSistemi.Entities.csproj", "{D20D2860-06A7-4A7B-A614-6606397541BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A92624AF-9448-4AB4-8202-7E5FAD97EF49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A92624AF-9448-4AB4-8202-7E5FAD97EF49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A92624AF-9448-4AB4-8202-7E5FAD97EF49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D20D2860-06A7-4A7B-A614-6606397541BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20D2860-06A7-4A7B-A614-6606397541BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20D2860-06A7-4A7B-A614-6606397541BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20D2860-06A7-4A7B-A614-6606397541BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

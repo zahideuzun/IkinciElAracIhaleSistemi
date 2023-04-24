@@ -1,7 +1,8 @@
-﻿using IkinciElAracIhaleSistemi.DAL.Entities;
+﻿
 
 namespace IkinciElAracIhaleSistemi.DAL.Migrations
 {
+	using IkinciElAracIhaleSistemi.Entities.Entities;
 	using System;
 	using System.Data.Entity;
     using System.Data.Entity.Migrations;

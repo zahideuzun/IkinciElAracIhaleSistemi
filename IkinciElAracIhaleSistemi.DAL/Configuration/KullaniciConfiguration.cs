@@ -1,5 +1,6 @@
-﻿using IkinciElAracIhaleSistemi.DAL.Entities;
+﻿
 using System.Data.Entity.ModelConfiguration;
+using IkinciElAracIhaleSistemi.Entities.Entities;
 
 namespace IkinciElAracIhaleSistemi.DAL.Configuration
 {

@@ -105,65 +105,19 @@
     <Compile Include="Configuration\UyeTuruConfiguration.cs" />
     <Compile Include="Context\AracIhaleContext.cs" />
     <Compile Include="DAL\KullaniciDAL.cs" />
-    <Compile Include="Entities\Arac.cs" />
-    <Compile Include="Entities\AracFiyat.cs" />
-    <Compile Include="Entities\AracIhale.cs" />
-    <Compile Include="Entities\AracOzellik.cs" />
-    <Compile Include="Entities\AracParca.cs" />
-    <Compile Include="Entities\AracStatu.cs" />
-    <Compile Include="Entities\AracTeklif.cs" />
-    <Compile Include="Entities\AracTramer.cs" />
-    <Compile Include="Entities\AracTramerDetay.cs" />
-    <Compile Include="Entities\Bases\BaseEntity.cs" />
-    <Compile Include="Entities\Chatbot.cs" />
-    <Compile Include="Entities\Ekspertiz.cs" />
-    <Compile Include="Entities\FavoriArama.cs" />
-    <Compile Include="Entities\FavoriAramaKriter.cs" />
-    <Compile Include="Entities\FavoriIlan.cs" />
-    <Compile Include="Entities\FavoriOzellik.cs" />
-    <Compile Include="Entities\Firma.cs" />
-    <Compile Include="Entities\FirmaIletisim.cs" />
-    <Compile Include="Entities\FirmaTuru.cs" />
-    <Compile Include="Entities\Fotograf.cs" />
-    <Compile Include="Entities\Ihale.cs" />
-    <Compile Include="Entities\IhaleStatu.cs" />
-    <Compile Include="Entities\IhaleTuru.cs" />
-    <Compile Include="Entities\Ilan.cs" />
-    <Compile Include="Entities\Ilce.cs" />
-    <Compile Include="Entities\Iletisim.cs" />
-    <Compile Include="Entities\Kullanici.cs" />
-    <Compile Include="Entities\KullaniciIletisim.cs" />
-    <Compile Include="Entities\KurumsalUye.cs" />
-    <Compile Include="Entities\Marka.cs" />
-    <Compile Include="Entities\Mesaj.cs" />
-    <Compile Include="Entities\Model.cs" />
-    <Compile Include="Entities\Ozellik.cs" />
-    <Compile Include="Entities\OzellikDetay.cs" />
-    <Compile Include="Entities\Paket.cs" />
-    <Compile Include="Entities\Rol.cs" />
-    <Compile Include="Entities\RolYetki.cs" />
-    <Compile Include="Entities\Satis.cs" />
-    <Compile Include="Entities\SatisTuru.cs" />
-    <Compile Include="Entities\Sayfa.cs" />
-    <Compile Include="Entities\Sehir.cs" />
-    <Compile Include="Entities\SehirIlce.cs" />
-    <Compile Include="Entities\Sozlesme.cs" />
-    <Compile Include="Entities\SozlesmeTuru.cs" />
-    <Compile Include="Entities\Statu.cs" />
-    <Compile Include="Entities\Stok.cs" />
-    <Compile Include="Entities\Tramer.cs" />
-    <Compile Include="Entities\Ucret.cs" />
-    <Compile Include="Entities\UcretTipi.cs" />
-    <Compile Include="Entities\Uye.cs" />
-    <Compile Include="Entities\UyeIletisim.cs" />
-    <Compile Include="Entities\UyeTuru.cs" />
+    <Compile Include="DAL\RolSayfaDAL.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemi.Entities\IkinciElAracIhaleSistemi.Entities.csproj">
+      <Project>{d20d2860-06a7-4a7b-a614-6606397541bb}</Project>
+      <Name>IkinciElAracIhaleSistemi.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
