@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkinciElAracIhaleSistemi.UI", "IkinciElAracIhaleSistemi.UI\IkinciElAracIhaleSistemi.UI.csproj", "{BF0D101F-0355-487A-8D3B-6300DC9110D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkinciElAracIhaleSistemi.DAL", "IkinciElAracIhaleSistemi.DAL\IkinciElAracIhaleSistemi.DAL.csproj", "{A92624AF-9448-4AB4-8202-7E5FAD97EF49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF0D101F-0355-487A-8D3B-6300DC9110D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0D101F-0355-487A-8D3B-6300DC9110D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0D101F-0355-487A-8D3B-6300DC9110D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0D101F-0355-487A-8D3B-6300DC9110D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A92624AF-9448-4AB4-8202-7E5FAD97EF49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A92624AF-9448-4AB4-8202-7E5FAD97EF49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A92624AF-9448-4AB4-8202-7E5FAD97EF49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A92624AF-9448-4AB4-8202-7E5FAD97EF49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B962C35-10B7-4152-9DE2-15F9FC756FE3}
+	EndGlobalSection
+EndGlobal

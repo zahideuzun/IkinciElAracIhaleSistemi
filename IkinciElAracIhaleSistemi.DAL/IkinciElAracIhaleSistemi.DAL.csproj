@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A92624AF-9448-4AB4-8202-7E5FAD97EF49}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IkinciElAracIhaleSistemi.DAL</RootNamespace>
+    <AssemblyName>IkinciElAracIhaleSistemi.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\AracConfiguration.cs" />
+    <Compile Include="Configuration\AracFiyatConfiguration.cs" />
+    <Compile Include="Configuration\AracIhaleConfiguration.cs" />
+    <Compile Include="Configuration\AracOzellikConfiguration.cs" />
+    <Compile Include="Configuration\AracParcaConfiguration.cs" />
+    <Compile Include="Configuration\AracStatuConfiguration.cs" />
+    <Compile Include="Configuration\AracTeklifConfiguration.cs" />
+    <Compile Include="Configuration\AracTramerConfiguration.cs" />
+    <Compile Include="Configuration\AracTramerDetayConfiguration.cs" />
+    <Compile Include="Configuration\ChatbotConfiguration.cs" />
+    <Compile Include="Configuration\EkspertizConfiguration.cs" />
+    <Compile Include="Configuration\FavoriAramaConfiguration.cs" />
+    <Compile Include="Configuration\FavoriAramaKriterConfiguration.cs" />
+    <Compile Include="Configuration\FavoriIlanConfiguration.cs" />
+    <Compile Include="Configuration\FavoriOzellikConfiguration.cs" />
+    <Compile Include="Configuration\FirmaConfiguration.cs" />
+    <Compile Include="Configuration\FirmaIletisimConfiguration.cs" />
+    <Compile Include="Configuration\FirmaTuruConfiguration.cs" />
+    <Compile Include="Configuration\FotografConfiguration.cs" />
+    <Compile Include="Configuration\IhaleConfiguration.cs" />
+    <Compile Include="Configuration\IhaleStatuConfiguration.cs" />
+    <Compile Include="Configuration\IhaleTuruConfiguration.cs" />
+    <Compile Include="Configuration\IlanConfiguration.cs" />
+    <Compile Include="Configuration\IlceConfiguration.cs" />
+    <Compile Include="Configuration\IletisimConfiguration.cs" />
+    <Compile Include="Configuration\KullaniciConfiguration.cs" />
+    <Compile Include="Configuration\KullaniciIletisimConfiguration.cs" />
+    <Compile Include="Configuration\KurumsalUyeConfiguration.cs" />
+    <Compile Include="Configuration\MarkaConfiguration.cs" />
+    <Compile Include="Configuration\MesajConfiguration.cs" />
+    <Compile Include="Configuration\ModelConfiguration.cs" />
+    <Compile Include="Configuration\OzellikConfiguration.cs" />
+    <Compile Include="Configuration\OzellikDetayConfiguration.cs" />
+    <Compile Include="Configuration\PaketConfiguration.cs" />
+    <Compile Include="Configuration\RolConfiguration.cs" />
+    <Compile Include="Configuration\RolYetkiConfiguration.cs" />
+    <Compile Include="Configuration\SatisConfiguration.cs" />
+    <Compile Include="Configuration\SatisTuruConfiguration.cs" />
+    <Compile Include="Configuration\SayfaConfiguration.cs" />
+    <Compile Include="Configuration\SehirConfiguration.cs" />
+    <Compile Include="Configuration\SehirIlceConfiguration.cs" />
+    <Compile Include="Configuration\SozlesmeConfiguration.cs" />
+    <Compile Include="Configuration\SozlesmeTuruConfiguration.cs" />
+    <Compile Include="Configuration\StatuConfiguration.cs" />
+    <Compile Include="Configuration\StokConfiguration.cs" />
+    <Compile Include="Configuration\TramerConfiguration.cs" />
+    <Compile Include="Configuration\UcretConfiguration.cs" />
+    <Compile Include="Configuration\UcretTipiConfiguration.cs" />
+    <Compile Include="Configuration\UyeConfiguration.cs" />
+    <Compile Include="Configuration\UyeIletisimConfiguration.cs" />
+    <Compile Include="Configuration\UyeTuruConfiguration.cs" />
+    <Compile Include="Context\AracIhaleContext.cs" />
+    <Compile Include="DAL\KullaniciDAL.cs" />
+    <Compile Include="Entities\Arac.cs" />
+    <Compile Include="Entities\AracFiyat.cs" />
+    <Compile Include="Entities\AracIhale.cs" />
+    <Compile Include="Entities\AracOzellik.cs" />
+    <Compile Include="Entities\AracParca.cs" />
+    <Compile Include="Entities\AracStatu.cs" />
+    <Compile Include="Entities\AracTeklif.cs" />
+    <Compile Include="Entities\AracTramer.cs" />
+    <Compile Include="Entities\AracTramerDetay.cs" />
+    <Compile Include="Entities\Bases\BaseEntity.cs" />
+    <Compile Include="Entities\Chatbot.cs" />
+    <Compile Include="Entities\Ekspertiz.cs" />
+    <Compile Include="Entities\FavoriArama.cs" />
+    <Compile Include="Entities\FavoriAramaKriter.cs" />
+    <Compile Include="Entities\FavoriIlan.cs" />
+    <Compile Include="Entities\FavoriOzellik.cs" />
+    <Compile Include="Entities\Firma.cs" />
+    <Compile Include="Entities\FirmaIletisim.cs" />
+    <Compile Include="Entities\FirmaTuru.cs" />
+    <Compile Include="Entities\Fotograf.cs" />
+    <Compile Include="Entities\Ihale.cs" />
+    <Compile Include="Entities\IhaleStatu.cs" />
+    <Compile Include="Entities\IhaleTuru.cs" />
+    <Compile Include="Entities\Ilan.cs" />
+    <Compile Include="Entities\Ilce.cs" />
+    <Compile Include="Entities\Iletisim.cs" />
+    <Compile Include="Entities\Kullanici.cs" />
+    <Compile Include="Entities\KullaniciIletisim.cs" />
+    <Compile Include="Entities\KurumsalUye.cs" />
+    <Compile Include="Entities\Marka.cs" />
+    <Compile Include="Entities\Mesaj.cs" />
+    <Compile Include="Entities\Model.cs" />
+    <Compile Include="Entities\Ozellik.cs" />
+    <Compile Include="Entities\OzellikDetay.cs" />
+    <Compile Include="Entities\Paket.cs" />
+    <Compile Include="Entities\Rol.cs" />
+    <Compile Include="Entities\RolYetki.cs" />
+    <Compile Include="Entities\Satis.cs" />
+    <Compile Include="Entities\SatisTuru.cs" />
+    <Compile Include="Entities\Sayfa.cs" />
+    <Compile Include="Entities\Sehir.cs" />
+    <Compile Include="Entities\SehirIlce.cs" />
+    <Compile Include="Entities\Sozlesme.cs" />
+    <Compile Include="Entities\SozlesmeTuru.cs" />
+    <Compile Include="Entities\Statu.cs" />
+    <Compile Include="Entities\Stok.cs" />
+    <Compile Include="Entities\Tramer.cs" />
+    <Compile Include="Entities\Ucret.cs" />
+    <Compile Include="Entities\UcretTipi.cs" />
+    <Compile Include="Entities\Uye.cs" />
+    <Compile Include="Entities\UyeIletisim.cs" />
+    <Compile Include="Entities\UyeTuru.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

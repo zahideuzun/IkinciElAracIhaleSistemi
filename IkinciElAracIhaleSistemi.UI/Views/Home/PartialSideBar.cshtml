@@ -1,0 +1,173 @@
+﻿
+<ul class="nav">
+    <li class="nav-item profile">
+        <div class="profile-desc">
+            <div class="profile-pic">
+                <div class="count-indicator">
+                    <img class="img-xs rounded-circle " src="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/faces/face15.jpg" alt="">
+                    <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                    <h5 class="mb-0 font-weight-normal">Zahide Uzun</h5>
+                    <span>Admin</span>
+                </div>
+            </div>
+            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="mdi mdi-settings text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject ellipsis mb-1 text-small">Hesap Ayarları</p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="mdi mdi-onepassword  text-info"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject ellipsis mb-1 text-small">Şifre Değiştir</p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="mdi mdi-calendar-today text-success"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject ellipsis mb-1 text-small">Yapılacaklar Listesi</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item menu-items">
+        <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/index.html">
+            <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+            </span>
+            <span class="menu-title">Dashboard</span>
+        </a>
+    </li>
+    @*<li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#kullanici" aria-expanded="false" aria-controls="kullanici">
+            <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">Kullanıcı İşlemleri</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="kullanici">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/Kullanici/KullaniciEkle/">Kullanıcı Ekle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Kullanici/Index/">Kayıtlı Kullanıcılar</a></li>
+
+            </ul>
+        </div>
+    </li>*@
+    <li class="nav-item menu-items">
+        <a class="nav-link" href="/Kullanici/Index/">
+            <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+            </span>
+            <span class="menu-title">Kullanıcılar</span>
+        </a>
+    </li>
+    <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#arac" aria-expanded="false" aria-controls="arac">
+            <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">Araç İşlemleri</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="arac">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/Arac/Index/">Kayıtlı Araçlar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/Arac/AracEkle/">Yeni Araç Ekle</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#ilan" aria-expanded="false" aria-controls="ilan">
+            <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">İlan İşlemleri</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ilan">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ui-features/buttons.html">İlanlar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ui-features/dropdowns.html">Yeni İlan Oluştur</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#ihale" aria-expanded="false" aria-controls="ihale">
+            <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">İhale İşlemleri</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ihale">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ui-features/buttons.html">İhaleler</a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ui-features/dropdowns.html">Yeni İhale Başlat</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#uye" aria-expanded="false" aria-controls="uye">
+            <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">Üye İşlemleri</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="uye">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ui-features/buttons.html">Kayıtlı Üyeler</a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ui-features/dropdowns.html">Kurumsal Üye Onay</a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ui-features/dropdowns.html">Bireysel Üye Araç Satış</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+            </span>
+            <span class="menu-title">User Pages</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="auth">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/samples/blank-page.html"> Blank Page </a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/samples/error-404.html"> 404 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/samples/error-500.html"> 500 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/samples/login.html"> Login </a></li>
+                <li class="nav-item"> <a class="nav-link" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/samples/register.html"> Register </a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item menu-items">
+        <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
+            <span class="menu-icon">
+                <i class="mdi mdi-file-document-box"></i>
+            </span>
+            <span class="menu-title">Documentation</span>
+        </a>
+    </li>
+</ul>
+
