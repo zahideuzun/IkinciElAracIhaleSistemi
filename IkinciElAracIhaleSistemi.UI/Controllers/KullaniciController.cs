@@ -10,7 +10,7 @@ using IkinciElAracIhaleSistemi.Entities.VM;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class KullaniciController : Controller
     {
         // GET: Kullanici
@@ -56,18 +56,17 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult KullaniciGuncelle(
-            [Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")] KullaniciRolVM kullanici)
+            [Bind(Include = "KullaniciId, KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")] KullaniciRolVM kullanici)
         {
+
 	        if (ModelState.IsValid && kullanici !=null)
 	        {
 		        KullaniciDAL kullaniciDal = new KullaniciDAL();
-		        kullaniciDal.KullaniciGuncelle(kullanici);
-		        return View("KullaniciGuncelle");
-
-	        }
-
-			ViewBag.RolId = new SelectList(new RolDAL().RolleriGetir(), "Id", "RolAdi", kullanici.RolId);
-	        return View(kullanici);
+		       kullaniciDal.KullaniciGuncelle(kullanici);
+		        ViewBag.RolId = new SelectList(new RolDAL().RolleriGetir(), "Id", "RolAdi", kullanici.RolId);
+		        return View(kullanici);
+			}
+	        return RedirectToAction("Index");
 		}
 
         public ActionResult KullaniciSil(KullaniciRolVM kullanici)

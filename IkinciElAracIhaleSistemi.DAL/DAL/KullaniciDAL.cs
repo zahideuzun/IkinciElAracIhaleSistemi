@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Transactions;
 using System.Threading.Tasks;
@@ -154,14 +155,14 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			{
 				try
 				{
-					IletisimDAL iletisimTurleri = new IletisimDAL();
+					//IletisimDAL iletisimTurleri = new IletisimDAL();
 					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
 						var guncellenecekKullanici = aracDb.Kullanicilar.Find(kullanici.KullaniciId);
 						if (guncellenecekKullanici != null)
 						{
-							aracDb.Kullanicilar.Attach(guncellenecekKullanici);
-							aracDb.Entry(kullanici).State = EntityState.Modified;
+							//aracDb.Kullanicilar.Attach(guncellenecekKullanici);
+							aracDb.Entry(guncellenecekKullanici).State = EntityState.Modified;
 							kullanici.KullaniciAdi = guncellenecekKullanici.KullaniciAdi;
 							kullanici.KullaniciMail = guncellenecekKullanici.Mail;
 							kullanici.KullaniciIsim = guncellenecekKullanici.Isim;
@@ -174,28 +175,23 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
 						var mailId = Convert.ToInt16(IletisimTurleri.Mail);
 
-						var iletisimListesi = iletisimTurleri.IletisimTurleriniGetir()
-							.Where(item => item.Id == telefonId || item.Id == mailId)
-							.ToList();
+						
+						var guncellenecekIletisim = aracDb.KullaniciIletisimleri
+							.Where(x => x.KullaniciId == kullanici.KullaniciId).ToList();
 
-						foreach (var item in iletisimListesi)
+
+						foreach (var item in guncellenecekIletisim)
 						{
-							var kullaniciIletisim = new KullaniciIletisim()
+							if (item.IletisimId == telefonId)
 							{
-								IletisimId = item.Id,
-								KullaniciId = guncellenecekKullanici.KullaniciId,
-							};
-
-							if (item.Id == telefonId)
-							{
-								kullaniciIletisim.IletisimBilgi = kullanici.KullaniciTelefon;
+								item.IletisimBilgi = kullanici.KullaniciTelefon;
 							}
-							else if (item.Id == mailId)
+							else if (item.IletisimId == mailId)
 							{
-								kullaniciIletisim.IletisimBilgi = kullanici.KullaniciMail;
+								item.IletisimBilgi = kullanici.KullaniciMail;
 							}
 
-							aracDb.KullaniciIletisimleri.Attach(kullaniciIletisim);
+							aracDb.KullaniciIletisimleri.Attach(item);
 						}
 						aracDb.SaveChanges();
 					}
