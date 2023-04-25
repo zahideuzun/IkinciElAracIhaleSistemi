@@ -17208,6 +17208,8 @@
     <Content Include="Views\Kullanici\Index.cshtml" />
     <Content Include="Views\Kullanici\KullaniciEkle.cshtml" />
     <Content Include="Views\Kullanici\KullaniciGuncelle.cshtml" />
+    <Content Include="Views\Home\PartialSideBar.cshtml" />
+    <Content Include="Views\Home\PartialNavBar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -18656,6 +18658,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemi.App\IkinciElAracIhaleSistemi.App.csproj">
+      <Project>{fa161476-3a6f-42cc-8af6-6f7a44684ddd}</Project>
+      <Name>IkinciElAracIhaleSistemi.App</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IkinciElAracIhaleSistemi.DAL\IkinciElAracIhaleSistemi.DAL.csproj">
       <Project>{a92624af-9448-4ab4-8202-7e5fad97ef49}</Project>
       <Name>IkinciElAracIhaleSistemi.DAL</Name>

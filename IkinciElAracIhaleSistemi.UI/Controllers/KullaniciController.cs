@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using IkinciElAracIhaleSistemi.App.Results;
 using IkinciElAracIhaleSistemi.DAL.DAL;
 using IkinciElAracIhaleSistemi.Entities.VM;
 
@@ -26,10 +27,14 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		}
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult KullaniciEkle(/*[Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")]*/ KullaniciRolVM kullanici)
+        public ActionResult KullaniciEkle([Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")] KullaniciRolVM kullanici)
         {
-            //todo kullanici iletisim tablosuna da ekleme yapacak?
-	        if (new KullaniciDAL().KullaniciEkle(kullanici) > 0 && ModelState.IsValid) return RedirectToAction("Index");
+	        if (ModelState.IsValid && kullanici != null)
+	        {
+		        KullaniciDAL kullaniciDal = new KullaniciDAL();
+		        kullaniciDal.KullaniciEkle(kullanici);
+		        return RedirectToAction("Index");
+	        }
 
 	        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 		}
@@ -51,9 +56,15 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult KullaniciGuncelle(
-            /*[Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")]*/ KullaniciRolVM kullanici)
+            [Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")] KullaniciRolVM kullanici)
         {
-			if (new KullaniciDAL().KullaniciGuncelle(kullanici) > 0 && ModelState.IsValid) return RedirectToAction("KullaniciGuncelle");
+	        if (ModelState.IsValid && kullanici !=null)
+	        {
+		        KullaniciDAL kullaniciDal = new KullaniciDAL();
+		        kullaniciDal.KullaniciGuncelle(kullanici);
+		        return View("KullaniciGuncelle");
+
+	        }
 
 			ViewBag.RolId = new SelectList(new RolDAL().RolleriGetir(), "Id", "RolAdi", kullanici.RolId);
 	        return View(kullanici);

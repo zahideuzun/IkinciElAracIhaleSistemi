@@ -19,7 +19,15 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			}
 	        
         }
-        public PartialViewResult PartialFooter()
+        public PartialViewResult PartialSideBar()
+        {
+	        return PartialView();
+        }
+        public PartialViewResult PartialNavBar()
+        {
+	        return PartialView();
+        }
+		public PartialViewResult PartialFooter()
         {
 	        return PartialView();
         }

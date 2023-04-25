@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using System.Threading.Tasks;
+using IkinciElAracIhaleSistemi.App.Results;
+using IkinciElAracIhaleSistemi.App.Results.Bases;
 using IkinciElAracIhaleSistemi.DAL.Context;
 using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM;
@@ -58,31 +61,69 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
-		public int KullaniciEkle(KullaniciRolVM kullanici)
+		public Result KullaniciEkle(KullaniciRolVM kullanici)
 		{
-			try
+			using (TransactionScope scope = new TransactionScope())
 			{
-				using (AracIhaleContext aracDb = new AracIhaleContext())
+				try
 				{
-					aracDb.Kullanicilar.Add(new Kullanici()
+					IletisimDAL iletisimTurleri = new IletisimDAL();
+
+					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
-						KullaniciAdi = kullanici.KullaniciAdi,
-						Mail = kullanici.KullaniciMail,
-						Isim = kullanici.KullaniciIsim,
-						Soyisim = kullanici.KullaniciSoyisim,
-						Sifre = kullanici.KullaniciSifre,
-						Telefon = kullanici.KullaniciTelefon,
-						RolId = kullanici.RolId,
-					});
-					return aracDb.SaveChanges();
+						Kullanici eklenenKullanici = aracDb.Kullanicilar.Add(new Kullanici()
+						{
+							KullaniciAdi = kullanici.KullaniciAdi,
+							Mail = kullanici.KullaniciMail,
+							Isim = kullanici.KullaniciIsim,
+							Soyisim = kullanici.KullaniciSoyisim,
+							Sifre = kullanici.KullaniciSifre,
+							Telefon = kullanici.KullaniciTelefon,
+							RolId = kullanici.RolId,
+						});
+
+						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
+						var mailId = Convert.ToInt16(IletisimTurleri.Mail);
+
+						var iletisimListesi = iletisimTurleri.IletisimTurleriniGetir()
+							.Where(item => item.Id == telefonId || item.Id == mailId)
+							.ToList();
+
+						foreach (var item in iletisimListesi)
+						{
+							var kullaniciIletisim = new KullaniciIletisim()
+							{
+								IletisimId = item.Id,
+								KullaniciId = eklenenKullanici.KullaniciId,
+							};
+
+							if (item.Id == telefonId)
+							{
+								kullaniciIletisim.IletisimBilgi = kullanici.KullaniciTelefon;
+							}
+							else if (item.Id == mailId)
+							{
+								kullaniciIletisim.IletisimBilgi = kullanici.KullaniciMail;
+							}
+
+							aracDb.KullaniciIletisimleri.Add(kullaniciIletisim);
+						}
+
+						aracDb.SaveChanges();
+					}
+
+					scope.Complete();
+					return new SuccessResult("Kullanıcı kaydedildi");
+
+				}
+				catch (Exception ex)
+				{
+					scope.Complete();
+					return new ErrorResult("Kullanıcı kaydedilemedi!");
 				}
 			}
-			catch (Exception ex)
-			{
-				//todo buraya duserse napacagina karar ver
-				return -1;
-			}
 		}
+
 
 
 		public KullaniciRolVM IdyeGoreKullaniciGetir(int? id)
@@ -107,33 +148,66 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
-		public int KullaniciGuncelle(KullaniciRolVM kullanici)
+		public Result KullaniciGuncelle(KullaniciRolVM kullanici)
 		{
-			try
+			using (TransactionScope scope = new TransactionScope())
 			{
-				using (AracIhaleContext aracDb = new AracIhaleContext())
+				try
 				{
-					var guncellenecekKullanici = aracDb.Kullanicilar.Find(kullanici.KullaniciId);
-					if (guncellenecekKullanici != null)
+					IletisimDAL iletisimTurleri = new IletisimDAL();
+					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
-						aracDb.Kullanicilar.Attach(guncellenecekKullanici);
-						aracDb.Entry(kullanici).State = EntityState.Modified;
-						kullanici.KullaniciAdi = guncellenecekKullanici.KullaniciAdi;
-						kullanici.KullaniciMail = guncellenecekKullanici.Mail;
-						kullanici.KullaniciIsim = guncellenecekKullanici.Isim;
-						kullanici.KullaniciSoyisim = guncellenecekKullanici.Soyisim;
-						kullanici.KullaniciTelefon = guncellenecekKullanici.Telefon;
-						kullanici.RolId = guncellenecekKullanici.RolId;
-						kullanici.KullaniciSifre = guncellenecekKullanici.Sifre;
-					}
+						var guncellenecekKullanici = aracDb.Kullanicilar.Find(kullanici.KullaniciId);
+						if (guncellenecekKullanici != null)
+						{
+							aracDb.Kullanicilar.Attach(guncellenecekKullanici);
+							aracDb.Entry(kullanici).State = EntityState.Modified;
+							kullanici.KullaniciAdi = guncellenecekKullanici.KullaniciAdi;
+							kullanici.KullaniciMail = guncellenecekKullanici.Mail;
+							kullanici.KullaniciIsim = guncellenecekKullanici.Isim;
+							kullanici.KullaniciSoyisim = guncellenecekKullanici.Soyisim;
+							kullanici.KullaniciTelefon = guncellenecekKullanici.Telefon;
+							kullanici.RolId = guncellenecekKullanici.RolId;
+							kullanici.KullaniciSifre = guncellenecekKullanici.Sifre;
+						}
 
-					return aracDb.SaveChanges();
+						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
+						var mailId = Convert.ToInt16(IletisimTurleri.Mail);
+
+						var iletisimListesi = iletisimTurleri.IletisimTurleriniGetir()
+							.Where(item => item.Id == telefonId || item.Id == mailId)
+							.ToList();
+
+						foreach (var item in iletisimListesi)
+						{
+							var kullaniciIletisim = new KullaniciIletisim()
+							{
+								IletisimId = item.Id,
+								KullaniciId = guncellenecekKullanici.KullaniciId,
+							};
+
+							if (item.Id == telefonId)
+							{
+								kullaniciIletisim.IletisimBilgi = kullanici.KullaniciTelefon;
+							}
+							else if (item.Id == mailId)
+							{
+								kullaniciIletisim.IletisimBilgi = kullanici.KullaniciMail;
+							}
+
+							aracDb.KullaniciIletisimleri.Attach(kullaniciIletisim);
+						}
+						aracDb.SaveChanges();
+					}
+					scope.Complete();
+					return new SuccessResult("Kullanıcı güncellendi!");
 				}
-			}
-			catch (Exception ex)
-			{
-				//todo buraya duserse napacagina karar ver
-				return -1; 
+				catch (Exception ex)
+				{
+
+					scope.Complete();
+					return new ErrorResult("Kullanıcı güncellenemedi!");
+				}
 			}
 		}
 

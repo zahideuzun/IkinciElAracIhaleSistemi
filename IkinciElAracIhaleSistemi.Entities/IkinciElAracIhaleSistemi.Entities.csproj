@@ -95,11 +95,18 @@
     <Compile Include="Entities\UyeIletisim.cs" />
     <Compile Include="Entities\UyeTuru.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VM\IletisimBilgiVM.cs" />
+    <Compile Include="VM\Enum\IletisimTurleri.cs" />
     <Compile Include="VM\KullaniciRolVM.cs" />
     <Compile Include="VM\LoginVM.cs" />
     <Compile Include="VM\RolSayfaVM.cs" />
     <Compile Include="VM\RolVM.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemi.App\IkinciElAracIhaleSistemi.App.csproj">
+      <Project>{fa161476-3a6f-42cc-8af6-6f7a44684ddd}</Project>
+      <Name>IkinciElAracIhaleSistemi.App</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

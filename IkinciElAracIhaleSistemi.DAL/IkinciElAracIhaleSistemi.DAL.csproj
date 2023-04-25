@@ -40,10 +40,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Server.1.0.0\lib\net46\Microsoft.SqlServer.Server.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -104,6 +109,7 @@
     <Compile Include="Configuration\UyeIletisimConfiguration.cs" />
     <Compile Include="Configuration\UyeTuruConfiguration.cs" />
     <Compile Include="Context\AracIhaleContext.cs" />
+    <Compile Include="DAL\IletisimDAL.cs" />
     <Compile Include="DAL\KullaniciDAL.cs" />
     <Compile Include="DAL\RolDAL.cs" />
     <Compile Include="DAL\RolSayfaDAL.cs" />
@@ -115,6 +121,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemi.App\IkinciElAracIhaleSistemi.App.csproj">
+      <Project>{fa161476-3a6f-42cc-8af6-6f7a44684ddd}</Project>
+      <Name>IkinciElAracIhaleSistemi.App</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IkinciElAracIhaleSistemi.Entities\IkinciElAracIhaleSistemi.Entities.csproj">
       <Project>{d20d2860-06a7-4a7b-a614-6606397541bb}</Project>
       <Name>IkinciElAracIhaleSistemi.Entities</Name>
