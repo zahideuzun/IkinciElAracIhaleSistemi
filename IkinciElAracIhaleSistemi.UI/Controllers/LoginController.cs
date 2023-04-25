@@ -17,11 +17,8 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         {
 			LoginVM vm = new LoginVM();
 
-			if (User.Identity.IsAuthenticated)
-			{
-				return RedirectToAction("Index", "Home");
-			}
-
+			if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
+			
 			if (Request.Cookies["kullaniciBilgileri"] != null)
 			{
 				var httpCookie = Request.Cookies["kullaniciBilgileri"];
