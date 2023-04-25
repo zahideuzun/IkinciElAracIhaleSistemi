@@ -26,8 +26,9 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		}
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult KullaniciEkle([Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")] KullaniciRolVM kullanici)
+        public ActionResult KullaniciEkle(/*[Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")]*/ KullaniciRolVM kullanici)
         {
+            //todo kullanici iletisim tablosuna da ekleme yapacak?
 	        if (new KullaniciDAL().KullaniciEkle(kullanici) > 0 && ModelState.IsValid) return RedirectToAction("Index");
 
 	        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -50,7 +51,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult KullaniciGuncelle(
-            [Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")] KullaniciRolVM kullanici)
+            /*[Bind(Include = "KullaniciIsim, KullaniciSoyisim, KullaniciAdi, KullaniciSifre, KullaniciTelefon, KullaniciMail,RolId")]*/ KullaniciRolVM kullanici)
         {
 			if (new KullaniciDAL().KullaniciGuncelle(kullanici) > 0 && ModelState.IsValid) return RedirectToAction("KullaniciGuncelle");
 
@@ -60,11 +61,12 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
         public ActionResult KullaniciSil(KullaniciRolVM kullanici)
         {
-	        if (new KullaniciDAL().KullaniciGuncelle(kullanici) > 0)
+	        if (new KullaniciDAL().KullaniciSil(kullanici) > 0)
 	        {
 		        return RedirectToAction("Index");
 	        }
-	        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        //todo hata mesaji duzenlenecek
+			return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 		}
 	}
 }

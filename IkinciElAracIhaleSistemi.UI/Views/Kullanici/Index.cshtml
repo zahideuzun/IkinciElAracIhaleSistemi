@@ -2,7 +2,7 @@
 @model List<IkinciElAracIhaleSistemi.Entities.VM.KullaniciRolVM>
 @{
 	int sira = 1;
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -13,9 +13,9 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Kullanıcılar</h4>
-
+	            <a href="/Kullanici/KullaniciEkle/" class="btn btn-outline-info, float-md-right">Yeni Kullanıcı Ekle</a>
 	            <div class="table-responsive">
-		            <a href="/Kullanici/KullaniciEkle/" class="btn btn-outline-info, border-right">Yeni Kullanıcı Ekle</a>
+		           
 		            <table class="table">
 			            <thead>
 			            <tr>
@@ -34,7 +34,7 @@
 			            @foreach (var item in Model)
 			            {
 				            <tr>
-					            <td>(@sira++)</td>
+					            <td>(@sira)</td>
 					            <td>@item.KullaniciAdi</td>
 					            <td>@item.KullaniciIsim</td>
 					            <td>@item.KullaniciSoyisim</td>

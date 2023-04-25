@@ -35,12 +35,14 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
 	        if (kullanici == null)
 	        {
+				//todo mesaji kullaniciya göster
 		        ViewBag.HataMesaji = "Kullanıcı adı veya şifre hatalı";
 		        return View("Index");
 	        }
 	        FormsAuthentication.SetAuthCookie(kullanici.KullaniciAdi, true);
 
 	        HttpCookie cookie = new HttpCookie("kullaniciBilgileri");
+			//todo checkboxi düzenle
 	        if (loginVm.BeniHatirla)
 	        {
 		        cookie.Expires = DateTime.Now.AddDays(1);
@@ -50,6 +52,11 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
 	        Session.Add("girisYapanKullanici", kullanici);
 			return RedirectToAction("Index", "Home");
+        }
+        public ActionResult LogOut()
+        {
+	        FormsAuthentication.SignOut();
+	        return RedirectToAction("Index", "Login");
         }
 	}
 }

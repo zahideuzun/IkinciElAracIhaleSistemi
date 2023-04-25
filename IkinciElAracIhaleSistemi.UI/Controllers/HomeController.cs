@@ -14,6 +14,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         public ActionResult Index()
         {
 	        {
+                //todo giren her kullanici dashboardda satis bilgilerini falan görmesin
 				return View();
 			}
 	        

@@ -68,7 +68,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 					{
 						KullaniciAdi = kullanici.KullaniciAdi,
 						Mail = kullanici.KullaniciMail,
-						Isim = kullanici.KullaniciMail,
+						Isim = kullanici.KullaniciIsim,
 						Soyisim = kullanici.KullaniciSoyisim,
 						Sifre = kullanici.KullaniciSifre,
 						Telefon = kullanici.KullaniciTelefon,

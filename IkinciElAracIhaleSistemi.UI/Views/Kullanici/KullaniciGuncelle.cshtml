@@ -6,7 +6,7 @@
 
 @using (Html.BeginForm("KullaniciGuncelle", "Kullanici", FormMethod.Post))
 {
-
+	@Html.AntiForgeryToken()
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -40,7 +40,7 @@
 			            @Html.LabelFor(a => a.RolId, "Rol:")
 			            @Html.DropDownList("RolId", null, htmlAttributes: new { @class = "form-control" })
 		            </div>
-		            <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+		            <button type="submit" class="btn btn-primary mr-2 float-md-right">Kaydet</button>
 		            <button class="btn btn-dark">İptal</button>
 	            </form>
             </div>

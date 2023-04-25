@@ -2,10 +2,10 @@
 @using IkinciElAracIhaleSistemi.Entities.VM
 
 @{
-	KullaniciRolVM kullanici = (Session["girisYapanKullanici"] as KullaniciRolVM);
-	List<RolSayfaVM> listMenu = new RolSayfaDAL().RoleGoreSayfaYetkileriniGetir((Session["girisYapanKullanici"] as KullaniciRolVM).RolId);
-	ViewBag.Menu = listMenu;
-	ViewBag.GirisYapanKullanici = kullanici;
+    KullaniciRolVM kullanici = (Session["girisYapanKullanici"] as KullaniciRolVM);
+    List<RolSayfaVM> listMenu = new RolSayfaDAL().RoleGoreSayfaYetkileriniGetir((Session["girisYapanKullanici"] as KullaniciRolVM).RolId);
+    ViewBag.Menu = listMenu;
+    ViewBag.GirisYapanKullanici = kullanici;
 }
 
 <!DOCTYPE html>
@@ -276,7 +276,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a class="dropdown-item preview-item" href="/Login/LogOut">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-logout text-danger"></i>

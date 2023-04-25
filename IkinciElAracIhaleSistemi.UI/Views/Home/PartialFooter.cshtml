@@ -1,7 +1,29 @@
-﻿<footer class="footer">
+﻿@using System.Diagnostics.Eventing.Reader
+@using IkinciElAracIhaleSistemi.Entities.VM
+@{
+	KullaniciRolVM kullanici = (Session["girisYapanKullanici"] as KullaniciRolVM);
+} 
+	
+
+
+<footer class="footer">
     <div class="d-sm-flex justify-content-center justify-content-sm-between">
         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Zahide Uzun</a> from Bootstrapdash.com</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">@kullanici.KullaniciIsim @kullanici.RolAdi</a> from Bootstrapdash.com</span>
     </div>
+    @if (kullanici.RolAdi == "Süper Admin")
+    {
+        <div>
+            husamettin
+        </div>
+    }
+    else
+    {
+        <div>
+            cindoruk
+        </div>
+    }
+
+
 </footer>
 
