@@ -11008,6 +11008,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Content\corona-free-dark-bootstrap-admin-template-1.0.0\template\node_modules\node-gyp\lib\Find-VS2017.cs" />
+    <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -17210,6 +17211,8 @@
     <Content Include="Views\Kullanici\KullaniciGuncelle.cshtml" />
     <Content Include="Views\Home\PartialSideBar.cshtml" />
     <Content Include="Views\Home\PartialNavBar.cshtml" />
+    <Content Include="Views\ErrorPage\Error404.cshtml" />
+    <Content Include="Views\ErrorPage\Error401.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
