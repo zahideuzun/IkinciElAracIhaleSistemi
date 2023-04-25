@@ -41,9 +41,6 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		        ViewBag.HataMesaji = "Kullanıcı adı veya şifre hatalı";
 		        return View("Index");
 	        }
-
-	        Session.Add("girisYapanKullanici", kullanici);
-
 	        FormsAuthentication.SetAuthCookie(kullanici.KullaniciAdi, true);
 
 	        HttpCookie cookie = new HttpCookie("kullaniciBilgileri");
@@ -53,7 +50,9 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		        cookie.Values.Add("kullaniciadi", loginVm.KullaniciAdi);
 		        HttpContext.Response.Cookies.Add(cookie);
 	        }
-	        return RedirectToAction("Index", "Home");
+
+	        Session.Add("girisYapanKullanici", kullanici);
+			return RedirectToAction("Index", "Home");
         }
 	}
 }

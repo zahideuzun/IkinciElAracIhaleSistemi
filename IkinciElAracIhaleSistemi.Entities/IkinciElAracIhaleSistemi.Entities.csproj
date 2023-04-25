@@ -98,6 +98,7 @@
     <Compile Include="VM\KullaniciRolVM.cs" />
     <Compile Include="VM\LoginVM.cs" />
     <Compile Include="VM\RolSayfaVM.cs" />
+    <Compile Include="VM\RolVM.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

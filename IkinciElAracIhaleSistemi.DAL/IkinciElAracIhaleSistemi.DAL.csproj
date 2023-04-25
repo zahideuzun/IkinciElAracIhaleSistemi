@@ -105,6 +105,7 @@
     <Compile Include="Configuration\UyeTuruConfiguration.cs" />
     <Compile Include="Context\AracIhaleContext.cs" />
     <Compile Include="DAL\KullaniciDAL.cs" />
+    <Compile Include="DAL\RolDAL.cs" />
     <Compile Include="DAL\RolSayfaDAL.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

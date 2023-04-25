@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IkinciElAracIhaleSistemi.DAL.Configuration;
+using IkinciElAracIhaleSistemi.Entities.Entities.Bases;
 
 namespace IkinciElAracIhaleSistemi.DAL.Context
 {
@@ -130,5 +131,31 @@ namespace IkinciElAracIhaleSistemi.DAL.Context
 		public DbSet<Statu> Status { get; set; }
 
 		#endregion
+
+		public override int SaveChanges()
+		{
+			var data = ChangeTracker.Entries<BaseEntity>();
+			foreach (var entry in data)
+			{
+				if (entry.State == EntityState.Added)
+				{
+					entry.Entity.CreatedDate = DateTime.Now;
+					entry.Entity.IsActive = true;
+					entry.Entity.IsDeleted = false;
+				}
+				else if (entry.State == EntityState.Modified)
+				{
+					entry.Entity.ModifiedDate = DateTime.Now;
+				}
+				else if (entry.State == EntityState.Deleted)
+				{
+					entry.Entity.ModifiedDate = DateTime.Now;
+					entry.Entity.IsActive = false;
+					entry.Entity.IsDeleted = true;
+					entry.State = EntityState.Modified;
+				}
+			}
+			return base.SaveChanges();
+		}
 	}
 }

@@ -1,0 +1,51 @@
+﻿@model IkinciElAracIhaleSistemi.Entities.VM.KullaniciRolVM
+@{
+    ViewBag.Title = "KullaniciEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("KullaniciEkle", "Kullanici", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+	            <p class="card-description"> Yeni Kullanıcı Ekleme Paneli </p>
+                <form class="forms-sample" method="post">
+                    <div class="form-group">
+                        <label>Kullanıcı Adı</label>
+                        @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>İsim</label>
+                        @Html.TextBoxFor(x => x.KullaniciIsim, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Soyisim</label>
+                        @Html.TextBoxFor(x => x.KullaniciSoyisim, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        @Html.TextBoxFor(x => x.KullaniciTelefon, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Mail Adresi</label>
+                        @Html.TextBoxFor(x => x.KullaniciMail, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Şifre</label>
+                        @Html.TextBoxFor(x => x.KullaniciSifre, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.RolId, "Rol:")
+                        @Html.DropDownList("RolId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+                    <button class="btn btn-dark">İptal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
