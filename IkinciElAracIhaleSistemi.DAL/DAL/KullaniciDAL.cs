@@ -125,8 +125,6 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
-
-
 		public KullaniciRolVM IdyeGoreKullaniciGetir(int? id)
 		{
 			using (AracIhaleContext aracDb = new AracIhaleContext())
@@ -163,13 +161,13 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 						{
 							//aracDb.Kullanicilar.Attach(guncellenecekKullanici);
 							aracDb.Entry(guncellenecekKullanici).State = EntityState.Modified;
-							kullanici.KullaniciAdi = guncellenecekKullanici.KullaniciAdi;
-							kullanici.KullaniciMail = guncellenecekKullanici.Mail;
-							kullanici.KullaniciIsim = guncellenecekKullanici.Isim;
-							kullanici.KullaniciSoyisim = guncellenecekKullanici.Soyisim;
-							kullanici.KullaniciTelefon = guncellenecekKullanici.Telefon;
-							kullanici.RolId = guncellenecekKullanici.RolId;
-							kullanici.KullaniciSifre = guncellenecekKullanici.Sifre;
+							guncellenecekKullanici.KullaniciAdi = kullanici.KullaniciAdi;
+							guncellenecekKullanici.Mail = kullanici.KullaniciMail;
+							guncellenecekKullanici.Isim = kullanici.KullaniciIsim;
+							guncellenecekKullanici.Soyisim = kullanici.KullaniciSoyisim;
+							guncellenecekKullanici.Telefon = kullanici.KullaniciTelefon;
+							guncellenecekKullanici.RolId = kullanici.RolId;
+							guncellenecekKullanici.Sifre = kullanici.KullaniciSifre;
 						}
 
 						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
