@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -21,6 +22,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			using (AracIhaleContext aracDb = new AracIhaleContext())
 			{
 				return (from u in aracDb.Kullanicilar
+						where u.IsActive == true
 					select new KullaniciRolVM()
 					{
 						KullaniciId = u.KullaniciId,
@@ -203,7 +205,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
-		public Result KullaniciSil(int id)
+		public Result KullaniciSil(int? id)
 		{
 			using (TransactionScope scope = new TransactionScope())
 			{
@@ -211,10 +213,13 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				{
 					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
+						
 						var silinecekKullanici = aracDb.Kullanicilar.Find(id);
 						if (silinecekKullanici != null)
 						{
-							aracDb.Entry(silinecekKullanici).State = EntityState.Deleted;
+							silinecekKullanici.IsActive = false;
+							silinecekKullanici.IsDeleted = true;
+							silinecekKullanici.ModifiedDate = DateTime.Now;
 						}
 
 						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
@@ -237,7 +242,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							}
 						}
 
-						//savechanges contextte override edildi.
+						//todo savechanges contextte override edildi. Entry.State kullanarak yap?? 
 						aracDb.SaveChanges();
 					}
 					scope.Complete();

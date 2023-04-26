@@ -1,0 +1,327 @@
+﻿@model IkinciElAracIhaleSistemi.Entities.VM.Arac.AracEklemeDetayVM
+@{
+    ViewBag.Title = "AracEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AracEkle", "Arac", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Araç Detay Bilgileri</h6>
+                    <h5 class="card-title"></h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        Bireysel/Kurumsal
+                                        <ul class="list-group">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    <select class="form-control">
+                                                        <option>Seçiniz</option>
+                                                        <option value="1">Bireysel</option>
+                                                        <option value="0">Kurumsal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @Html.AntiForgeryToken()
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            @*<div class="form-group row">*@
+                                            <div class="col-sm-10">
+                                                @Html.LabelFor(a => a.Firma.Id, "Firma")
+                                                @Html.DropDownListFor(a => a.FirmaId, Model.Firmalar, "Firma", new { @class = "form-control" })
+                                            </div>
+                                            @*</div>*@
+
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.Statu.StatuId, "Statü")
+                                                    @Html.DropDownListFor(a => a.StatuId, Model.Statuler, "Statü", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    @*Fiyat*@
+                                    <div class="col">
+                                        Fiyat
+                                        <ul class="list-group list-group-flush">
+                                            <div class="col-sm-10">
+                                                @Html.TextBoxFor(a => a.Fiyat, new { @class = "form-control" })
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Araç Ekleme</h6>
+                    <h5 class="card-title"></h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.Marka.MarkaId, "Marka")
+                                                    @Html.DropDownListFor(a => a.MarkaId, Model.Markalar, "Marka", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.Model.ModelId, "Model")
+                                                    @Html.DropDownListFor(a => a.ModelId, Model.Modeller, "Model", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Gövde Tipi")
+                                                    @Html.DropDownListFor(a => a.GovdeTipiId, Model.GovdeTipleri, "Gövde Tipi", new { @class = "form-control" })
+
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        Yıl
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.TextBoxFor(a => a.Yil, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Yakıt Tipi")
+                                                    @Html.DropDownListFor(a => a.YakitTipiId, Model.YakitTipleri, "Yakıt Tipi", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Vites Tipi")
+                                                    @Html.DropDownListFor(a => a.VitesTipiId, Model.VitesTipleri, "Vites Tipi", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Versiyon")
+                                                    @Html.DropDownListFor(a => a.VersiyonId, Model.Versiyonlar, "Versiyon", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        Km Bilgisi
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.TextBoxFor(a => a.Km, new { @class = "form-control" })
+                                                    @*<input class="form-control" type="number" asp-for="Km"/>*@
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Renk")
+                                                    @Html.DropDownListFor(a => a.RenkId, Model.Renkler, "Renk", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Donanim")
+                                                    @Html.DropDownListFor(a => a.DonanimId, Model.Donanimlar, "Donanim", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+
+                                        </ul>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="formFileMultiple" class="form-label">Fotoğraf Ekle</label>
+                                        <input class="form-control" type="file" id="formFileMultiple" multiple asp-for="AracÖzellikVM.Resim">
+                                    </div>
+                                    <div class="col">
+                                        <label for="floatingTextarea2">Açıklama</label>
+                                        @Html.TextArea("Açıklama", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body" disabled>
+                    <br />
+                    <button type="button" class="btn btn-primary">Hemen Al Satış</button>
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#komisyonModal">Komisyon</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tarihceModal">Araç Tarihçe</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aliciModal">Alıcı Bilgileri Ekle</button>
+                    <a class="btn btn-info" href="" role="button" data-toggle="modal" data-target="#ilanModal">İlan Bilgileri Ekle</a>
+                    <a class="btn btn-warning" href="" role="button" data-toggle="modal" data-target="#tramerModal">Tramer Bilgileri Ekle</a>
+
+                    <button type="submit" class="btn btn-dark">Kaydet</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ilanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">İlan Bilgileri</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">İlan Başlığı:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">İlan Açıklama:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                        <button type="button" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="tarihceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Araç Tarihçe</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Araç tarihçe
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="aliciModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alıcı Bilgileri</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Alıcı
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="komisyonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alıcı Bilgileri</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Araç Komisyon
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+

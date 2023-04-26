@@ -69,7 +69,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult KullaniciSil(int id)
+		public ActionResult KullaniciSil(int? id)
 		{
 			if (ModelState.IsValid && id != null)
 			{
