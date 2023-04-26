@@ -182,14 +182,12 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 						{
 							if (item.IletisimId == telefonId)
 							{
-								item.IletisimBilgi = kullanici.KullaniciTelefon;
+								item.IletisimBilgi = guncellenecekKullanici.Telefon;
 							}
 							else if (item.IletisimId == mailId)
 							{
-								item.IletisimBilgi = kullanici.KullaniciMail;
+								item.IletisimBilgi = guncellenecekKullanici.Mail;
 							}
-
-							aracDb.KullaniciIletisimleri.Attach(item);
 						}
 						aracDb.SaveChanges();
 					}
@@ -205,25 +203,51 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
-		public int KullaniciSil(KullaniciRolVM kullanici)
+		public Result KullaniciSil(int id)
 		{
-			try
+			using (TransactionScope scope = new TransactionScope())
 			{
-				using (AracIhaleContext aracDb = new AracIhaleContext())
+				try
 				{
-					var silinecekKullanici = aracDb.Kullanicilar.Find(kullanici.KullaniciId);
-					if (silinecekKullanici != null)
+					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
-						aracDb.Entry(kullanici).State = EntityState.Deleted;
+						var silinecekKullanici = aracDb.Kullanicilar.Find(id);
+						if (silinecekKullanici != null)
+						{
+							aracDb.Entry(silinecekKullanici).State = EntityState.Deleted;
+						}
+
+						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
+						var mailId = Convert.ToInt16(IletisimTurleri.Mail);
+
+						var guncellenecekIletisim = aracDb.KullaniciIletisimleri
+							.Where(x => x.KullaniciId == id).ToList();
+
+						foreach (var item in guncellenecekIletisim)
+						{
+							if (item.IletisimId == telefonId)
+							{
+								item.IsActive = false;
+								item.IsDeleted = true;
+							}
+							else if (item.IletisimId == mailId)
+							{
+								item.IsActive = false;
+								item.IsDeleted = true;
+							}
+						}
+
+						//savechanges contextte override edildi.
+						aracDb.SaveChanges();
 					}
-					//savechanges contextte override edildi.
-					return aracDb.SaveChanges();
+					scope.Complete();
+					return new SuccessResult("Kullanıcı silindi!");
 				}
-			}
-			catch (Exception ex)
-			{
-				//todo buraya duserse napacagina karar ver
-				return -1;
+				catch (Exception ex)
+				{
+					scope.Complete();
+					return new ErrorResult("Kullanıcı silinemedi!");
+				}
 			}
 		}
 

@@ -1,8 +1,8 @@
 ﻿
 @model List<IkinciElAracIhaleSistemi.Entities.VM.KullaniciRolVM>
 @{
-	int sira = 1;
-	ViewBag.Title = "Index";
+    int sira = 1;
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -13,43 +13,44 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Kullanıcılar</h4>
-	            <a href="/Kullanici/KullaniciEkle/" class="btn btn-outline-info, float-md-right">Yeni Kullanıcı Ekle</a>
-	            <div class="table-responsive">
-		           
-		            <table class="table">
-			            <thead>
-			            <tr>
-				            <th>#</th>
-				            <th>Kullanıcı Adı</th>
-				            <th>İsim</th>
-				            <th>Soyisim</th>
-				            <th>Telefon</th>
-				            <th>Mail Adresi</th>
-				            <th>Rolü</th>
-				            <th>Sil</th>
-				            <th>Güncelle</th>
-			            </tr>
-			            </thead>
-			            <tbody>
-			            @foreach (var item in Model)
-			            {
-				            <tr>
-					            <td>(@sira)</td>
-					            <td>@item.KullaniciAdi</td>
-					            <td>@item.KullaniciIsim</td>
-					            <td>@item.KullaniciSoyisim</td>
-					            <td>@item.KullaniciTelefon</td>
-					            <td>@item.KullaniciMail</td>
-					            <td>@item.RolAdi</td>
-					            <td><a href="/Kullanici/KullaniciSil/@item.KullaniciId" class="btn btn-outline-danger">Sil</a></td>
-					            <td><a href="/Kullanici/KullaniciGuncelle/@item.KullaniciId" class="btn btn-outline-success">Güncelle</a></td>
-				            </tr>
-			            }
+                <a href="/Kullanici/KullaniciEkle/" class="btn btn-outline-info, float-md-right">Yeni Kullanıcı Ekle</a>
+                <div class="table-responsive">
+	                <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>İsim</th>
+                                <th>Soyisim</th>
+                                <th>Telefon</th>
+                                <th>Mail Adresi</th>
+                                <th>Rolü</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@sira</td>
+                                    <td>@item.KullaniciAdi</td>
+                                    <td>@item.KullaniciIsim</td>
+                                    <td>@item.KullaniciSoyisim</td>
+                                    <td>@item.KullaniciTelefon</td>
+                                    <td>@item.KullaniciMail</td>
+                                    <td>@item.RolAdi</td>
+                                    <td><a href="/Kullanici/KullaniciSil/@item.KullaniciId" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Kullanici/KullaniciGuncelle/@item.KullaniciId" class="btn btn-outline-success">Güncelle</a></td>
+                                </tr>
 
-			            </tbody>
-		            </table>
+	                            sira++;
+                            }
 
-	            </div>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>
