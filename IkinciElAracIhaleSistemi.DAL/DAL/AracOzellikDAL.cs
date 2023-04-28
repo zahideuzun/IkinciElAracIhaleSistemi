@@ -23,22 +23,30 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 									 OzellikDetayId = ozd.OzellikDetayId,
 									 OzellikDetayAdi = ozd.OzellikDetayi
 								 }).ToList();
-
-
-
 				return ozellikListesi;
 			}
 		}
-		public List<SelectListItem> VitesTipiListesineDonustur()
+		public List<SelectListItem> AracTuruListesineDonustur()
 		{
-			var rolVm = new AracEklemeDetayVM();
-			rolVm.VitesTipleri = new AracOzellikDAL().AracOzellikleriGetir(AracOzellikleri.VitesTipi)
+			var aracVm = new AracEklemeDetayVM();
+			aracVm.AracTurleri = new AracOzellikDAL().AracOzellikleriGetir(AracOzellikleri.Tur)
 				.Select(r => new SelectListItem()
 				{
 					Value = r.OzellikDetayId.ToString(),
 					Text = r.OzellikDetayAdi,
 				}).ToList();
-			return rolVm.VitesTipleri;
+			return aracVm.AracTurleri;
+		}
+		public List<SelectListItem> VitesTipiListesineDonustur()
+		{
+			var aracVm = new AracEklemeDetayVM();
+			aracVm.VitesTipleri = new AracOzellikDAL().AracOzellikleriGetir(AracOzellikleri.VitesTipi)
+				.Select(r => new SelectListItem()
+				{
+					Value = r.OzellikDetayId.ToString(),
+					Text = r.OzellikDetayAdi,
+				}).ToList();
+			return aracVm.VitesTipleri;
 		}
 		public List<SelectListItem> GovdeTipiListesineDonustur()
 		{

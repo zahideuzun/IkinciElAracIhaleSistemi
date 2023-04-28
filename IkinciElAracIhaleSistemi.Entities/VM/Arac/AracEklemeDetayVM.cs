@@ -19,14 +19,25 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		public int MarkaId { get; set; }
 		public int ModelId { get; set; }
 		public int StatuId { get; set; }
+		public int VitesTipiId { get; set; }
+		public int YakitTipiId { get; set; }
+		public int FirmaId { get; set; }
+		public string FirmaAdi { get; set; }
+		public decimal Fiyat { get; set; }
+		public decimal Km { get; set; }
+		public int DonanimId { get; set; }
+		public int Yil { get; set; }
+		public int AracTuruId { get; set; }
 
+		public SelectListGroup SelectList { get; set; }
 
 		public OzellikDetay OzellikDetay { get; set; }
 		public List<SelectListItem> GovdeTipleri { get; set; }
 		public List<SelectListItem> YakitTipleri { get; set; }
 		public List<SelectListItem> VitesTipleri { get; set; }
+		public List<SelectListItem> AracTurleri { get; set; }
 		
-		
+		public AracOzellik AracOzellik { get; set; }
 		public List<SelectListItem> Renkler { get; set; }
 		public List<SelectListItem> Markalar { get; set; }
 		public List<SelectListItem> Modeller { get; set; }
@@ -37,15 +48,13 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		
 		public Statu Statu { get; set; }
 		public List<SelectListItem> Versiyonlar { get; set; }
-		public string Donanim { get; set; }
+		
 		public List<SelectListItem> Donanimlar { get; set; }
 		public List<SelectListItem> Firmalar { get; set; }
-		public int FirmaId { get; set; }
-		public string FirmaAdi { get; set; }
+		
 		public Firma Firma { get; set; }
-		public decimal Fiyat { get; set; }
-		public decimal Km { get; set; }
+		
 		public AracFiyat AracFiyat { get; set; }
-		public int VitesTipiId { get; set; }
+		
 	}
 }

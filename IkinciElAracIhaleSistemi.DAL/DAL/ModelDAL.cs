@@ -2,6 +2,7 @@
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
@@ -21,6 +22,17 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 					}).ToList();
 			}
 			
+		}
+		public List<SelectListItem> ModelListesineDonustur()
+		{
+			var modelVm = new ModelVM();
+			modelVm.Modeller = new ModelDAL().ModelleriGetir()
+				.Select(r => new SelectListItem()
+				{
+					Value = r.ModelId.ToString(),
+					Text = r.ModelAdi
+				}).ToList();
+			return modelVm.Modeller;
 		}
 	}
 }

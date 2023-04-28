@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using IkinciElAracIhaleSistemi.DAL.Context;
+using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM;
+using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
@@ -26,5 +29,17 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 
 		}
+		public List<SelectListItem> FirmaListesineDonustur()
+		{
+			var firmaVm = new AracEklemeDetayVM();
+			firmaVm.Firmalar = new FirmaDAL().FirmalariGetir()
+				.Select(r => new SelectListItem()
+				{
+					Value = r.FirmaId.ToString(),
+					Text = r.FirmaAdi
+				}).ToList();
+			return firmaVm.Firmalar;
+		}
+
 	}
 }

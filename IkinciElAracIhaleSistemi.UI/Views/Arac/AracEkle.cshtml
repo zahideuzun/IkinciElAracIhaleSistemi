@@ -24,11 +24,8 @@
                                         <ul class="list-group">
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    <select class="form-control">
-                                                        <option>Seçiniz</option>
-                                                        <option value="1">Bireysel</option>
-                                                        <option value="0">Kurumsal</option>
-                                                    </select>
+	                                                @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
+	                                                @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text", new { @class = "form-control" }))
                                                 </div>
                                             </div>
                                             @Html.AntiForgeryToken()
@@ -38,8 +35,8 @@
                                         <ul class="list-group list-group-flush">
                                             @*<div class="form-group row">*@
                                             <div class="col-sm-10">
-                                                @Html.LabelFor(a => a.Firma.Id, "Firma")
-                                                @*@Html.DropDownListFor(a => a.FirmaId, Model.Firmalar, "Firma", new { @class = "form-control" })*@
+	                                            @Html.LabelFor(a => a.FirmaId, "Firma")
+	                                            @Html.DropDownListFor(a => a.FirmaId, new SelectList(ViewBag.Firmalar, "Value", "Text", new { @class = "form-control" }))
                                             </div>
                                             @*</div>*@
 
@@ -50,8 +47,8 @@
 
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    @Html.LabelFor(a => a.Statu.StatuId, "Statü")
-                                                    @*@Html.DropDownListFor(a => a.StatuId, Model.Statuler, "Statü", new { @class = "form-control" })*@
+	                                                @Html.LabelFor(a => a.StatuId, "Statü")
+	                                                @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text", new { @class = "form-control" }))
                                                 </div>
                                             </div>
                                         </ul>
@@ -92,7 +89,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.LabelFor(a => a.Marka.MarkaId, "Marka")
-                                                    @*@Html.DropDownListFor(a => a.MarkaId, Model.Markalar, "Marka", new { @class = "form-control" })*@
+                                                    @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text", new { @class = "form-control" }))
                                                 </div>
                                             </div>
 
@@ -103,7 +100,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.LabelFor(a => a.Model.ModelId, "Model")
-                                                    @*@Html.DropDownListFor(a => a.ModelId, Model.Modeller, "Model", new { @class = "form-control" })*@
+                                                    @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text", new { @class = "form-control" }))
                                                 </div>
                                             </div>
                                         </ul>
@@ -112,8 +109,8 @@
                                         <ul class="list-group list-group-flush">
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-	                                                @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Gövde Tipi")
-	                                                @*@Html.DropDownListFor(a => a.GovdeTipiId, new SelectList(ViewBag.GovdeTipleri, "GovdeTipiId", "GovdeTipi", "Gövde Tipi Seçiniz", new { @class = "form-control" }))*@
+                                                    @Html.LabelFor(a => a.GovdeTipiId, "Gövde Tipi")
+                                                    @Html.DropDownListFor(a => a.GovdeTipiId, new SelectList(ViewBag.GovdeTipleri, "Value", "Text", new { @class = "form-control" }))
 
                                                 </div>
                                             </div>
@@ -124,7 +121,7 @@
                                         <ul class="list-group list-group-flush">
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    @*@Html.TextBoxFor(a => a.Yil, new { @class = "form-control" })*@
+                                                    @Html.TextBoxFor(a => a.Yil, new { @class = "form-control" })
                                                 </div>
                                             </div>
                                         </ul>
@@ -135,8 +132,8 @@
                                         <ul class="list-group list-group-flush">
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Yakıt Tipi")
-                                                    @*@Html.DropDownListFor(a => a.YakitTipiId, new SelectList(ViewBag.AracOzellikleri, "YakitTipiId", "YakitTipi"), "Yakit Tipi Seçiniz", new { @class = "form-control" })*@
+                                                    @Html.LabelFor(a => a.YakitTipiId, "Yakıt Tipi")
+                                                    @Html.DropDownListFor(a => a.YakitTipiId, new SelectList(ViewBag.YakitTipleri, "Value", "Text", new { @class = "form-control" }))
                                                 </div>
                                             </div>
                                         </ul>
@@ -157,7 +154,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.LabelFor(a => a.VersiyonTipiId, "Versiyon")
-                                                    @Html.DropDownListFor(a => a.OzellikDetayId, new SelectList(ViewBag.VersiyonTipleri, "Value", "Text",  new { @class = "form-control" }))
+                                                    @Html.DropDownListFor(a => a.VersiyonTipiId, new SelectList(ViewBag.VersiyonTipleri, "Value", "Text",  new { @class = "form-control" }))
                                                 </div>
                                             </div>
                                         </ul>
@@ -168,7 +165,6 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.TextBoxFor(a => a.Km, new { @class = "form-control" })
-                                                    @*<input class="form-control" type="number" asp-for="Km"/>*@
                                                 </div>
                                             </div>
                                         </ul>
@@ -189,8 +185,8 @@
                                         <ul class="list-group list-group-flush">
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    @Html.LabelFor(a => a.OzellikDetay.OzellikDetayId, "Donanim")
-                                                    @*@Html.DropDownListFor(a => a.DonanimId, Model.Donanimlar, "Donanim", new { @class = "form-control" })*@
+                                                    @Html.LabelFor(a => a.DonanimId, "Donanim")
+                                                    @Html.DropDownListFor(a => a.DonanimId, new SelectList(ViewBag.Donanimlar, "Value", "Text",  new { @class = "form-control" }))
                                                 </div>
                                             </div>
 
