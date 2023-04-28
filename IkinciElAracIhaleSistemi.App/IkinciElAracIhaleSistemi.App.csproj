@@ -45,6 +45,8 @@
     <Compile Include="Results\Bases\Result.cs" />
     <Compile Include="Results\ErrorResult.cs" />
     <Compile Include="Results\SuccessResult.cs" />
+    <Compile Include="Services\IService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

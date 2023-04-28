@@ -120,6 +120,7 @@
     <Compile Include="VM\Arac\AracEklemeDetayVM.cs" />
     <Compile Include="VM\Arac\MarkaVM.cs" />
     <Compile Include="VM\Arac\ModelVM.cs" />
+    <Compile Include="VM\Enum\AracOzellikleri.cs" />
     <Compile Include="VM\FirmaVM.cs" />
     <Compile Include="VM\IletisimBilgiVM.cs" />
     <Compile Include="VM\Enum\IletisimTurleri.cs" />
