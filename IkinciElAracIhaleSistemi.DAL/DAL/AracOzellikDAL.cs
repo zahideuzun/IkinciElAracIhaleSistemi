@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using IkinciElAracIhaleSistemi.DAL.Context;
-using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 
@@ -38,7 +37,5 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			return ozellikListesi;
 		}
 
-
-		
 	}
 }

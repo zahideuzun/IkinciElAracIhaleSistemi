@@ -21,7 +21,7 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		public int StatuId { get; set; }
 		public int VitesTipiId { get; set; }
 		public int YakitTipiId { get; set; }
-		public int FirmaId { get; set; }
+		public int? FirmaId { get; set; }
 		public string Plaka { get; set; }
 		public decimal Fiyat { get; set; }
 		public decimal Km { get; set; }

@@ -10,7 +10,6 @@ namespace IkinciElAracIhaleSistemi.App.Helper
 
 	public class CacheHelper
 	{
-		
 		public static T GetOrSet<T>(string key, Func<T> getItemCallback, DateTimeOffset absoluteExpiration)
 		{
 			var cache = MemoryCache.Default;
@@ -24,8 +23,5 @@ namespace IkinciElAracIhaleSistemi.App.Helper
 
 			return (T)item;
 		}
-
-
 	}
-
 }

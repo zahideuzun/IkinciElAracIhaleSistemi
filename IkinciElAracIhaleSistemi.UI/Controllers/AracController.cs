@@ -42,7 +42,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			return View();
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult AracEkle([Bind(Exclude = "Fotograf, Aciklama, FirmaId")] AracEklemeDetayVM arac)
+        public ActionResult AracEkle([Bind(Exclude = "Fotograf, Aciklama")] AracEklemeDetayVM arac)
         {
 	        if (ModelState.IsValid && arac.AracId == 0) //kayitli bir arac yoksa ekleme islemi
 	        {
@@ -54,8 +54,8 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 	        {
 		        AracDAL aracDal = new AracDAL();
 				aracDal.AracGuncelle(arac);
-
-	        }
+				return RedirectToAction("Index");
+			}
 	        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 		}
         [HttpPost]
