@@ -10,6 +10,7 @@ using IkinciElAracIhaleSistemi.DAL.Context;
 using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
+using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
@@ -58,7 +59,8 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							MarkaId = arac.MarkaId,
 							ModelId = arac.ModelId,
 							Km = arac.Km,
-							BireyselMi = (arac.AracTuruId == 1),
+							BireyselMi = (arac.AracTuruId == 19),
+							//todo bireysel/kurumsal kaydini elle id vermeden nasil alabilirim?
 
 						});
 						AracOzellik aracOzellikDonanim = aracDb.AracOzellikleri.Add(new AracOzellik()
@@ -97,6 +99,97 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							OzellikDetayId = arac.VersiyonTipiId,
 						});
 						
+						AracStatu aracStatu = aracDb.AracStatu.Add(new AracStatu()
+						{
+							AracId = eklenenArac.Id,
+							StatuId = arac.StatuId,
+							Tarih = DateTime.Now
+						});
+						AracFiyat aracFiyat = aracDb.AracFiyatlari.Add(new AracFiyat()
+						{
+							AracId = eklenenArac.Id,
+							Fiyat = arac.Fiyat,
+							Tarih = DateTime.Now
+						});
+
+						aracDb.SaveChanges();
+					}
+
+					scope.Complete();
+					return new SuccessResult("Araç kaydedildi");
+
+				}
+				catch (Exception ex)
+				{
+					scope.Complete();
+					return new ErrorResult("Araç kaydedilemedi!");
+				}
+			}
+		}
+
+		public Result AracGuncelle(AracEklemeDetayVM arac)
+		{
+			using (TransactionScope scope = new TransactionScope())
+			{
+				try
+				{
+					using (AracIhaleContext aracDb = new AracIhaleContext())
+					{
+						Arac guncellenecekArac = aracDb.Araclar.Where(a => a.Id == arac.AracId).SingleOrDefault();
+
+						guncellenecekArac.Yil = arac.Yil;
+						guncellenecekArac.Plaka = arac.Plaka;
+						guncellenecekArac.KullaniciId = 1;
+						guncellenecekArac.MarkaId = arac.MarkaId;
+
+						Arac eklenenArac = aracDb.Araclar.Add(new Arac()
+						{
+							Yil = arac.Yil,
+							Plaka = arac.Plaka,
+							KullaniciId = 1,
+							MarkaId = arac.MarkaId,
+							ModelId = arac.ModelId,
+							Km = arac.Km,
+							BireyselMi = (arac.AracTuruId == 19),
+							//todo bireysel/kurumsal kaydini elle id vermeden nasil alabilirim?
+
+						});
+						AracOzellik aracOzellikDonanim = aracDb.AracOzellikleri.Add(new AracOzellik()
+						{
+							AracId = eklenenArac.Id,
+							OzellikDetayId = arac.DonanimId,
+						});
+						AracOzellik aracOzellikYakit = aracDb.AracOzellikleri.Add(new AracOzellik()
+						{
+							AracId = eklenenArac.Id,
+							OzellikDetayId = arac.YakitTipiId,
+						});
+						AracOzellik aracOzellikGovde = aracDb.AracOzellikleri.Add(new AracOzellik()
+						{
+							AracId = eklenenArac.Id,
+							OzellikDetayId = arac.GovdeTipiId,
+						});
+						AracOzellik aracOzellikVites = aracDb.AracOzellikleri.Add(new AracOzellik()
+						{
+							AracId = eklenenArac.Id,
+							OzellikDetayId = arac.VitesTipiId,
+						});
+						AracOzellik aracOzellikRenk = aracDb.AracOzellikleri.Add(new AracOzellik()
+						{
+							AracId = eklenenArac.Id,
+							OzellikDetayId = arac.RenkId,
+						});
+						AracOzellik aracOzellikTur = aracDb.AracOzellikleri.Add(new AracOzellik()
+						{
+							AracId = eklenenArac.Id,
+							OzellikDetayId = arac.AracTuruId,
+						});
+						AracOzellik aracOzellikVersiyon = aracDb.AracOzellikleri.Add(new AracOzellik()
+						{
+							AracId = eklenenArac.Id,
+							OzellikDetayId = arac.VersiyonTipiId,
+						});
+
 						AracStatu aracStatu = aracDb.AracStatu.Add(new AracStatu()
 						{
 							AracId = eklenenArac.Id,

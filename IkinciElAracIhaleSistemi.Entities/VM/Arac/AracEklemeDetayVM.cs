@@ -10,7 +10,7 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 {
 	public class AracEklemeDetayVM
 	{
-		
+		public int AracId { get; set; }
 		public int OzellikDetayId { get; set; }
 		public string OzellikDetayAdi { get; set; }
 		public int GovdeTipiId { get; set; }
@@ -32,27 +32,12 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		public string Aciklama { get; set; }
 		public string Fotograf { get; set; }
 
-		public SelectListGroup SelectList { get; set; }
-
-		public OzellikDetay OzellikDetay { get; set; }
-		public List<SelectListItem> GovdeTipleri { get; set; }
-		public List<SelectListItem> YakitTipleri { get; set; }
-		public List<SelectListItem> VitesTipleri { get; set; }
-		public List<SelectListItem> AracTurleri { get; set; }
 		
-		public AracOzellik AracOzellik { get; set; }
-		public List<SelectListItem> Renkler { get; set; }
-		public List<SelectListItem> Markalar { get; set; }
-		public List<SelectListItem> Modeller { get; set; }
 		public Marka Marka { get; set; }
 		public Model Model { get; set; }
 		
 		public List<SelectListItem> Statuler { get; set; }
 		
-		public Statu Statu { get; set; }
-		public List<SelectListItem> Versiyonlar { get; set; }
-		
-		public List<SelectListItem> Donanimlar { get; set; }
 		public List<SelectListItem> Firmalar { get; set; }
 		
 		public Firma Firma { get; set; }

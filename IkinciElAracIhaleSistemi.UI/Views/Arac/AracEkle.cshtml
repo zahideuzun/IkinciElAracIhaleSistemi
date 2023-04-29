@@ -10,10 +10,11 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Araç Detay Bilgileri</h6>
-                    <h5 class="card-title"></h5>
-                </div>
+	            <div class="card-body">
+		            <h6 class="card-title">Araç Detay Bilgileri</h6>
+		            <h5 class="card-title"></h5>
+	            </div>
+                @Html.HiddenFor(a=>a.AracId)
                 <div class="row">
                     <div class="col">
                         <div class="card">
@@ -93,7 +94,7 @@
 
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    @Html.LabelFor(a => a.Marka.MarkaId, "Marka")
+                                                    @Html.LabelFor(a => a.MarkaId, "Marka")
                                                     @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text"), "Marka", new { @class = "form-control" })
                                                 </div>
                                             </div>
@@ -104,7 +105,7 @@
                                         <ul class="list-group list-group-flush">
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
-                                                    @Html.LabelFor(a => a.Model.ModelId, "Model")
+                                                    @Html.LabelFor(a => a.ModelId, "Model")
                                                     @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text"), "Model", new { @class = "form-control" })
                                                 </div>
                                             </div>
@@ -211,12 +212,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-	                                    @Html.Label("", "Fotoğraf Ekle", new { @class = "form-label" })
+	                                    @Html.Label("Fotograf", "Fotoğraf Ekle", new { @class = "form-label" })
 	                                    @Html.TextBoxFor(a => a.Fotograf, new { @type = "file", @class = "form-control" })
 
                                     </div>
                                     <div class="col">
-                                        <label for="floatingTextarea2">Açıklama</label>
+                                        <label for="Aciklama">Açıklama</label>
 	                                    @Html.TextAreaFor(a => a.Aciklama, new { @class = "form-control" })
                                     </div>
                                 </div>
@@ -330,29 +331,29 @@
 }
 <script src="~/Scripts/jquery-3.6.4.min.js"></script>
 <script>
-    $(document).ready(function () {
-        var firmaSecimi = $('#FirmaId').parent().parent();
-        var aracTuru = $('#AracTuruId');
-        debugger
-        if (aracTuru.val() == '2') {
-            firmaSecimi.show();
-        } else {
-            firmaSecimi.hide();
-        }
+    //$(document).ready(function () {
+    //    var firmaSecimi = $('#FirmaId').parent().parent();
+    //    var aracTuru = $('#AracTuruId');
+    //    debugger;
+    //    //if (aracTuru.val() == '2') {
+    //    //    firmaSecimi.show();
+    //    //} else {
+    //    //    firmaSecimi.hide();
+    //    //}
 
-        aracTuru.change(function () {
-            if (aracTuru.val() == '2') {
-                firmaSecimi.show();
-            } else {
-                firmaSecimi.hide();
-            }
-        });
-    });
+    //    aracTuru.change(function () {
+    //        if (aracTuru.val() == '2') {
+    //            firmaSecimi.show();
+    //        } else {
+    //            firmaSecimi.hide();
+    //        }
+    //    });
+    //});
 
     $(document).ready(function () {
-        $('#MarkaId').change(function () {// Marka dropdown değiştiğinde
-            var MarkaId = $(this).val(); // Seçilen marka Id değerini al
-            if (MarkaId != '') { // Eğer boş değilse
+        $('#MarkaId').change(function () {
+            var MarkaId = $(this).val(); 
+            if (MarkaId != '') { 
                 $.ajax({
                     url: '/Arac/ModelleriGetir', // Modelleri döndüren action metodu
                     type: 'POST',
