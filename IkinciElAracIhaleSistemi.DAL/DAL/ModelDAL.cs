@@ -23,6 +23,21 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 			
 		}
+		public List<ModelVM> MarkayaGoreModelleriGetir(int id)
+		{
+			using (AracIhaleContext db = new AracIhaleContext())
+			{
+				return (from m in db.Modeller
+					where m.IsActive == true && m.MarkaId == id
+					select new ModelVM()
+					{
+						ModelId = m.ModelId,
+						ModelAdi = m.ModelAdi
+
+					}).ToList();
+			}
+
+		}
 		public List<SelectListItem> ModelListesineDonustur()
 		{
 			var modelVm = new ModelVM();

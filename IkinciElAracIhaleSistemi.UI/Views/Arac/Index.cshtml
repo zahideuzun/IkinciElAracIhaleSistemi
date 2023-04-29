@@ -19,19 +19,19 @@
                     <table class="table">
                         <div class="form-group col-lg-3">
 	                        @Html.LabelFor(a => a.Marka.MarkaId, "Marka")
-	                        @*@Html.DropDownListFor(a => a.MarkaId, Model.Markalar, "Marka", new { @class = "form-control" })*@
+	                        @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text", new { @class = "form-control" }))
                         </div>
                         <div class="form-group col-lg-3">
 	                        @Html.LabelFor(a => a.Model.ModelId, "Model")
-	                        @*@Html.DropDownListFor(a => a.ModelId, Model.Modeller, "Model", new { @class = "form-control" })*@
+	                        @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text", new { @class = "form-control" }))
                         </div>
                         <div class="form-group col-lg-3">
-                            @Html.LabelFor(a => a.Markalar, "Bireysel/Kurumsal")
-                            @*@Html.DropDownListFor(a => a.Markalar, new SelectList(Model.Markalar, "Value", "Text"), "-- Ürün Seçiniz --", new { @class = "form-control" })*@
+	                        @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
+	                        @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text", new { @class = "form-control" }))
                         </div>
                         <div class="form-group col-lg-3">
-	                        @Html.LabelFor(a => a.Statu.StatuId, "Statü")
-	                        @*@Html.DropDownListFor(a => a.StatuId, Model.Statuler, "Statü", new { @class = "form-control" })*@
+	                        @Html.LabelFor(a => a.StatuId, "Statü")
+	                        @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text", new { @class = "form-control" }))
                         </div>
                     </table>
                     <a href="/Arac/Index" class="btn btn-outline-info">Listele</a>

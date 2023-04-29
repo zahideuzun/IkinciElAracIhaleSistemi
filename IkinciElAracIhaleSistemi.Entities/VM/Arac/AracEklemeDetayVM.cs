@@ -22,12 +22,15 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		public int VitesTipiId { get; set; }
 		public int YakitTipiId { get; set; }
 		public int FirmaId { get; set; }
-		public string FirmaAdi { get; set; }
+		public string Plaka { get; set; }
 		public decimal Fiyat { get; set; }
 		public decimal Km { get; set; }
 		public int DonanimId { get; set; }
 		public int Yil { get; set; }
 		public int AracTuruId { get; set; }
+		public int KaydedenKullaniciId { get; set; } 
+		public string Aciklama { get; set; }
+		public string Fotograf { get; set; }
 
 		public SelectListGroup SelectList { get; set; }
 

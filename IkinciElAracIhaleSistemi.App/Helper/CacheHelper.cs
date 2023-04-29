@@ -4,10 +4,8 @@ using System.Linq;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
-using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 
-namespace IkinciElAracIhaleSistemi.DAL.DAL.Metot
+namespace IkinciElAracIhaleSistemi.App.Helper
 {
 
 	public class CacheHelper
