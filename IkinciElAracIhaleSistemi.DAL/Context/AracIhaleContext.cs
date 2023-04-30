@@ -95,6 +95,8 @@ namespace IkinciElAracIhaleSistemi.DAL.Context
 		public DbSet<AracOzellik> AracOzellikleri { get; set; }
 		public DbSet<AracParca> AracParcalari { get; set; }
 		public DbSet<AracTramer> AracTramerleri { get; set; }
+		public DbSet<BireyselUye> BireyselUyeler { get; set; }
+		public DbSet<BireyselUyeArac> BireyselUyeAraclar { get; set; }
 		public DbSet<AracFiyat> AracFiyatlari { get; set; }
 		public DbSet<Ihale> Ihaleler { get; set; }
 		public DbSet<IhaleStatu> IhaleStatuleri { get; set; }

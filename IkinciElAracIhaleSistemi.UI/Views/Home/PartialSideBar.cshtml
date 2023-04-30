@@ -3,10 +3,10 @@
 @using IkinciElAracIhaleSistemi.Entities.VM
 
 @{
-	KullaniciRolVM kullanici = (Session["girisYapanKullanici"] as KullaniciRolVM);
-	List<RolSayfaVM> listMenu = new RolSayfaDAL().RoleGoreSayfaYetkileriniGetir((Session["girisYapanKullanici"] as KullaniciRolVM).RolId);
-	ViewBag.Menu = listMenu;
-	ViewBag.GirisYapanKullanici = kullanici;
+    KullaniciRolVM kullanici = (Session["girisYapanKullanici"] as KullaniciRolVM);
+    List<RolSayfaVM> listMenu = new RolSayfaDAL().RoleGoreSayfaYetkileriniGetir((Session["girisYapanKullanici"] as KullaniciRolVM).RolId);
+    ViewBag.Menu = listMenu;
+    ViewBag.GirisYapanKullanici = kullanici;
 }
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
@@ -14,6 +14,7 @@
         <a class="sidebar-brand brand-logo-mini" href="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/index.html"><img src="~/Content/corona-free-dark-bootstrap-admin-template-1.0.0/template/assets/images/logo-mini.svg" alt="logo" /></a>
     </div>
     <ul class="nav">
+       
         <li class="nav-item profile">
             <div class="profile-desc">
                 <div class="profile-pic">

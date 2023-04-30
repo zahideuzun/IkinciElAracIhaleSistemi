@@ -29,6 +29,9 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 			Property(a => a.BireyselMi)
 				.IsRequired();
 
+			Property(a => a.Aciklama)
+				.IsOptional();
+
 			HasRequired(a => a.Kullanici)
 				.WithMany(k => k.Araclar)
 				.HasForeignKey(a => a.KullaniciId);

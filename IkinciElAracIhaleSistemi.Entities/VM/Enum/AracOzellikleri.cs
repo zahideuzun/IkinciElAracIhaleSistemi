@@ -14,7 +14,7 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Enum
 		Renk=4,
 		Versiyon=5,
 		OpsiyonelDonanim=6,
-		Tur=7
+		AracTuru=7,
 
 	}
 }

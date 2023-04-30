@@ -21,16 +21,20 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		public int StatuId { get; set; }
 		public int VitesTipiId { get; set; }
 		public int YakitTipiId { get; set; }
-		public int? FirmaId { get; set; }
+		public int BireyselVeyaFirmaId { get; set; }
 		public string Plaka { get; set; }
 		public decimal Fiyat { get; set; }
 		public decimal Km { get; set; }
 		public int DonanimId { get; set; }
 		public int Yil { get; set; }
 		public int AracTuruId { get; set; }
-		public int KaydedenKullaniciId { get; set; } 
+		public int KaydedenKullaniciId { get; set; } = 1;
 		public string Aciklama { get; set; }
 		public string Fotograf { get; set; }
+		public int ModifiedBy { get; set; } = 1;
+		public int CreatedBy { get; set; } = 1;
+		public DateTime CreatedDate { get; set; } = DateTime.Now;
+		public DateTime ModifiedDate { get; set; } = DateTime.Now;
 
 		
 		public Marka Marka { get; set; }

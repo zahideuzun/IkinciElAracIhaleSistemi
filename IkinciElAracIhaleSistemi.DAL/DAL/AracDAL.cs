@@ -11,6 +11,7 @@ using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
+using System.Web;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
@@ -60,10 +61,14 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							MarkaId = arac.MarkaId,
 							ModelId = arac.ModelId,
 							Km = arac.Km,
-							BireyselMi = arac.FirmaId == 0
-							//todo bireysel/kurumsal kaydini elle id vermeden nasil alabilirim?
-
+							BireyselMi = arac.BireyselVeyaFirmaId == (int)(UyeTurleri.Bireysel),
+							UyeId = UyeTipineGoreUyeIdGetir(, ),
+							Aciklama = arac.Aciklama
 						});
+
+
+
+
 						aracDb.AracOzellikleri.Add(new AracOzellik()
 						{
 							AracId = eklenenArac.Id,
@@ -104,7 +109,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 						{
 							AracId = eklenenArac.Id,
 							StatuId = arac.StatuId,
-							Tarih = DateTime.Now
+							Tarih = DateTime.Now,
 						});
 						aracDb.AracFiyatlari.Add(new AracFiyat()
 						{
@@ -120,7 +125,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 					return new SuccessResult("Araç kaydedildi");
 
 				}
-				catch (Exception ex)
+				catch
 				{
 					scope.Complete();
 					return new ErrorResult("Araç kaydedilemedi!");
@@ -140,11 +145,14 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 
 						guncellenecekArac.Yil = arac.Yil;
 						guncellenecekArac.Plaka = arac.Plaka;
-						guncellenecekArac.KullaniciId = 1;
+						guncellenecekArac.KullaniciId = arac.KaydedenKullaniciId;
 						guncellenecekArac.MarkaId = arac.MarkaId;
 						guncellenecekArac.ModelId = arac.ModelId;
 						guncellenecekArac.Km = arac.Km;
-						guncellenecekArac.BireyselMi = (arac.AracTuruId == 19);
+						guncellenecekArac.BireyselMi = arac.BireyselVeyaFirmaId == (int)(UyeTurleri.Bireysel);
+						guncellenecekArac.UyeId = arac.BireyselVeyaFirmaId;
+						guncellenecekArac.ModifiedDate = arac.ModifiedDate;
+						guncellenecekArac.ModifiedBy = arac.ModifiedBy;
 
 						var guncellenecekAracOzellik = from ao in aracDb.AracOzellikleri
 													   join od in aracDb.OzellikDetaylari on ao.OzellikDetayId equals od.OzellikDetayId
@@ -161,15 +169,15 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 
 						foreach (var item in guncellenecekAracOzellik)
 						{
-							if (item.ozellik.OzellikId == Convert.ToInt16(AracOzellikleri.GovdeTipi))
+							if (item.ozellik.OzellikId == (int)(AracOzellikleri.GovdeTipi))
 							{
 								item.ozellikDetay.OzellikDetayId = arac.GovdeTipiId;
 							}
-							if (item.ozellik.OzellikId == Convert.ToInt16(AracOzellikleri.VitesTipi))
+							if (item.ozellik.OzellikId == (int)(AracOzellikleri.VitesTipi))
 							{
 								item.ozellikDetay.OzellikDetayId = arac.VitesTipiId;
 							}
-							if (item.ozellik.OzellikId == Convert.ToInt16(AracOzellikleri.YakitTipi))
+							if (item.ozellik.OzellikId == (int)(AracOzellikleri.YakitTipi))
 							{
 								item.ozellikDetay.OzellikDetayId = arac.YakitTipiId;
 							}
@@ -177,55 +185,40 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							{
 								item.ozellikDetay.OzellikDetayId = arac.DonanimId;
 							}
-							if (item.ozellik.OzellikId == Convert.ToInt16(AracOzellikleri.Renk))
+							if (item.ozellik.OzellikId == (int)(AracOzellikleri.Renk))
 							{
 								item.ozellikDetay.OzellikDetayId = arac.RenkId;
 							}
-							if (item.ozellik.OzellikId == Convert.ToInt16(AracOzellikleri.Versiyon))
+							if (item.ozellik.OzellikId == (int)(AracOzellikleri.Versiyon))
 							{
 								item.ozellikDetay.OzellikDetayId = arac.VersiyonTipiId;
 							}
 						}
 
-						if (arac.StatuId != 0)
+						if ((AracStatuKontrol(arac.StatuId, arac.AracId)))
 						{
-							var guncellenecekAracStatuleri =
-								aracDb.AracStatu.Where(a => a.AracId == arac.AracId).ToList();
-
-
-							foreach (var item in guncellenecekAracStatuleri)
-							{
-								if (item.IsActive && item.IsDeleted == false)
-								{
-									item.IsActive = false;
-									item.IsDeleted = true;
-								}
-							}
 							aracDb.AracStatu.Add(new AracStatu()
 							{
 								AracId = guncellenecekArac.Id,
 								StatuId = arac.StatuId,
-								Tarih = DateTime.Now
+								Tarih = DateTime.Now,
+								ModifiedBy = arac.ModifiedBy,
+								ModifiedDate = arac.ModifiedDate,
 							});
-
 						}
 
-						if (arac.Fiyat != 0)
+						if ((AracFiyatKontrol(arac.Fiyat, arac.AracId)))
 						{
-							var guncellenecekFiyatBilgisi =
-								aracDb.AracFiyatlari.Where(a => a.AracId == arac.AracId).ToList();
-							foreach (var item in guncellenecekFiyatBilgisi.Where(item => item.IsActive && item.IsDeleted == false))
-							{
-								item.IsActive = false;
-								item.IsDeleted = true;
-							}
 							aracDb.AracFiyatlari.Add(new AracFiyat()
 							{
 								AracId = guncellenecekArac.Id,
 								Fiyat = arac.Fiyat,
-								Tarih = DateTime.Now
+								Tarih = DateTime.Now,
+								ModifiedDate = arac.ModifiedDate,
+								ModifiedBy = arac.ModifiedBy
 							});
 						}
+
 
 						aracDb.SaveChanges();
 					}
@@ -242,6 +235,12 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
+		/// <summary>
+		/// kullanicinin girdigi ffiyat bilgisini aracin son fiyat bilgisiyle karsilastirir. fiyat degisikligi yapildiysa son fiyati isdeleted = true yapar ve fiyat degisti diye true sonuc doner. 
+		/// </summary>
+		/// <param name="fiyat"></param>
+		/// <param name="aracId"></param>
+		/// <returns></returns>
 		public bool AracFiyatKontrol(decimal fiyat, int aracId)
 		{
 			using (var db = new AracIhaleContext())
@@ -251,12 +250,50 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 					.OrderByDescending(f => f.Tarih)
 					.FirstOrDefault();
 
-				if (sonFiyat != null)
+				if (sonFiyat != null && (fiyat != sonFiyat.Fiyat))
 				{
-					return (fiyat >= sonFiyat.Fiyat);
+					sonFiyat.IsActive = false;
+					sonFiyat.IsDeleted = true;
 				}
-				return false;
+				return true;
 			}
+		}
+		public bool AracStatuKontrol(int statuId, int aracId)
+		{
+			using (var db = new AracIhaleContext())
+			{
+				var sonStatu = db.AracStatu
+					.Where(f => f.AracId == aracId && f.IsActive)
+					.OrderByDescending(f => f.Tarih)
+					.FirstOrDefault();
+
+				if (sonStatu != null && sonStatu.Statu.StatuId != statuId)
+				{
+					sonStatu.IsActive = false;
+					sonStatu.IsDeleted = true;
+				}
+				return true;
+			}
+
+		}
+
+		public int UyeTipineGoreUyeIdGetir(int uyeTipi, int uyeId)
+		{
+			using (var db = new AracIhaleContext())
+			{
+				switch ((UyeTurleri)uyeTipi)
+				{
+					case UyeTurleri.Bireysel:
+						var bireyselUye = db.BireyselUyeler.FirstOrDefault(x => x.Id == uyeId);
+						return bireyselUye != null ? bireyselUye.UyeId : 0;
+					case UyeTurleri.Kurumsal:
+						var kurumsalUye = db.KurumsalUyeler.FirstOrDefault(x => x.Id == uyeId);
+						return kurumsalUye != null ? kurumsalUye.UyeId : 0;
+					default:
+						return 0;
+				}
+			}
+			
 		}
 
 	}

@@ -18,6 +18,7 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public decimal Km { get; set; }
 		public bool BireyselMi { get; set; }
 		public int UyeId { get; set; }
+		public string Aciklama { get; set; }
 
 
 		public Uye Uye { get; set; }

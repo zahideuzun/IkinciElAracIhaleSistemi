@@ -1,10 +1,10 @@
 ﻿@using IkinciElAracIhaleSistemi.Entities.VM.Arac
+@using IkinciElAracIhaleSistemi.Entities.VM.Enum
 @model AracEklemeDetayVM
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-	List<AracBilgileriVM> aracListesi = ViewBag.Araclar;
 	int sayac = 1;
 }
 
@@ -14,26 +14,56 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Kriterler</h4>
-
+                @Html.HiddenFor(a => a.AracId)
                 <div class="table-responsive">
-                    <table class="table">
-                        <div class="form-group col-lg-3">
-	                        @Html.LabelFor(a => a.Marka.MarkaId, "Marka")
-	                        @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text", new { @class = "form-control" }))
-                        </div>
-                        <div class="form-group col-lg-3">
-	                        @Html.LabelFor(a => a.Model.ModelId, "Model")
-	                        @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text", new { @class = "form-control" }))
-                        </div>
-                        <div class="form-group col-lg-3">
-	                        @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
-	                        @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text", new { @class = "form-control" }))
-                        </div>
-                        <div class="form-group col-lg-3">
-	                        @Html.LabelFor(a => a.StatuId, "Statü")
-	                        @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text", new { @class = "form-control" }))
-                        </div>
-                    </table>
+	                <table class="table">
+                        
+		                <div class="col">
+			                <ul class="list-group list-group-flush">
+				                <div class="form-group row">
+					                <div class="col-sm-3">
+						                @Html.LabelFor(a => a.MarkaId, "Marka")
+						                @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text"),"Marka", new { @class = "form-control" })
+					                </div>
+				                </div>
+
+			                </ul>
+		                </div>
+		                <div class="col">
+			                <ul class="list-group list-group-flush">
+				                <div class="form-group row">
+					                <div class="col-sm-3">
+						                @Html.LabelFor(a => a.ModelId, "Model")
+						                @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text"),"Model", new { @class = "form-control" }))
+					                </div>
+				                </div>
+
+			                </ul>
+		                </div>
+		                <div class="col">
+			                <ul class="list-group list-group-flush">
+				                <div class="form-group row">
+					                <div class="col-sm-3">
+						                @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
+						                @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"),"Bireysel/Kurumsal", new { @class = "form-control" })
+					                </div>
+				                </div>
+
+			                </ul>
+		                </div>
+		                <div class="col">
+			                <ul class="list-group list-group-flush">
+				                <div class="form-group row">
+					                <div class="col-sm-3">
+						                @Html.LabelFor(a => a.StatuId, "Statü")
+						                @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text"),"Statü", new { @class = "form-control" })
+					                </div>
+				                </div>
+
+			                </ul>
+		                </div>
+
+	                </table>
                     <a href="/Arac/Index" class="btn btn-outline-info">Listele</a>
                 </div>
             </div>
@@ -43,7 +73,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Araç Listesi</h4>
-	            <a href="/Arac/AracEkle/" class="btn btn-outline-info float-md-right">Yeni Araç Ekle</a>
+                <a href="/Arac/AracEkle/" class="btn btn-outline-info float-md-right">Yeni Araç Ekle</a>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -63,28 +93,57 @@
                         <tbody>
                             @foreach (var item in (List<AracBilgileriVM>)ViewBag.Araclar)
                             {
-	                            <tr>
-		                            <td>@sayac</td>
-		                            <td>@item.Plaka</td>
-		                            <td>@item.MarkaAdi</td>
-		                            <td>@item.ModelAdi</td>
-		                            <td>@item.BireyselMi</td>
-		                            <td>@item.Statu</td>
-		                            <td>@item.KaydedenKullanici</td>
-		                            <td>@item.KaydedilmeZamani</td>
-		                            <td><a href="/Kullanici/KullaniciSil/@item.AracId" class="btn btn-outline-danger">Sil</a></td>
-		                            <td><a href="/Arac/AracEkle/@item.AracId" class="btn btn-outline-success">Güncelle</a></td>
+                                <tr>
+                                    <td>@sayac</td>
+                                    <td>@item.Plaka</td>
+                                    <td>@item.MarkaAdi</td>
+                                    <td>@item.ModelAdi</td>
+                                    <td>@item.BireyselMi</td>
+                                    <td>@item.Statu</td>
+                                    <td>@item.KaydedenKullanici</td>
+                                    <td>@item.KaydedilmeZamani</td>
+                                    <td><a href="/Arac/AracSil/@item.AracId" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Arac/AracEkle/@item.AracId" class="btn btn-outline-success">Güncelle</a></td>
 
-	                            </tr>
-	                            sayac++;
+                                </tr>
+                                sayac++;
                             }
 
                         </tbody>
                     </table>
-                    
+
                 </div>
             </div>
         </div>
     </div>
 }
+
+<script src="~/Scripts/jquery-3.6.4.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        $('#MarkaId').change(function () {
+            var MarkaId = $(this).val();
+            if (MarkaId != '') {
+                $.ajax({
+                    url: '/Arac/ModelleriGetir',
+                    type: 'POST',
+                    data: { MarkaId: MarkaId },
+                    success: function (data) {
+                        $('#ModelId').empty();
+                        $('#ModelId').append($('<option>').text('Model').attr('value', ''));
+                        $.each(data, function (index, model) {
+                            $('#ModelId').append($('<option>').text(model.Text).attr('value', model.Value));
+                        });
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Bir hata oluştu: ' + errorThrown);
+                    }
+                });
+            }
+        });
+    });
+
+</script>
 

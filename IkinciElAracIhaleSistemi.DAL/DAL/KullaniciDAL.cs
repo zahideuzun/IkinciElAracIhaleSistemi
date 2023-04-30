@@ -83,6 +83,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							Sifre = kullanici.KullaniciSifre,
 							Telefon = kullanici.KullaniciTelefon,
 							RolId = kullanici.RolId,
+							//todo created by
 						});
 
 						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
@@ -155,7 +156,6 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			{
 				try
 				{
-					//IletisimDAL iletisimTurleri = new IletisimDAL();
 					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
 						var guncellenecekKullanici = aracDb.Kullanicilar.Find(kullanici.KullaniciId);
@@ -170,6 +170,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							guncellenecekKullanici.Telefon = kullanici.KullaniciTelefon;
 							guncellenecekKullanici.RolId = kullanici.RolId;
 							guncellenecekKullanici.Sifre = kullanici.KullaniciSifre;
+							//todo modified by
 						}
 
 						var telefonId = Convert.ToInt16(IletisimTurleri.Telefon);
