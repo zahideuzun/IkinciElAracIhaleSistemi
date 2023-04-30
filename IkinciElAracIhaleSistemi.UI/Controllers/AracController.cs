@@ -32,7 +32,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			return View();
 		}
 		[HttpPost, ValidateAntiForgeryToken]
-		public ActionResult AracEkle([Bind(Exclude = "Fotograf")] AracEklemeDetayVM arac)
+		public ActionResult AracEkle([Bind(Exclude = "Fotograf, AracId")] AracEklemeDetayVM arac)
 		{
 			//todo bireysel ve kurumsal eklemeyi düzenle, guncellemeyi de yap ve artik bitir NOLUR!!!! 
 			if (ModelState.IsValid)
