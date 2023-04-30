@@ -1,4 +1,5 @@
-﻿@model IkinciElAracIhaleSistemi.Entities.VM.Arac.AracEklemeDetayVM
+﻿@using IkinciElAracIhaleSistemi.Entities.VM.Enum
+@model IkinciElAracIhaleSistemi.Entities.VM.Arac.AracEklemeDetayVM
 @{
     ViewBag.Title = "AracEkle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -25,7 +26,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
 	                                                @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
-	                                                @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control" })
+	                                                @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control" , onclick= "onChangeAracTuru()" })
                                                 </div>
                                             </div>
                                             @Html.AntiForgeryToken()
@@ -36,7 +37,7 @@
                                             <div class="form-group row">
                                             <div class="col-sm-10">
 	                                            @Html.LabelFor(a => a.FirmaId, "Firma")
-	                                            @Html.DropDownListFor(a => a.FirmaId, new SelectList(ViewBag.Firmalar, "Value", "Text"), "Firma", new { @class = "form-control" })
+	                                            @Html.DropDownListFor(a => a.FirmaId, new SelectList(ViewBag.Firmalar, "Value", "Text"), "Firma/Bireysel Üye", new { @class = "form-control" })
                                             </div>
                                             </div>
 
@@ -331,29 +332,40 @@
 }
 <script src="~/Scripts/jquery-3.6.4.min.js"></script>
 <script>
-    //$(document).ready(function () {
-    //    var firmaSecimi = $('#FirmaId').parent().parent();
-    //    var aracTuru = $('#AracTuruId');
-    //    debugger;
-    //    //if (aracTuru.val() == '2') {
-    //    //    firmaSecimi.show();
-    //    //} else {
-    //    //    firmaSecimi.hide();
-    //    //}
 
-    //    aracTuru.change(function () {
-    //        if (aracTuru.val() == '2') {
-    //            firmaSecimi.show();
-    //        } else {
-    //            firmaSecimi.hide();
-    //        }
-    //    });
-    //});
+
+function onChangeAracTuru() {
+    var aracTuruId = $("#AracTuruId").val();
+    debugger;
+    if (aracTuruId == '@((int)UyeTurleri.Bireysel)')) {
+
+        var bireyselUyeler = @Html.Raw(Json.Encode(ViewBag.BireyselUyeler));
+        var selectList = $("#FirmaId");
+        selectList.empty();
+        $.each(bireyselUyeler, function (index, bireyselUye) {
+            selectList.append($("<option></option>")
+                .attr("value", bireyselUye.Value)
+                .text(bireyselUye.Text));
+        });
+    } else if (aracTuruId == '@((int)UyeTurleri.Kurumsal)')) {
+
+        var firmalar = @Html.Raw(Json.Encode(ViewBag.Firmalar));
+        var selectList = $("#FirmaId");
+        selectList.empty();
+        $.each(firmalar, function (index, firma) {
+            selectList.append($("<option></option>")
+                .attr("value", firma.Value)
+                .text(firma.Text));
+        });
+    }
+}
+
+
 
     $(document).ready(function () {
         $('#MarkaId').change(function () {
-            var MarkaId = $(this).val(); 
-            if (MarkaId != '') { 
+            var MarkaId = $(this).val();
+            if (MarkaId != '') {
                 $.ajax({
                     url: '/Arac/ModelleriGetir', // Modelleri döndüren action metodu
                     type: 'POST',

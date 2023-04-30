@@ -37,7 +37,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 	        ViewBag.Markalar = CacheHelper.GetOrSet("Markalar", () => new MarkaDAL().MarkaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 	        ViewBag.Statuler = CacheHelper.GetOrSet("Statuler", () => new StatuDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 	        ViewBag.Firmalar = CacheHelper.GetOrSet("Firmalar", () => new FirmaDAL().FirmaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
-
+	        ViewBag.BireyselUyeler = CacheHelper.GetOrSet("BireyselUyeler", () => new BireyselUyeDAL().BireyselUyeleriListeyeDonustur(UyeTurleri.Bireysel), DateTimeOffset.Now.AddMinutes(30));
 
 			return View();
         }
@@ -69,8 +69,9 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 	        }
 	        return Json(modelList);
         }
+        
 
-		
+
 
 	}
 }

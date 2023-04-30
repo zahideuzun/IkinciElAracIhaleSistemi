@@ -151,6 +151,7 @@
     <Compile Include="Context\AracIhaleContext.cs" />
     <Compile Include="DAL\AracDAL.cs" />
     <Compile Include="DAL\AracOzellikDAL.cs" />
+    <Compile Include="DAL\BireyselUyeDAL.cs" />
     <Compile Include="DAL\FirmaDAL.cs" />
     <Compile Include="DAL\IletisimDAL.cs" />
     <Compile Include="DAL\KullaniciDAL.cs" />
