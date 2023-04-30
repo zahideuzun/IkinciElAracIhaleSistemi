@@ -34,6 +34,8 @@ namespace IkinciElAracIhaleSistemi.DAL.Context
 			modelBuilder.Configurations.Add(new AracTeklifConfiguration());
 			modelBuilder.Configurations.Add(new AracStatuConfiguration());
 			modelBuilder.Configurations.Add(new AracTramerConfiguration());
+			modelBuilder.Configurations.Add(new BireyselUyeConfiguration());
+			modelBuilder.Configurations.Add(new BireyselUyeAracConfiguration());
 			modelBuilder.Configurations.Add(new AracTramerDetayConfiguration());
 			modelBuilder.Configurations.Add(new ChatbotConfiguration());
 			modelBuilder.Configurations.Add(new EkspertizConfiguration());

@@ -10,8 +10,12 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 	{
 		public int MesajId { get; set; }
 		public string MesajBilgisi { get; set; }
-		public ICollection<Uye> Uye { get; set; }
 		public bool IsActive { get; set; } = true;
 		public bool IsDeleted { get; set; } = false;
+		public int UyeId { get; set; }
+
+
+		public Uye Uye { get; set; }
+		
 	}
 }

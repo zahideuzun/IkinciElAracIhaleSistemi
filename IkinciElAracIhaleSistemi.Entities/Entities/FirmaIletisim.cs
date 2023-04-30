@@ -12,6 +12,8 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public int IletisimId { get; set; }
 		public int FirmaId { get; set; }
 		public string IletisimBilgi { get; set; }
+		
+		
 		public Iletisim Iletisim { get; set; }
 		public Firma Firma { get; set; }
 	}

@@ -33,6 +33,10 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 				.WithMany(k => k.Araclar)
 				.HasForeignKey(a => a.KullaniciId);
 
+			HasRequired(a => a.Uye)
+				.WithMany(k => k.Araclar)
+				.HasForeignKey(a => a.UyeId);
+
 			HasRequired(a => a.Marka)
 				.WithMany(m => m.Arac)
 				.HasForeignKey(a => a.MarkaId);

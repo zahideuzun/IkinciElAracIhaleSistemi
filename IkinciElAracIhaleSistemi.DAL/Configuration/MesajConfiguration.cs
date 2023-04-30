@@ -20,7 +20,9 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 			Property(m => m.MesajBilgisi)
 				.IsRequired();
 
-
+			HasRequired(u => u.Uye)
+				.WithMany()
+				.HasForeignKey(u => u.UyeId);
 		}
 	}
 

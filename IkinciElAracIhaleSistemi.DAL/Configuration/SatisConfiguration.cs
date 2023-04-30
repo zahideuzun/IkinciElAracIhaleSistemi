@@ -14,25 +14,43 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 		public SatisConfiguration()
 		{
 			ToTable("Satis");
-
 			HasKey(s => s.Id);
+
+			Property(s => s.IlanId)
+				.IsRequired();
+
+			Property(s => s.SatisTarihi)
+				.IsRequired();
+
+			Property(s => s.SatisToplamUcreti)
+				.IsRequired();
+
+			Property(s => s.UcretId)
+				.IsRequired();
+
+			Property(s => s.BireyselUyeAracId)
+				.IsRequired();
+
+			Property(s => s.SatisTuruId)
+				.IsRequired();
 
 			HasRequired(s => s.SatisTuru)
 				.WithMany()
-				.HasForeignKey(s => s.SatisTuruId);
+				.HasForeignKey(s => s.SatisTuruId)
+				.WillCascadeOnDelete(false);
 
 			HasRequired(s => s.Ucret)
 				.WithMany()
-				.HasForeignKey(s => s.UcretId);
+				.HasForeignKey(s => s.UcretId)
+				.WillCascadeOnDelete(false);
 
-			HasRequired(s => s.Uye)
-				.WithMany(u => u.AldigiAraclar)
-				.HasForeignKey(s => s.UyeId);
+			HasRequired(s => s.BireyselUyeArac)
+				.WithMany(bua => bua.AldigiAraclar)
+				.HasForeignKey(s => s.BireyselUyeAracId)
+				.WillCascadeOnDelete(false);
 
-			HasRequired(s => s.Uye)
-				.WithMany()
-				.HasForeignKey(s => s.UyeId);
 		}
 	}
+
 
 }

@@ -13,6 +13,8 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public int FirmaTuruId { get; set; }
 		public int PaketId { get; set; }
 		public int SehirIlceId { get; set; }
+		
+		
 		public FirmaTuru FirmaTuru { get; set; }
 		public Paket Paket { get; set; }
 		public SehirIlce SehirIlce { get; set; }

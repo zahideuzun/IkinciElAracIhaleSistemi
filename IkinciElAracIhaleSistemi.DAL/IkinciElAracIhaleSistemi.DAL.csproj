@@ -106,6 +106,8 @@
     <Compile Include="Configuration\AracTeklifConfiguration.cs" />
     <Compile Include="Configuration\AracTramerConfiguration.cs" />
     <Compile Include="Configuration\AracTramerDetayConfiguration.cs" />
+    <Compile Include="Configuration\BireyselUyeAracConfiguration.cs" />
+    <Compile Include="Configuration\BireyselUyeConfiguration.cs" />
     <Compile Include="Configuration\ChatbotConfiguration.cs" />
     <Compile Include="Configuration\EkspertizConfiguration.cs" />
     <Compile Include="Configuration\FavoriAramaConfiguration.cs" />

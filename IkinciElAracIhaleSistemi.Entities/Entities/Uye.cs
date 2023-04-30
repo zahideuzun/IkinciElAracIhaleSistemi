@@ -15,13 +15,14 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public string Email { get; set; }
 		public string Telefon { get; set; }
 		public string Sifre { get; set; }
+		
+
 		public ICollection<UyeIletisim> UyeIletisim { get; set; }
 		public ICollection<AracTeklif> AracTeklif { get; set; }
 		public ICollection<FavoriArama> FavoriArama { get; set; }
 		public ICollection<FavoriIlan> FavoriIlan { get; set; }
-		public ICollection<Satis> AldigiAraclar { get; set; }
 		public UyeTuru UyeTuru { get; set; }
-		public ICollection<Rol> Roller { get; set; }
 		public ICollection<Mesaj> Mesajlar { get; set; }
+		public ICollection<Arac> Araclar { get; set; }
 	}
 }

@@ -24,11 +24,11 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public bool IsActive { get; set; } = true;
 		public bool IsDeleted { get; set; } = false;
 		public int RolId { get; set; }
+		
+		
 		public Rol Rol { get; set; }
-
 		public ICollection<Arac> Araclar { get; set; }
 		public ICollection<KullaniciIletisim> KullaniciIletisim { get; set; }
-		public ICollection<Rol> Roller { get; set; }
 		public ICollection<Ihale> Ihaleler { get; set; }
 	}
 }

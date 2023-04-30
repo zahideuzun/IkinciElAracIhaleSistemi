@@ -37,6 +37,13 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 			HasRequired(k => k.Rol)
 				.WithMany()
 				.HasForeignKey(k => k.RolId).WillCascadeOnDelete(false);
+			HasRequired(k => k.Rol)
+				.WithMany()
+				.HasForeignKey(k => k.RolId);
+
+			HasRequired(bu => bu.Rol)
+				.WithMany(r => r.Kullanicilar)
+				.HasForeignKey(bu => bu.RolId);
 
 			HasMany(k => k.Araclar)
 				.WithRequired(a => a.Kullanici)

@@ -28,7 +28,11 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 			HasRequired(k => k.Rol)
 				.WithMany()
 				.HasForeignKey(k => k.RolId);
-
+			
+			HasRequired(bu => bu.Rol)
+				.WithMany(r => r.KurumsalUyeler)
+				.HasForeignKey(bu => bu.RolId);
+			
 			Property(k => k.OnaylandiMi).IsRequired();
 		}
 	}

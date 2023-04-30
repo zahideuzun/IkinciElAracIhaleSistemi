@@ -44,6 +44,10 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult AracEkle([Bind(Exclude = "Fotograf, Aciklama")] AracEklemeDetayVM arac)
         {
+			//todo bireysel ve kurumsal eklemeyi düzenle, guncellemeyi de yap ve artik bitir NOLUR!!!! 
+			//todo arac eklemede aractarihce tablosuna da ekleme yap
+			//todo aciklamayi db ekle
+			//todo uyeye arac nasil ekleyeceksin? 
 	        if (ModelState.IsValid && arac.AracId == 0) //kayitli bir arac yoksa ekleme islemi
 	        {
 				AracDAL aracDal = new AracDAL();

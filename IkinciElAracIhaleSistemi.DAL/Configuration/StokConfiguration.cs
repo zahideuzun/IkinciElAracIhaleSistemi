@@ -18,12 +18,17 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 			HasKey(x => x.Id); 
 
 			Property(x => x.FirmaId).IsRequired(); 
-			Property(x => x.StokAdedi).IsRequired(); 
+			Property(x => x.AracId).IsRequired(); 
 			Property(x => x.Tarih).IsRequired(); 
 
 			HasRequired(x => x.Firma)
 				.WithMany()
 				.HasForeignKey(x => x.FirmaId)
+				.WillCascadeOnDelete(false);
+			
+			HasRequired(x => x.Arac)
+				.WithMany()
+				.HasForeignKey(x => x.AracId)
 				.WillCascadeOnDelete(false);
 		}
 	}

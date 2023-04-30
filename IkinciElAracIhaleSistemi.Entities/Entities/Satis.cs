@@ -13,11 +13,13 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public DateTime SatisTarihi { get; set; }
 		public decimal SatisToplamUcreti { get; set; }
 		public int UcretId { get; set; }
-		public int UyeId { get; set; }
+		public int BireyselUyeAracId { get; set; }
 		public int SatisTuruId { get; set; }
+
+
 		public SatisTuru SatisTuru { get; set; }
 		public Ucret Ucret { get; set; }
-		public Uye Uye { get; set; }
+		public BireyselUyeArac BireyselUyeArac { get; set; }
 		public Ilan Ilan { get; set; }
 		
 	}
