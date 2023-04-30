@@ -41,16 +41,82 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							 }).ToList();
 				return liste;
 			}
-
-
 		}
+		public AracEklemeDetayVM GuncellenecekAracBilgisiniGetir(int? id)
+		{
+			using (AracIhaleContext db = new AracIhaleContext())
+			{
+				AracEklemeDetayVM arac = (from k in db.Araclar
+										  join mr in db.Markalar on k.MarkaId equals mr.MarkaId
+										  join md in db.Modeller on k.ModelId equals md.ModelId
+										  join ast in db.AracStatu on k.Id equals ast.AracId
+										  join st in db.Status on ast.StatuId equals st.StatuId
+										  join af in db.AracFiyatlari on k.Id equals af.AracId
+										  join ao in db.AracOzellikleri on k.Id equals ao.AracId
+										  join ozd in db.OzellikDetaylari on ao.OzellikDetayId equals ozd.OzellikDetayId
+										  join oz in db.Ozellikler on ozd.OzellikId equals oz.OzellikId
+										  where k.Id == id
+										  select new AracEklemeDetayVM()
+										  {
+											  AracId = k.Id,
+											  Plaka = k.Plaka,
+											  Fiyat = af.Fiyat,
+											  StatuId = ast.StatuId,
+											  Yil = k.Yil,
+											  Km = k.Km,
+											  MarkaId = mr.MarkaId,
+											  ModelId = md.ModelId,
+											  Aciklama = k.Aciklama,
+											  BireyselVeyaFirmaId = k.UyeId
+										  }).FirstOrDefault();
 
+				var guncellenecekAracOzellik = (from ao in db.AracOzellikleri
+												join od in db.OzellikDetaylari on ao.OzellikDetayId equals od.OzellikDetayId
+												join oz in db.Ozellikler on od.OzellikId equals oz.OzellikId
+												where ao.AracId == arac.AracId
+												select new
+												{
+													aracOzellik = ao,
+													ozellikDetay = od,
+													ozellik = oz
+												});
+				foreach (var item in guncellenecekAracOzellik)
+				{
+					switch (item.ozellik.OzellikId)
+					{
+						case (int)(AracOzellikleri.GovdeTipi):
+							arac.GovdeTipiId = item.ozellikDetay.OzellikDetayId;
+							break;
+						case (int)(AracOzellikleri.VitesTipi):
+							arac.VitesTipiId = item.ozellikDetay.OzellikDetayId;
+							break;
+						case (int)(AracOzellikleri.YakitTipi):
+							arac.YakitTipiId = item.ozellikDetay.OzellikDetayId;
+							break;
+						case (int)AracOzellikleri.OpsiyonelDonanim:
+							arac.DonanimId = item.ozellikDetay.OzellikDetayId;
+							break;
+						case (int)(AracOzellikleri.Renk):
+							arac.RenkId = item.ozellikDetay.OzellikDetayId;
+							break;
+						case (int)(AracOzellikleri.Versiyon):
+							arac.VersiyonTipiId = item.ozellikDetay.OzellikDetayId;
+							break;
+						case (int)(AracOzellikleri.AracTuru):
+							arac.AracTuruId = item.ozellikDetay.OzellikDetayId;
+							break;
+					}
+				}
+				return arac;
+			}
+		}
 		public Result AracEkle(AracEklemeDetayVM arac)
 		{
 			using (TransactionScope scope = new TransactionScope())
 			{
 				try
 				{
+
 					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
 						Arac eklenenArac = aracDb.Araclar.Add(new Arac()
@@ -62,11 +128,9 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							ModelId = arac.ModelId,
 							Km = arac.Km,
 							BireyselMi = arac.BireyselVeyaFirmaId == (int)(UyeTurleri.Bireysel),
-							UyeId = UyeTipineGoreUyeIdGetir(, ),
 							Aciklama = arac.Aciklama
 						});
-
-
+						eklenenArac.UyeId = eklenenArac.BireyselMi ? UyeTipineGoreUyeIdGetir((int)UyeTurleri.Bireysel, arac.BireyselVeyaFirmaId) : UyeTipineGoreUyeIdGetir((int)UyeTurleri.Kurumsal, arac.BireyselVeyaFirmaId);
 
 
 						aracDb.AracOzellikleri.Add(new AracOzellik()
@@ -150,9 +214,9 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 						guncellenecekArac.ModelId = arac.ModelId;
 						guncellenecekArac.Km = arac.Km;
 						guncellenecekArac.BireyselMi = arac.BireyselVeyaFirmaId == (int)(UyeTurleri.Bireysel);
-						guncellenecekArac.UyeId = arac.BireyselVeyaFirmaId;
 						guncellenecekArac.ModifiedDate = arac.ModifiedDate;
 						guncellenecekArac.ModifiedBy = arac.ModifiedBy;
+						guncellenecekArac.Aciklama = arac.Aciklama;
 
 						var guncellenecekAracOzellik = from ao in aracDb.AracOzellikleri
 													   join od in aracDb.OzellikDetaylari on ao.OzellikDetayId equals od.OzellikDetayId
@@ -169,33 +233,30 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 
 						foreach (var item in guncellenecekAracOzellik)
 						{
-							if (item.ozellik.OzellikId == (int)(AracOzellikleri.GovdeTipi))
+							switch (item.ozellik.OzellikId)
 							{
-								item.ozellikDetay.OzellikDetayId = arac.GovdeTipiId;
-							}
-							if (item.ozellik.OzellikId == (int)(AracOzellikleri.VitesTipi))
-							{
-								item.ozellikDetay.OzellikDetayId = arac.VitesTipiId;
-							}
-							if (item.ozellik.OzellikId == (int)(AracOzellikleri.YakitTipi))
-							{
-								item.ozellikDetay.OzellikDetayId = arac.YakitTipiId;
-							}
-							if (item.ozellik.OzellikId == (int)AracOzellikleri.OpsiyonelDonanim)
-							{
-								item.ozellikDetay.OzellikDetayId = arac.DonanimId;
-							}
-							if (item.ozellik.OzellikId == (int)(AracOzellikleri.Renk))
-							{
-								item.ozellikDetay.OzellikDetayId = arac.RenkId;
-							}
-							if (item.ozellik.OzellikId == (int)(AracOzellikleri.Versiyon))
-							{
-								item.ozellikDetay.OzellikDetayId = arac.VersiyonTipiId;
+								case (int)(AracOzellikleri.GovdeTipi):
+									item.aracOzellik.OzellikDetayId = arac.GovdeTipiId;
+									break;
+								case (int)(AracOzellikleri.VitesTipi):
+									item.aracOzellik.OzellikDetayId = arac.VitesTipiId;
+									break;
+								case (int)(AracOzellikleri.YakitTipi):
+									item.aracOzellik.OzellikDetayId = arac.YakitTipiId;
+									break;
+								case (int)AracOzellikleri.OpsiyonelDonanim:
+									item.aracOzellik.OzellikDetayId = arac.DonanimId;
+									break;
+								case (int)(AracOzellikleri.Renk):
+									arac.RenkId = item.aracOzellik.OzellikDetayId;
+									break;
+								case (int)(AracOzellikleri.Versiyon):
+									item.aracOzellik.OzellikDetayId = arac.VersiyonTipiId;
+									break;
 							}
 						}
 
-						if ((AracStatuKontrol(arac.StatuId, arac.AracId)))
+						if (!(AracStatuKontrol(arac.StatuId, arac.AracId)))
 						{
 							aracDb.AracStatu.Add(new AracStatu()
 							{
@@ -207,7 +268,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							});
 						}
 
-						if ((AracFiyatKontrol(arac.Fiyat, arac.AracId)))
+						if (!(AracFiyatKontrol(arac.Fiyat, arac.AracId)))
 						{
 							aracDb.AracFiyatlari.Add(new AracFiyat()
 							{
@@ -258,6 +319,13 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				return true;
 			}
 		}
+
+		/// <summary>
+		/// kullanicinin girdigi statu bilgisini aracin son statu bilgisiyle karsilastirir. statu degisikligi yapildiysa son statuyu isdeleted = true yapar ve statu degisti diye true sonuc doner. 
+		/// </summary>
+		/// <param name="statuId"></param>
+		/// <param name="aracId"></param>
+		/// <returns></returns>
 		public bool AracStatuKontrol(int statuId, int aracId)
 		{
 			using (var db = new AracIhaleContext())
@@ -267,16 +335,24 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 					.OrderByDescending(f => f.Tarih)
 					.FirstOrDefault();
 
-				if (sonStatu != null && sonStatu.Statu.StatuId != statuId)
+				if (sonStatu != null && sonStatu.StatuId != statuId)
 				{
 					sonStatu.IsActive = false;
 					sonStatu.IsDeleted = true;
+					return false;
 				}
+
 				return true;
 			}
 
 		}
 
+		/// <summary>
+		/// arac eklemede kurumsal ya da bireysel secilen uyelerin uye tablosundaki idsini getirir.
+		/// </summary>
+		/// <param name="uyeTipi"></param>
+		/// <param name="uyeId"></param>
+		/// <returns></returns>
 		public int UyeTipineGoreUyeIdGetir(int uyeTipi, int uyeId)
 		{
 			using (var db = new AracIhaleContext())
@@ -293,7 +369,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 						return 0;
 				}
 			}
-			
+
 		}
 
 	}

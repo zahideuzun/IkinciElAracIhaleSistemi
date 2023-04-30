@@ -1,15 +1,11 @@
 ﻿@using IkinciElAracIhaleSistemi.Entities.VM.Enum
-@using IkinciElAracIhaleSistemi.Entities.VM
 @model IkinciElAracIhaleSistemi.Entities.VM.Arac.AracEklemeDetayVM
 @{
-    ViewBag.Title = "AracEkle";
+    ViewBag.Title = "AracGuncelle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    KullaniciRolVM kullanici = (Session["girisYapanKullanici"] as KullaniciRolVM);
-    ViewBag.GirisYapanKullanici = kullanici;
-
 }
 
-@using (Html.BeginForm("AracEkle", "Arac", FormMethod.Post))
+@using (Html.BeginForm("AracGuncelle", "Arac", FormMethod.Post))
 {
     <div class="row">
         <div class="col">
@@ -29,7 +25,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
-                                                    @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control", onclick = "onChangeAracTuru()" })
+                                                    @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control", onclick = "onChangeAracTuru()", disabled=true })
                                                 </div>
                                             </div>
                                             @Html.AntiForgeryToken()
@@ -40,7 +36,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.LabelFor(a => a.BireyselVeyaFirmaId, "Firma")
-                                                    @Html.DropDownListFor(a => a.BireyselVeyaFirmaId, new SelectList("", "Value", "Text"), "Firma/Bireysel Üye", new { @class = "form-control" })
+                                                    @Html.DropDownListFor(a => a.BireyselVeyaFirmaId, new SelectList(ViewBag.Firmalar, "Value", "Text"), "Firma/Bireysel Üye", new { @class = "form-control", disabled = true  })
                                                 </div>
                                             </div>
 

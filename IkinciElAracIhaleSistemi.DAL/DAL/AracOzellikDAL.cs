@@ -36,6 +36,16 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 
 			return ozellikListesi;
 		}
+		//public List<SelectListItem> AracOzellikleriniListeyeDonustur(AracOzellikleri ozellik, int aracId)
+		//{
+		//	var ozellikListesi = new AracOzellikDAL().AracOzellikleriGetir(ozellik)
+		//		.Select(r => new SelectListItem()
+		//		{
+		//			Value = r.OzellikDetayId.ToString(),
+		//			Text = r.OzellikDetayAdi,
+		//		}).ToList();
 
+		//	return ozellikListesi;
+		//}
 	}
 }

@@ -5,70 +5,76 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-	int sayac = 1;
+    int sayac = 1;
 }
 
 @using (Html.BeginForm("Index", "Arac", FormMethod.Get))
 {
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Kriterler</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+	            <div class="card-body">
+		            <h4 class="card-title">Kriterler</h4>
+		            @Html.HiddenFor(a => a.AracId)
+		            <h5 class="card-title"></h5>
+	            </div>
                 @Html.HiddenFor(a => a.AracId)
-                <div class="table-responsive">
-	                <table class="table">
-                        
-		                <div class="col">
-			                <ul class="list-group list-group-flush">
-				                <div class="form-group row">
-					                <div class="col-sm-3">
-						                @Html.LabelFor(a => a.MarkaId, "Marka")
-						                @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text"),"Marka", new { @class = "form-control" })
-					                </div>
-				                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-group">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+	                                                @Html.LabelFor(a => a.MarkaId, "Marka")
+	                                                @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text"), "Marka", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            @Html.AntiForgeryToken()
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+	                                                @Html.LabelFor(a => a.ModelId, "Model")
+	                                                @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text"), "Model", new { @class = "form-control" })
+                                                </div>
+                                            </div>
 
-			                </ul>
-		                </div>
-		                <div class="col">
-			                <ul class="list-group list-group-flush">
-				                <div class="form-group row">
-					                <div class="col-sm-3">
-						                @Html.LabelFor(a => a.ModelId, "Model")
-						                @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text"),"Model", new { @class = "form-control" }))
-					                </div>
-				                </div>
-
-			                </ul>
-		                </div>
-		                <div class="col">
-			                <ul class="list-group list-group-flush">
-				                <div class="form-group row">
-					                <div class="col-sm-3">
-						                @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
-						                @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"),"Bireysel/Kurumsal", new { @class = "form-control" })
-					                </div>
-				                </div>
-
-			                </ul>
-		                </div>
-		                <div class="col">
-			                <ul class="list-group list-group-flush">
-				                <div class="form-group row">
-					                <div class="col-sm-3">
-						                @Html.LabelFor(a => a.StatuId, "Statü")
-						                @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text"),"Statü", new { @class = "form-control" })
-					                </div>
-				                </div>
-
-			                </ul>
-		                </div>
-
-	                </table>
-                    <a href="/Arac/Index" class="btn btn-outline-info">Listele</a>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+	                                                @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
+	                                                @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+	                                <div class="col">
+		                                <ul class="list-group list-group-flush">
+			                                <div class="form-group row">
+				                                <div class="col-sm-10">
+					                                @Html.LabelFor(a => a.StatuId, "Statü")
+					                                @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text"), "Statü", new { @class = "form-control" })
+				                                </div>
+			                                </div>
+		                                </ul>
+	                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -103,7 +109,7 @@
                                     <td>@item.KaydedenKullanici</td>
                                     <td>@item.KaydedilmeZamani</td>
                                     <td><a href="/Arac/AracSil/@item.AracId" class="btn btn-outline-danger">Sil</a></td>
-                                    <td><a href="/Arac/AracEkle/@item.AracId" class="btn btn-outline-success">Güncelle</a></td>
+                                    <td><a href="/Arac/AracGuncelle/@item.AracId" class="btn btn-outline-success">Güncelle</a></td>
 
                                 </tr>
                                 sayac++;

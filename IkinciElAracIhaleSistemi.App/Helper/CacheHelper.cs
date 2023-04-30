@@ -15,11 +15,9 @@ namespace IkinciElAracIhaleSistemi.App.Helper
 			var cache = MemoryCache.Default;
 			var item = cache.Get(key);
 
-			if (item == null)
-			{
-				item = getItemCallback();
-				cache.Set(key, item, absoluteExpiration);
-			}
+			if (item != null) return (T)item;
+			item = getItemCallback();
+			cache.Set(key, item, absoluteExpiration);
 
 			return (T)item;
 		}

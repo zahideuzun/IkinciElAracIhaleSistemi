@@ -44,9 +44,6 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		
 		public List<SelectListItem> Firmalar { get; set; }
 		
-		public Firma Firma { get; set; }
-		
-		public AracFiyat AracFiyat { get; set; }
 		
 	}
 }
