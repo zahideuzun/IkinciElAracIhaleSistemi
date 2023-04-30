@@ -337,7 +337,7 @@
 function onChangeAracTuru() {
     var aracTuruId = $("#AracTuruId").val();
     debugger;
-    if (aracTuruId == '@((int)UyeTurleri.Bireysel)')) {
+    if (aracTuruId == '@((int)UyeTurleri.Bireysel)') {
 
         var bireyselUyeler = @Html.Raw(Json.Encode(ViewBag.BireyselUyeler));
         var selectList = $("#FirmaId");
@@ -347,7 +347,7 @@ function onChangeAracTuru() {
                 .attr("value", bireyselUye.Value)
                 .text(bireyselUye.Text));
         });
-    } else if (aracTuruId == '@((int)UyeTurleri.Kurumsal)')) {
+    } else if (aracTuruId == '@((int)UyeTurleri.Kurumsal)') {
 
         var firmalar = @Html.Raw(Json.Encode(ViewBag.Firmalar));
         var selectList = $("#FirmaId");

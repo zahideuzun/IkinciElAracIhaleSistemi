@@ -17,6 +17,7 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public int ModelId { get; set; }
 		public decimal Km { get; set; }
 		public bool BireyselMi { get; set; }
+		
 		public Model Model { get; set; }
 		public Marka Marka { get; set; }
 
