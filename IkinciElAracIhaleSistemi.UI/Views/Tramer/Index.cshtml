@@ -1,81 +1,86 @@
 ﻿@using IkinciElAracIhaleSistemi.Entities.VM.Arac
 @using System.Web.Mvc
 @using System.Web.Mvc.Html
-@model (AracTramerVM, AracParcaVM)
+@model AracTramerDetayEklemeVM
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
+@using (@Html.BeginForm("Index", "Tramer", FormMethod.Post))
+{
 <div class="row">
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="card-title">Araç Tramer Bilgileri</h6>
-                <h5 class="card-title"></h5>
-            </div>
-	        <div class="form-group row">
-		        <div class="card-body">
-			        <h6 class="card-title">Tramer Fiyatı</h6>
-		        </div>
-		        <div class="col-sm-9">
-			        <div class="form-check form-check-inline float-left">
-				        @Html.TextBoxFor(model => model.Item1.TramerTutari, new { @class = "form-control" })
-			        </div>
-		        </div>
-		        <div class="col-sm-3">
-			        <button type="submit" class="btn btn-primary float-right mt-2 mt-sm-0">Kaydet</button>
-		        </div>
-	        </div>
+	<div class="col">
+		@Html.AntiForgeryToken()
+		<div class="card">
+			<div class="card-body">
+				<h6 class="card-title">Araç Tramer Bilgileri</h6>
+				<h5 class="card-title"></h5>
+			</div>
+			<div class="form-group row">
+				<div class="card-body col-sm-2">
+					<h6 class="card-title">Tramer Fiyatı</h6>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check form-check-inline float-left">
+						@Html.TextBoxFor(model => model.Fiyat, new { @class = "form-control" })
+					</div>
+				</div>
+			</div>
 
 
 
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col">
+							<ul class="list-group list-group-flush">
+								<div class="form-group row">
+									<label class="col-sm-8 col-form-label">Tramer Durumu</label>
+								</div>
+							</ul>
+							<input type="hidden" name="AracId" value="1"/>
+							<div class="row">
+								<div class="col">
+									<div class="card">
+										<div class="card-body">
+											@{ int sayi = 0; }
+											@foreach (var parca in (List<AracParcaVM>)ViewBag.AracParcalari)
+											{
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">@parca.AracParcaAdi</label>
+													<input type="hidden" name="Children[@sayi].ParcaId" value="@parca.AracParcaId"/>
+													@foreach (var durum in (List<AracTramerVM>)ViewBag.TramerDurumlari)
+													{
+														<div class="form-check form-check-inline col-sm-2">
+															<input type="radio" name="Children[@sayi].TramerId" id="@durum.TramerDurumAdi" value="@durum.TramerDurumId"/>
+															<label for="@durum.TramerDurumAdi">@durum.TramerDurumAdi</label>
+														</div>
+													}
+												</div>
+												sayi++;
+											}
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <ul class="list-group list-group-flush">
-                                <div class="form-group row">
-                                    <label class="col-sm-5 col-form-label">Tramer Durumu</label>
-                                </div>
-                            </ul>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            @foreach (var parca in (List<AracParcaVM>)ViewBag.AracParcalari)
-                                            {
-                                                <div class="form-group row">
-                                                    <label class="col-sm-2 col-form-label">@parca.AracParcaAdi</label>
-                                                    @foreach (var durum in (List<AracTramerVM>)ViewBag.TramerDurumlari)
-                                                    {
-                                                        <div class="form-check form-check-inline col-sm-2">
-                                                            <input type="radio" name="@parca.AracParcaAdi" id="@durum.TramerDurumAdi" value="@durum.TramerDurumAdi" />
-                                                            <label for="@durum.TramerDurumAdi">@durum.TramerDurumAdi</label>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            }
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-           
-                <div class="col text-center">
-                    <button type="submit" class="btn btn-primary">Parçaları Kaydet</button>
-                </div>
-            
-
-        </div>
-    </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col text-center">
+									<button type="submit" class="btn btn-primary">Parçaları Kaydet</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+}
+
+
 
 
 

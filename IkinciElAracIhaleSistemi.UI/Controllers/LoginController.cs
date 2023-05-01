@@ -1,15 +1,13 @@
-﻿using IkinciElAracIhaleSistemi.Entities.VM;
+﻿using IkinciElAracIhaleSistemi.DAL.DAL;
+using IkinciElAracIhaleSistemi.Entities.VM;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using IkinciElAracIhaleSistemi.DAL.DAL;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
 {
-    [AllowAnonymous]
+	[AllowAnonymous]
     public class LoginController : Controller
     {
         // GET: Login

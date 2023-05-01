@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using IkinciElAracIhaleSistemi.App.Helper;
+﻿using IkinciElAracIhaleSistemi.App.Helper;
 using IkinciElAracIhaleSistemi.DAL.DAL;
 using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
 {

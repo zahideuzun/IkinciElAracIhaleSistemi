@@ -1,30 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using IkinciElAracIhaleSistemi.DAL.DAL;
+﻿using IkinciElAracIhaleSistemi.DAL.DAL;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
+using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
 {
-    public class TramerController : Controller
+	public class TramerController : Controller
     {
         // GET: Tramer
         public ActionResult Index()
         {
-            AracTramerVM tramerVM = new AracTramerVM();
-            AracParcaVM parcaVM = new AracParcaVM();
-            AracParcaDAL aracParca = new AracParcaDAL();
-            AracTramerDurumDAL aracTramer = new AracTramerDurumDAL();
-            ViewBag.AracParcalari = aracParca.AracParcalariGetir();
+            //AracTramerVM tramerVM = new AracTramerVM();
+            //AracParcaVM parcaVM = new AracParcaVM();
+            AracTramerDetayEklemeVM detayEkleme = new AracTramerDetayEklemeVM();
+			AracTramerDetayDAL aracTramer = new AracTramerDetayDAL();
+            ViewBag.AracParcalari = aracTramer.AracParcalariGetir();
             ViewBag.TramerDurumlari = aracTramer.AracTramerDurumlariniGetir();
-            return View((tramerVM,parcaVM));
+            return View(detayEkleme);
         }
 
-        public ActionResult TramerEkle()
+        
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Index(AracTramerDetayEklemeVM aracTramer)
         {
-	        return null;
+	        AracTramerDetayDAL aracTramerDetay = new AracTramerDetayDAL();
+	        aracTramerDetay.TramerEkle(aracTramer);
+	        return View();
         }
-    }
+
+        
+	}
 }
