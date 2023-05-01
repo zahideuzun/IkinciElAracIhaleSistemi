@@ -12,5 +12,10 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public string ParcaAdi { get; set; }
 		public bool IsActive { get; set; } = true;
 		public bool IsDeleted { get; set; } = false;
+
+		public override string ToString()
+		{
+			return ParcaAdi;
+		}
 	}
 }

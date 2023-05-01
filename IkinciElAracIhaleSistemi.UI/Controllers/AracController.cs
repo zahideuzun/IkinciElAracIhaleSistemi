@@ -18,17 +18,14 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		// GET: Arac
 		public ActionResult Index()
 		{
-			ViewBag.AracTurleri = CacheHelper.GetOrSet("AracTurleri", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur(AracOzellikleri.AracTuru), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Modeller = CacheHelper.GetOrSet("Modeller", () => new ModelDAL().ModelListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Markalar = CacheHelper.GetOrSet("Markalar", () => new MarkaDAL().MarkaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Statuler = CacheHelper.GetOrSet("Statuler", () => new StatuDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Araclar = new AracDAL().AraclariGetir();
+			AracListelemeOzellikleriCache();
 			return View();
 		}
 		[HttpGet]
 		public ActionResult AracEkle()
 		{
 			AracOzellikleriCache();
+			AracListelemeOzellikleriCache();
 			return View();
 		}
 		[HttpPost, ValidateAntiForgeryToken]
@@ -63,9 +60,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			aracDal.AracGuncelle(arac);
 			return RedirectToAction("Index");
 		}
-
-
-
+		
 		[HttpPost]
 		public JsonResult ModelleriGetir(int markaId)
 		{
@@ -86,15 +81,18 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			ViewBag.VersiyonTipleri = CacheHelper.GetOrSet("VersiyonTipleri", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur(AracOzellikleri.Versiyon), DateTimeOffset.Now.AddMinutes(30));
 			ViewBag.Renkler = CacheHelper.GetOrSet("Renkler", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur(AracOzellikleri.Renk), DateTimeOffset.Now.AddMinutes(30));
 			ViewBag.Donanimlar = CacheHelper.GetOrSet("Donanim", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur(AracOzellikleri.OpsiyonelDonanim), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.AracTurleri = CacheHelper.GetOrSet("AracTurleri", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur(AracOzellikleri.AracTuru), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Modeller = CacheHelper.GetOrSet("Modeller", () => new ModelDAL().ModelListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Markalar = CacheHelper.GetOrSet("Markalar", () => new MarkaDAL().MarkaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Statuler = CacheHelper.GetOrSet("Statuler", () => new StatuDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
+			
 			ViewBag.Firmalar = CacheHelper.GetOrSet("Firmalar", () => new FirmaDAL().FirmaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 			ViewBag.BireyselUyeler = CacheHelper.GetOrSet("BireyselUyeler", () => new BireyselUyeDAL().BireyselUyeleriListeyeDonustur(UyeTurleri.Bireysel), DateTimeOffset.Now.AddMinutes(30));
 		}
 
-
+		public void AracListelemeOzellikleriCache()
+		{
+			ViewBag.AracTurleri = CacheHelper.GetOrSet("AracTurleri", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur(AracOzellikleri.AracTuru), DateTimeOffset.Now.AddMinutes(30));
+			ViewBag.Modeller = CacheHelper.GetOrSet("Modeller", () => new ModelDAL().ModelListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
+			ViewBag.Markalar = CacheHelper.GetOrSet("Markalar", () => new MarkaDAL().MarkaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
+			ViewBag.Statuler = CacheHelper.GetOrSet("Statuler", () => new StatuDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
+		}
 
 	}
 }
