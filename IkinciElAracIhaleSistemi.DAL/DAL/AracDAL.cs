@@ -12,6 +12,7 @@ using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 using System.Web;
+using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
@@ -27,6 +28,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							 join md in db.Modeller on k.ModelId equals md.ModelId
 							 join ast in db.AracStatu on k.Id equals ast.AracId
 							 join st in db.Status on ast.StatuId equals st.StatuId
+							 where k.IsActive
 							 select new AracBilgileriVM()
 							 {
 								 AracId = k.Id,
@@ -116,7 +118,6 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			{
 				try
 				{
-
 					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
 						Arac eklenenArac = aracDb.Araclar.Add(new Arac()
@@ -292,6 +293,74 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				{
 					scope.Complete();
 					return new ErrorResult("Araç güncellenemedi!");
+				}
+			}
+		}
+
+		public Result AracSil(int id)
+		{
+			using (TransactionScope scope = new TransactionScope())
+			{
+				try
+				{
+					using (AracIhaleContext aracDb = new AracIhaleContext())
+					{
+
+						var silinecekArac = aracDb.Araclar.Find(id);
+						if (silinecekArac != null)
+						{
+							silinecekArac.IsActive = false;
+							silinecekArac.IsDeleted = true;
+							silinecekArac.ModifiedDate = DateTime.Now;
+						}
+
+						var silinecekAracFiyat = aracDb.AracFiyatlari.SingleOrDefault(x => x.AracId== id && x.IsActive);
+						if (silinecekAracFiyat != null)
+						{
+							silinecekAracFiyat.IsActive = false;
+							silinecekAracFiyat.IsDeleted = true;
+							silinecekAracFiyat.ModifiedDate = DateTime.Now;
+						}
+
+						var silinecekAracOzellikleri = aracDb.AracOzellikleri.Where(x => x.AracId == id && x.IsActive).ToList();
+
+						foreach (var aracOzellik in silinecekAracOzellikleri)
+						{
+							aracOzellik.IsActive = false;
+							aracOzellik.IsDeleted = true;
+							aracOzellik.ModifiedDate = DateTime.Now;
+						}
+						var silinecekAracStatu = aracDb.AracStatu.SingleOrDefault(x => x.AracId == id && x.IsActive);
+						if (silinecekAracStatu != null)
+						{
+							silinecekAracStatu.IsActive = false;
+							silinecekAracStatu.IsDeleted = true;
+							silinecekAracStatu.ModifiedDate = DateTime.Now;
+						}
+						var silinecekAracTramer = aracDb.AracTramerleri.SingleOrDefault(x => x.AracId == id && x.IsActive);
+						if (silinecekAracTramer != null)
+						{				 
+							silinecekAracTramer.IsActive = false;
+							silinecekAracTramer.IsDeleted = true;
+						}
+						var silinecekAracTramerDetayi = aracDb.AracTramerDetaylari.SingleOrDefault(x => x.AracTramerId == silinecekAracTramer.AracTramerId && x.IsActive);
+						if (silinecekAracTramerDetayi != null)
+						{					   
+							silinecekAracTramerDetayi.IsActive = false;
+							silinecekAracTramerDetayi.IsDeleted = true;
+						}
+
+
+						//todo savechanges contextte override edildi. Entry.State kullanarak yap?? 
+						aracDb.SaveChanges();
+					}
+					scope.Complete();
+					return new SuccessResult("Araç silindi!");
+				}
+				catch (Exception ex)
+				{
+					scope.Complete();
+					return new ErrorResult("Araç silinemedi!");
 				}
 			}
 		}

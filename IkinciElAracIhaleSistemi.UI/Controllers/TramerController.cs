@@ -7,15 +7,13 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 	public class TramerController : Controller
     {
         // GET: Tramer
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            //AracTramerVM tramerVM = new AracTramerVM();
-            //AracParcaVM parcaVM = new AracParcaVM();
-            AracTramerDetayEklemeVM detayEkleme = new AracTramerDetayEklemeVM();
+	        AracTramerDetayEklemeVM detayEkleme = new AracTramerDetayEklemeVM();
 			AracTramerDetayDAL aracTramer = new AracTramerDetayDAL();
             ViewBag.AracParcalari = aracTramer.AracParcalariGetir();
             ViewBag.TramerDurumlari = aracTramer.AracTramerDurumlariniGetir();
-            return View(detayEkleme);
+            return View((detayEkleme,id));
         }
 
         
@@ -24,7 +22,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         {
 	        AracTramerDetayDAL aracTramerDetay = new AracTramerDetayDAL();
 	        aracTramerDetay.TramerEkle(aracTramer);
-	        return View();
+	        return RedirectToAction("Index", "Arac");
         }
 
         

@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 {
-	public class AracStatuVM
+	public class AracIlanVM
 	{
 		public int AracId { get; set; }
-		public int StatuId { get; set; }
-		public string StatuAdi { get; set; }
-		public string AktifMi { get; set; }
-		public DateTime Tarih { get; set; }
-
+		public string Baslik { get; set; }
+		public string Aciklama { get; set; }
 	}
 }

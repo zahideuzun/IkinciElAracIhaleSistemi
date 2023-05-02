@@ -6,6 +6,7 @@ using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
@@ -16,13 +17,14 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		public ActionResult Index()
 		{
 			AracListelemeOzellikleriCache();
+			AracDAL arac = new AracDAL();
+			ViewBag.Araclar = arac.AraclariGetir();
 			return View();
 		}
 		[HttpGet]
 		public ActionResult AracEkle()
 		{
 			AracOzellikleriCache();
-			AracListelemeOzellikleriCache();
 			return View();
 		}
 		[HttpPost, ValidateAntiForgeryToken]
@@ -43,7 +45,8 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		public ActionResult AracGuncelle(int id)
 		{
 			AracOzellikleriCache();
-
+			AracStatuDAL aracStatu = new AracStatuDAL();
+			ViewBag.AracStatuleri = aracStatu.StatuleriGetir(id);
 			AracDAL aracDal = new AracDAL();
 			var arac = aracDal.GuncellenecekAracBilgisiniGetir(id);
 			return View(arac);
@@ -57,7 +60,27 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			aracDal.AracGuncelle(arac);
 			return RedirectToAction("Index");
 		}
-		
+		[HttpGet]
+		public ActionResult AracSil(int id)
+		{
+			AracDAL aracDal = new AracDAL();
+			aracDal.AracSil(id);
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public ActionResult IlanEkle([Bind(Include = "AracId, IlanBasligi, IlanAciklama")] AracIlanVM ilanVm)
+		{
+			IlanDAL ilan = new IlanDAL();
+			ilan.IlanEkle(ilanVm);
+			return RedirectToAction("Index");
+		}
+		public ActionResult IlanModal(int aracId)
+		{
+			var model = new AracIlanVM { AracId = aracId };
+			ViewBag.IlanModel = model;
+			return PartialView("IlanModal");
+		}
 		[HttpPost]
 		public JsonResult ModelleriGetir(int markaId)
 		{
@@ -70,6 +93,9 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			return Json(modelList);
 		}
 
+		/// <summary>
+		/// araca ait ozellikleri cache ekleyen metotlar
+		/// </summary>
 		public void AracOzellikleriCache()
 		{
 			ViewBag.VitesTipleri = CacheHelper.GetOrSet("VitesTipleri", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur(AracOzellikleri.VitesTipi), DateTimeOffset.Now.AddMinutes(30));
@@ -81,6 +107,8 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			
 			ViewBag.Firmalar = CacheHelper.GetOrSet("Firmalar", () => new FirmaDAL().FirmaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 			ViewBag.BireyselUyeler = CacheHelper.GetOrSet("BireyselUyeler", () => new BireyselUyeDAL().BireyselUyeleriListeyeDonustur(UyeTurleri.Bireysel), DateTimeOffset.Now.AddMinutes(30));
+			
+			AracListelemeOzellikleriCache();
 		}
 
 		public void AracListelemeOzellikleriCache()

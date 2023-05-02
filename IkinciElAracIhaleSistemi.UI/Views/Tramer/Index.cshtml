@@ -1,7 +1,7 @@
 ﻿@using IkinciElAracIhaleSistemi.Entities.VM.Arac
 @using System.Web.Mvc
 @using System.Web.Mvc.Html
-@model AracTramerDetayEklemeVM
+@model (AracTramerDetayEklemeVM,int id)
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -24,23 +24,23 @@
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check form-check-inline float-left">
-						@Html.TextBoxFor(model => model.Fiyat, new { @class = "form-control" })
+						@Html.TextBoxFor(model => model.Item1.Fiyat, new { @class = "form-control" })
 					</div>
 				</div>
 			</div>
-
-
-
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
 						<div class="col">
 							<ul class="list-group list-group-flush">
-								<div class="form-group row">
-									<label class="col-sm-8 col-form-label">Tramer Durumu</label>
+								<div class="form-group row" style="font-weight:bold">
+										<label class="col-sm-3 col-form-label">Tramer Durum</label>
+										<label class="col-sm-2 col-form-label">Orjinal</label>
+										<label class="col-sm-2 col-form-label">Boyalı</label>
+										<label class="col-sm-2 col-form-label">Değişmiş</label>
 								</div>
 							</ul>
-							<input type="hidden" name="AracId" value="1"/>
+							<input type="hidden" name="AracId" value="id"/>
 							<div class="row">
 								<div class="col">
 									<div class="card">
@@ -55,7 +55,7 @@
 													{
 														<div class="form-check form-check-inline col-sm-2">
 															<input type="radio" name="Children[@sayi].TramerId" id="@durum.TramerDurumAdi" value="@durum.TramerDurumId"/>
-															<label for="@durum.TramerDurumAdi">@durum.TramerDurumAdi</label>
+															<label for="@durum.TramerDurumAdi"></label>
 														</div>
 													}
 												</div>

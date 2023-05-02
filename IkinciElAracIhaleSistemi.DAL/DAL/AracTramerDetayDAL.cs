@@ -15,7 +15,6 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
 	public class AracTramerDetayDAL
 	{
-
 		public Result TramerEkle(AracTramerDetayEklemeVM aracTramer)
 		{
 			using (TransactionScope scope = new TransactionScope())
@@ -31,17 +30,15 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							//todo created by
 						});
 
-						AracTramerDetay aracTramerDetay = aracDb.AracTramerDetaylari.Add(new AracTramerDetay()
-						{
-							AracTramerId = eklenenTramer.AracTramerId,
-						});
-
 						foreach (var t in aracTramer.Children)
 						{
+							AracTramerDetay aracTramerDetay = aracDb.AracTramerDetaylari.Add(new AracTramerDetay()
+							{
+								AracTramerId = eklenenTramer.AracTramerId,
+							});
 							aracTramerDetay.AracParcaId = t.ParcaId;
 							aracTramerDetay.TramerId = t.TramerId;
 						}
-						
 
 						aracDb.SaveChanges();
 					}
@@ -58,29 +55,30 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
+		//public AracTramerDetayEklemeVM AracTramerBilgileriniGetir(int id)
+		//{
+		//	using (AracIhaleContext db = new AracIhaleContext())
+		//	{
+		//		AracTramerDetayEklemeVM arac = (from k in db.AracTramerleri
+		//			join mr in db.AracTramerDetaylari on k.AracTramerId equals mr.AracTramerId
 
+		//	}
 
-
-
-
-
-
-
-
-
+		//	return null;
+		//}
 
 		public List<AracTramerVM> AracTramerDurumlariniGetir()
 		{
 			using (AracIhaleContext db = new AracIhaleContext())
 			{
 				return (from m in db.Tramerler
-					where m.IsActive == true
-					select new AracTramerVM()
-					{
-						TramerDurumId = m.TramerId,
-						TramerDurumAdi = m.TramerAdi
+						where m.IsActive == true
+						select new AracTramerVM()
+						{
+							TramerDurumId = m.TramerId,
+							TramerDurumAdi = m.TramerAdi
 
-					}).ToList();
+						}).ToList();
 			}
 
 		}
@@ -89,13 +87,13 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			using (AracIhaleContext db = new AracIhaleContext())
 			{
 				return (from m in db.AracParcalari
-					where m.IsActive == true
-					select new AracParcaVM()
-					{
-						AracParcaId = m.AracParcaId,
-						AracParcaAdi = m.ParcaAdi
+						where m.IsActive == true
+						select new AracParcaVM()
+						{
+							AracParcaId = m.AracParcaId,
+							AracParcaAdi = m.ParcaAdi
 
-					}).ToList();
+						}).ToList();
 			}
 		}
 	}

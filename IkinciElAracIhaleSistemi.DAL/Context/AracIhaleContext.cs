@@ -112,6 +112,7 @@ namespace IkinciElAracIhaleSistemi.DAL.Context
 		public DbSet<OzellikDetay> OzellikDetaylari { get; set; }
 		public DbSet<Sehir> Sehirler { get; set; }
 		public DbSet<Ilce> Ilceler { get; set; }
+		public DbSet<Ilan> Ilanlar { get; set; }
 		public DbSet<SehirIlce> SehirIlceleri { get; set; }
 		public DbSet<KurumsalUye> KurumsalUyeler { get; set; }
 		public DbSet<Uye> Uyeler { get; set; }

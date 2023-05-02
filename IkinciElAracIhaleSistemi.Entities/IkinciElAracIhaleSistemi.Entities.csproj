@@ -120,6 +120,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VM\Arac\AracBilgileriVM.cs" />
     <Compile Include="VM\Arac\AracEklemeDetayVM.cs" />
+    <Compile Include="VM\Arac\AracIlanVM.cs" />
     <Compile Include="VM\Arac\AracParcaVM.cs" />
     <Compile Include="VM\Arac\AracStatuVM.cs" />
     <Compile Include="VM\Arac\AracTramerDetayEklemeVM.cs" />

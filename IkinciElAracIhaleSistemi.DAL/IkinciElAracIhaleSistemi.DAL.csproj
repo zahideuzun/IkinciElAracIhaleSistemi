@@ -158,6 +158,7 @@
     <Compile Include="DAL\AracTramerDetayDAL.cs" />
     <Compile Include="DAL\BireyselUyeDAL.cs" />
     <Compile Include="DAL\FirmaDAL.cs" />
+    <Compile Include="DAL\IlanDAL.cs" />
     <Compile Include="DAL\IletisimDAL.cs" />
     <Compile Include="DAL\KullaniciDAL.cs" />
     <Compile Include="DAL\MarkaDAL.cs" />

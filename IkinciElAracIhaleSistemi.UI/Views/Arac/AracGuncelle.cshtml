@@ -1,4 +1,5 @@
-﻿@using IkinciElAracIhaleSistemi.Entities.VM.Enum
+﻿@using IkinciElAracIhaleSistemi.Entities.VM.Arac
+@using IkinciElAracIhaleSistemi.Entities.VM.Enum
 @model IkinciElAracIhaleSistemi.Entities.VM.Arac.AracEklemeDetayVM
 @{
     ViewBag.Title = "AracGuncelle";
@@ -25,7 +26,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
-                                                    @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control", onclick = "onChangeAracTuru()", disabled=true })
+                                                    @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control", onclick = "onChangeAracTuru()", disabled = true })
                                                 </div>
                                             </div>
                                             @Html.AntiForgeryToken()
@@ -36,7 +37,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-10">
                                                     @Html.LabelFor(a => a.BireyselVeyaFirmaId, "Firma")
-                                                    @Html.DropDownListFor(a => a.BireyselVeyaFirmaId, new SelectList(ViewBag.Firmalar, "Value", "Text"), "Firma/Bireysel Üye", new { @class = "form-control", disabled = true  })
+                                                    @Html.DropDownListFor(a => a.BireyselVeyaFirmaId, new SelectList(ViewBag.Firmalar, "Value", "Text"), "Firma/Bireysel Üye", new { @class = "form-control", disabled = true })
                                                 </div>
                                             </div>
 
@@ -239,9 +240,9 @@
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tarihceModal">Araç Tarihçe</button>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aliciModal">Alıcı Bilgileri Ekle</button>
                     <a class="btn btn-info" href="" role="button" data-toggle="modal" data-target="#ilanModal">İlan Bilgileri Ekle</a>
-                    <a class="btn btn-warning" href="" role="button" data-toggle="modal" data-target="#tramerModal">Tramer Bilgileri Ekle</a>
+                    <a class="btn btn-warning" href="~/Tramer/Index/" role="button">Tramer Bilgileri Ekle</a>
 
-                    <button type="submit" class="btn btn-dark">Kaydet</button>
+                    <button type="submit" class="btn btn-dark">Güncelle</button>
                 </div>
             </div>
         </div>
@@ -255,18 +256,18 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">İlan Başlığı:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">İlan Açıklama:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                        <button type="button" class="btn btn-primary">Kaydet</button>
+                        <form action="~/Arac/IlanEkle/" method="POST">
+                            <input type="hidden" name="aracId" value="@Model.AracId" />
+                            <div class="form-group">
+                                <label for="ilanBasligi">İlan Başlığı:</label>
+                                <input type="text" class="form-control" id="Baslik" name="baslik">
+                            </div>
+                            <div class="form-group">
+                                <label for="ilanAciklama">İlan Açıklama:</label>
+                                <textarea class="form-control" id="Aciklama" name="aciklama"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">İlanı Ekle</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -281,7 +282,25 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Araç tarihçe
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Statü Adı</th>
+                                    <th scope="col">Tarih</th>
+                                    <th scope="col">Aktif</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in (List<AracStatuVM>)ViewBag.AracStatuleri)
+                                {
+                                    <tr>
+                                        <td>@item.StatuAdi</td>
+                                        <td>@item.Tarih</td>
+                                        <td>@item.AktifMi</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
@@ -289,6 +308,7 @@
                 </div>
             </div>
         </div>
+
         <div class="modal fade" id="aliciModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -325,8 +345,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 
 }
 <script src="~/Scripts/jquery-3.6.4.min.js"></script>

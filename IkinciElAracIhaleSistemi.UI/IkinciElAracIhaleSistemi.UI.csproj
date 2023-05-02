@@ -17226,6 +17226,7 @@
     <Content Include="Scripts\jquery-3.6.4.min.map" />
     <Content Include="Views\Arac\AracGuncelle.cshtml" />
     <Content Include="Views\Tramer\Index.cshtml" />
+    <Content Include="Views\Arac\IlanModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
