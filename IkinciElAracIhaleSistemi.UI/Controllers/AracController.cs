@@ -6,6 +6,7 @@ using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
@@ -47,7 +48,8 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			AracStatuDAL aracStatu = new AracStatuDAL();
 			ViewBag.AracStatuleri = aracStatu.StatuleriGetir(id);
 			AracTramerDetayDAL aracTramer = new AracTramerDetayDAL();
-
+			ViewBag.AracParcalari = aracTramer.AracParcalariGetir();
+			ViewBag.TramerDurumlari = aracTramer.AracTramerDurumlariniGetir();
 			AracDAL aracDal = new AracDAL();
 			var arac = aracDal.GuncellenecekAracBilgisiniGetir(id);
 			return View(arac);

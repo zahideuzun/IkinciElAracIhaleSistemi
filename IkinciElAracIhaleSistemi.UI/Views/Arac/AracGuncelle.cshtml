@@ -241,7 +241,7 @@
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aliciModal">Alıcı Bilgileri Ekle</button>
                     <a class="btn btn-info" href="" role="button" data-toggle="modal" data-target="#ilanModal">İlan Bilgileri Ekle</a>
                     <a class="btn btn-warning" href="@Url.Action("Index", "Tramer", new { id = Model.AracId })" role="button">Tramer Bilgileri Ekle</a>
-                    <button type="button" class="btn btn-dribbble" data-toggle="modal" data-target="#tramerDetayModel">Araç Tarihçe</button>
+                    <button type="button" class="btn btn-dribbble" data-toggle="modal" data-target="#tramerDetayModel">Tramer Detay Görüntüle</button>
 
 
                     <button type="submit" class="btn btn-dark">Güncelle</button>
@@ -310,42 +310,24 @@
                 </div>
             </div>
         </div>
-	    <div class="modal fade" id="tramerDetayModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		    <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-				    <div class="modal-header">
-					    <h5 class="modal-title" id="exampleModalLabel">Tramer Görüntüle</h5>
-					    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						    <span aria-hidden="true">&times;</span>
-					    </button>
-				    </div>
-				    <div class="modal-body">
-					    <table class="table">
-						    <thead>
-						    <tr>
-							    <th scope="col">Statü Adı</th>
-							    <th scope="col">Tarih</th>
-							    <th scope="col">Aktif</th>
-						    </tr>
-						    </thead>
-						    <tbody>
-						    @foreach (var item in (List<AracStatuVM>)ViewBag.AracStatuleri)
-						    {
-							    <tr>
-								    <td>@item.StatuAdi</td>
-								    <td>@item.Tarih</td>
-								    <td>@item.AktifMi</td>
-							    </tr>
-						    }
-						    </tbody>
-					    </table>
-				    </div>
-				    <div class="modal-footer">
-					    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-				    </div>
-			    </div>
-		    </div>
-	    </div>
+        <div class="modal fade" id="tramerDetayModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tramer Görüntüle</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        buraya tramer detaylari gelicek. list halinde
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="aliciModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -415,6 +397,7 @@ function onChangeAracTuru() {
         });
     }
 }
+
 
 
 
