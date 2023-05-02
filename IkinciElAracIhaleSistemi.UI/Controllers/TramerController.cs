@@ -13,7 +13,8 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			AracTramerDetayDAL aracTramer = new AracTramerDetayDAL();
             ViewBag.AracParcalari = aracTramer.AracParcalariGetir();
             ViewBag.TramerDurumlari = aracTramer.AracTramerDurumlariniGetir();
-            return View((detayEkleme,id));
+            detayEkleme.AracId = id;
+            return View((detayEkleme));
         }
 
         

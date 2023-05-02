@@ -136,7 +136,7 @@
     <Compile Include="VM\IletisimBilgiVM.cs" />
     <Compile Include="VM\Enum\IletisimTurleri.cs" />
     <Compile Include="VM\KullaniciRolVM.cs" />
-    <Compile Include="VM\LoginVM.cs" />
+    <Compile Include="VM\GirisVM.cs" />
     <Compile Include="VM\RolSayfaVM.cs" />
     <Compile Include="VM\RolVM.cs" />
     <Compile Include="VM\StatuVM.cs" />

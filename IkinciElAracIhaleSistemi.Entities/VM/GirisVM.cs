@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace IkinciElAracIhaleSistemi.Entities.VM
 {
-	public class LoginVM
+	public class GirisVM
 	{
 		[Display(Name = "Kullanıcı Id")]
 		public int KullaniciId { get; set; }

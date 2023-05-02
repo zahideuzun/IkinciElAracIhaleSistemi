@@ -54,18 +54,42 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				}
 			}
 		}
+		public List<AracTramerDetayChildVM> GetAracTramerDetayChildren()
+		{
+			using (AracIhaleContext db = new AracIhaleContext())
+			{
+				var aracParcalari = db.AracParcalari.ToList();
+				var tramerler = db.Tramerler.ToList();
 
-		//public AracTramerDetayEklemeVM AracTramerBilgileriniGetir(int id)
-		//{
-		//	using (AracIhaleContext db = new AracIhaleContext())
-		//	{
-		//		AracTramerDetayEklemeVM arac = (from k in db.AracTramerleri
-		//			join mr in db.AracTramerDetaylari on k.AracTramerId equals mr.AracTramerId
+				var childQuery = from ap in aracParcalari
+					from t in tramerler
+					select new AracTramerDetayChildVM()
+					{
+						ParcaId = ap.AracParcaId,
+						TramerId = t.TramerId
+					};
 
-		//	}
+				return childQuery.ToList();
+			}
+		}
 
-		//	return null;
-		//}
+		public List<AracTramerDetayEklemeVM> AracTramerBilgileriniGetir(int id)
+		{
+			using (AracIhaleContext db = new AracIhaleContext())
+			{
+				var aracList = (from k in db.AracTramerleri
+					where k.AracId == id
+					select new AracTramerDetayEklemeVM()
+					{
+						Fiyat = k.TramerFiyati,
+						AracId = k.AracId,
+						Children = GetAracTramerDetayChildren().ToArray()
+					}).ToList();
+
+				return aracList;
+			}
+		}
+
 
 		public List<AracTramerVM> AracTramerDurumlariniGetir()
 		{

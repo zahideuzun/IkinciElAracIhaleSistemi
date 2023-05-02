@@ -44,7 +44,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 		/// </summary>
 		/// <param name="vm"></param>
 		/// <returns></returns>
-		public KullaniciRolVM KullaniciKontrol(LoginVM vm)
+		public KullaniciRolVM KullaniciKontrol(GirisVM vm)
 		{
 			using (AracIhaleContext aracDb = new AracIhaleContext())
 			{

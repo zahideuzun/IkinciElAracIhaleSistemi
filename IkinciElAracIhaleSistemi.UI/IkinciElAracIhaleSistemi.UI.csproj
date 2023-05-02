@@ -11017,7 +11017,7 @@
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KullaniciController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\GirisController.cs" />
     <Compile Include="Controllers\TramerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -17212,7 +17212,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\PartialFooter.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Giris\Index.cshtml" />
     <Content Include="Views\Kullanici\Index.cshtml" />
     <Content Include="Views\Kullanici\KullaniciEkle.cshtml" />
     <Content Include="Views\Kullanici\KullaniciGuncelle.cshtml" />

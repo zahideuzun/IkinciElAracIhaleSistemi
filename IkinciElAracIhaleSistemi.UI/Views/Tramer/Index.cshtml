@@ -1,7 +1,7 @@
 ﻿@using IkinciElAracIhaleSistemi.Entities.VM.Arac
 @using System.Web.Mvc
 @using System.Web.Mvc.Html
-@model (AracTramerDetayEklemeVM,int id)
+@model AracTramerDetayEklemeVM
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -24,7 +24,7 @@
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check form-check-inline float-left">
-						@Html.TextBoxFor(model => model.Item1.Fiyat, new { @class = "form-control" })
+						@Html.TextBoxFor(model => model.Fiyat, new { @class = "form-control" })
 					</div>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 										<label class="col-sm-2 col-form-label">Değişmiş</label>
 								</div>
 							</ul>
-							<input type="hidden" name="AracId" value="id"/>
+							<input type="hidden" name="AracId" value="@Model.AracId"/>
 							<div class="row">
 								<div class="col">
 									<div class="card">

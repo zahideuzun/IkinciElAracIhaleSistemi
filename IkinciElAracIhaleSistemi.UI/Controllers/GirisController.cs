@@ -8,12 +8,12 @@ using System.Web.Security;
 namespace IkinciElAracIhaleSistemi.UI.Controllers
 {
 	[AllowAnonymous]
-    public class LoginController : Controller
+    public class GirisController : Controller
     {
         // GET: Login
         public ActionResult Index()
         {
-			LoginVM vm = new LoginVM();
+			GirisVM vm = new GirisVM();
 
 			if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
 			
@@ -26,25 +26,23 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		}
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Index(LoginVM loginVm)
+        public ActionResult Index(GirisVM girisVm)
         {
 	        KullaniciDAL kullaniciDal = new KullaniciDAL();
-	        var kullanici = kullaniciDal.KullaniciKontrol(loginVm);
+	        var kullanici = kullaniciDal.KullaniciKontrol(girisVm);
 
 	        if (kullanici == null)
 	        {
-				//todo mesaji kullaniciya göster
 		        ViewBag.HataMesaji = "Kullanıcı adı veya şifre hatalı";
 		        return View("Index");
 	        }
 	        FormsAuthentication.SetAuthCookie(kullanici.KullaniciAdi, true);
 
 	        HttpCookie cookie = new HttpCookie("kullaniciBilgileri");
-			//todo checkboxi düzenle
-	        if (loginVm.BeniHatirla)
+	        if (girisVm.BeniHatirla)
 	        {
 		        cookie.Expires = DateTime.Now.AddDays(1);
-		        cookie.Values.Add("kullaniciadi", loginVm.KullaniciAdi);
+		        cookie.Values.Add("kullaniciadi", girisVm.KullaniciAdi);
 		        HttpContext.Response.Cookies.Add(cookie);
 	        }
 
@@ -54,7 +52,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         public ActionResult LogOut()
         {
 	        FormsAuthentication.SignOut();
-	        return RedirectToAction("Index", "Login");
+	        return RedirectToAction("Index", "Giris");
         }
 	}
 }
