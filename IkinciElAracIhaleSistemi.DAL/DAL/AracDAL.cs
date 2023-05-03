@@ -129,11 +129,22 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							MarkaId = arac.MarkaId,
 							ModelId = arac.ModelId,
 							Km = arac.Km,
-							BireyselMi = arac.BireyselVeyaFirmaId == (int)(UyeTurleri.Bireysel),
+							BireyselMi = arac.AracTuruId == (int)(UyeTurleri.Bireysel),
 							Aciklama = arac.Aciklama
 						});
 						eklenenArac.UyeId = eklenenArac.BireyselMi ? UyeTipineGoreUyeIdGetir((int)UyeTurleri.Bireysel, arac.BireyselVeyaFirmaId) : UyeTipineGoreUyeIdGetir((int)UyeTurleri.Kurumsal, arac.BireyselVeyaFirmaId);
 
+						var sorgu = aracDb.KurumsalUyeler.SingleOrDefault(a => a.UyeId == eklenenArac.UyeId);
+						if (sorgu != null)
+						{
+							var firmaId = sorgu.FirmaId;
+							aracDb.Stoklar.Add(new Stok()
+							{
+								AracId = eklenenArac.Id,
+								FirmaId = firmaId,
+								Tarih = DateTime.Now
+							});
+						}
 
 						aracDb.AracOzellikleri.Add(new AracOzellik()
 						{

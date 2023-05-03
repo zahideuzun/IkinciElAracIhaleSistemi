@@ -240,9 +240,14 @@
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tarihceModal">Araç Tarihçe</button>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aliciModal">Alıcı Bilgileri Ekle</button>
                     <a class="btn btn-info" href="" role="button" data-toggle="modal" data-target="#ilanModal">İlan Bilgileri Ekle</a>
-                    <a class="btn btn-warning" href="@Url.Action("Index", "Tramer", new { id = Model.AracId })" role="button">Tramer Bilgileri Ekle</a>
-                    <button type="button" class="btn btn-dribbble" data-toggle="modal" data-target="#tramerDetayModel">Tramer Detay Görüntüle</button>
-
+                    @if (((List<AracTramerDetayGoruntulemeVM>)ViewBag.AracTramerDetaylari).Count > 0)
+                    {
+	                    <button type="button" class="btn btn-dribbble" data-toggle="modal" data-target="#tramerDetayModel">Tramer Detay Görüntüle</button>
+                    }
+                    else
+                    {
+	                    <a class="btn btn-warning" href="@Url.Action("Index", "Tramer", new { id = Model.AracId })" role="button">Tramer Bilgileri Ekle</a>
+                    }
 
                     <button type="submit" class="btn btn-dark">Güncelle</button>
                 </div>
@@ -319,9 +324,30 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        buraya tramer detaylari gelicek. list halinde
-                    </div>
+	                <div class="modal-body">
+		                <table class="table">
+			                <label for="tramerFiyat">Toplam Tramer Tutarı: </label>
+			                <span for="tramerFiyati">@ViewBag.AracTramerDetaylari.Fiyat</span>
+			                <thead>
+			                <tr>
+				                <th scope="col">Parça Adı</th>
+				                <th scope="col">Durumu</th>
+
+			                </tr>
+			                </thead>
+			                <tbody>
+			                @foreach (var item in (List<AracTramerDetayGoruntulemeVM>)ViewBag.AracTramerDetaylari)
+			                {
+				                <tr>
+					                <td>@item.ParcaAdi</td>
+					                <td>@item.DurumAdi</td>
+
+				                </tr>
+			                }
+			                </tbody>
+		                </table>
+
+	                </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
                     </div>

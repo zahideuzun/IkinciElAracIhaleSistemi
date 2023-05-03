@@ -10,6 +10,7 @@ using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using System.Transactions;
+using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
@@ -55,74 +56,56 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 			}
 		}
 
-		//public List<AracTramerDetayGoruntulemeVM> GetAracTramerDetayViewModels(int aracId)
-		//{
-		//	using (AracIhaleContext db = new AracIhaleContext())
-		//	{
-		//		var aracParcalari = db.AracParcalari.ToList();
-		//		var tramerler = db.Tramerler.ToList();
+		public List<AracTramerDetayGoruntulemeVM> TramerDetaylariniGetir(int aracId)
+		{
+			using (AracIhaleContext db = new AracIhaleContext())
+			{
 
-		//		var childQuery = from ap in aracParcalari
-		//			from t in tramerler
-		//			select new AracTramerDetayChildGoruntulemeVM()
-		//			{
-		//				ParcaId = ap.AracParcaId,
-		//				TramerId = t.TramerId,
-		//				ParcaAdi = ap.ParcaAdi,
-		//				DurumAdi = t.TramerAdi,
-		//			};
+				var aracParcalari = db.AracParcalari.ToList();
+				var tramerler = db.Tramerler.ToList();
+
+				var parcaDurumListesi = new List<AracTramerDetayGoruntulemeVM>();
+				var aracIdyeGoreTramerId = db.AracTramerleri.SingleOrDefault(a => a.AracId == aracId);
+				if (aracIdyeGoreTramerId != null)
+				{
+					var aracTramerId = aracIdyeGoreTramerId.AracTramerId;
+					var sorgu = db.AracTramerDetaylari.Where(a => a.AracTramerId == aracTramerId).ToList();
+
+					foreach (var parca in aracParcalari)
+					{
+						var parcaId = (int)parca.AracParcaId;
+						var parcaAdi = parca.ParcaAdi;
+
+						foreach (var tramer in tramerler)
+						{
+							var tramerId = (int)tramer.TramerId;
+							var tramerAdi = tramer.TramerAdi;
 
 
-		//		var viewModelList = from child in childQuery
-		//			group child by new { child.DurumAdi, child.ParcaAdi } into g
-		//			select new AracTramerDetayGoruntulemeVM()
-		//			{
-		//				AracId = aracId,
-		//				DurumAdi = g.Key.ParcaId,
-		//				ParcaAdi = g.Key.ParcaAdi,
-		//				ToplamFiyat = g.Sum(x => x.Fiyat),
-		//				Children = g.ToArray()
-		//			};
+							foreach (var aracTramerleri in sorgu)
+							{
+								if (aracTramerleri.AracParcaId == parcaId && aracTramerleri.TramerId == tramerId)
+								{
+									parcaDurumListesi.Add(new AracTramerDetayGoruntulemeVM
+									{
+										ParcaAdi = parcaAdi,
+										DurumAdi = tramerAdi,
+										
+									});
+								}
+							}
 
-		//		return viewModelList.ToList();
-		//	}
-		//}
+						}
 
-		//public List<AracTramerDetayChildVM> GetAracTramerDetayChildren()
-		//{
-		//	using (AracIhaleContext db = new AracIhaleContext())
-		//	{
-		//		var aracParcalari = db.AracParcalari.ToList();
-		//		var tramerler = db.Tramerler.ToList();
+					}
 
-		//		var childQuery = from ap in aracParcalari
-		//			from t in tramerler
-		//			select new AracTramerDetayChildVM()
-		//			{
-		//				ParcaId = ap.AracParcaId,
-		//				TramerId = t.TramerId
-		//			};
+					return parcaDurumListesi;
+				}
 
-		//		return childQuery.ToList();
-		//	}
-		//}
+				return parcaDurumListesi;
 
-		//public List<AracTramerDetayEklemeVM> AracTramerBilgileriniGetir(int id)
-		//{
-		//	using (AracIhaleContext db = new AracIhaleContext())
-		//	{
-		//		var aracList = (from k in db.AracTramerleri
-		//			where k.AracId == id
-		//			select new AracTramerDetayEklemeVM()
-		//			{
-		//				Fiyat = k.TramerFiyati,
-		//				AracId = k.AracId,
-		//				Children = GetAracTramerDetayChildren().ToArray()
-		//			}).ToList();
-
-		//		return aracList;
-		//	}
-		//}
+			}
+		}
 
 
 		public List<AracTramerVM> AracTramerDurumlariniGetir()

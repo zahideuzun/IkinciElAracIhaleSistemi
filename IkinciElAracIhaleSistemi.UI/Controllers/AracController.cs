@@ -30,7 +30,6 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		[HttpPost, ValidateAntiForgeryToken]
 		public ActionResult AracEkle([Bind(Exclude = "Fotograf, AracId")] AracEklemeDetayVM arac)
 		{
-			//todo bireysel ve kurumsal eklemeyi düzenle, guncellemeyi de yap ve artik bitir NOLUR!!!! 
 			if (ModelState.IsValid)
 			{
 				arac.CreatedBy = (Session["girisYapanKullanici"] as KullaniciRolVM).KullaniciId;
@@ -48,8 +47,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			AracStatuDAL aracStatu = new AracStatuDAL();
 			ViewBag.AracStatuleri = aracStatu.StatuleriGetir(id);
 			AracTramerDetayDAL aracTramer = new AracTramerDetayDAL();
-			ViewBag.AracParcalari = aracTramer.AracParcalariGetir();
-			ViewBag.TramerDurumlari = aracTramer.AracTramerDurumlariniGetir();
+			ViewBag.AracTramerDetaylari = aracTramer.TramerDetaylariniGetir(id);
 			AracDAL aracDal = new AracDAL();
 			var arac = aracDal.GuncellenecekAracBilgisiniGetir(id);
 			return View(arac);

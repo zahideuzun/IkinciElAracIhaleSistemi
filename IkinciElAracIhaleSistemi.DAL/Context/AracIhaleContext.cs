@@ -132,6 +132,7 @@ namespace IkinciElAracIhaleSistemi.DAL.Context
 		public DbSet<Ucret> Ucretler { get; set; }
 		public DbSet<SatisTuru> SatisTurleri { get; set; }
 		public DbSet<Satis> Satislar { get; set; }
+		public DbSet<Stok> Stoklar { get; set; }
 		public DbSet<Tramer> Tramerler { get; set; }
 		public DbSet<Iletisim> Iletisimler { get; set; }
 		public DbSet<Chatbot> Chatbotlar { get; set; }
