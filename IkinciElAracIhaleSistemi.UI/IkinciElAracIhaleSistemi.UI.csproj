@@ -11014,10 +11014,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Content\corona-free-dark-bootstrap-admin-template-1.0.0\template\node_modules\node-gyp\lib\Find-VS2017.cs" />
     <Compile Include="Controllers\AracController.cs" />
+    <Compile Include="Controllers\BireyselUyeController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IlanController.cs" />
+    <Compile Include="Controllers\KomisyonController.cs" />
     <Compile Include="Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\GirisController.cs" />
+    <Compile Include="Controllers\KurumsalUyeController.cs" />
+    <Compile Include="Controllers\NoterController.cs" />
     <Compile Include="Controllers\TramerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -17227,6 +17232,7 @@
     <Content Include="Views\Arac\AracGuncelle.cshtml" />
     <Content Include="Views\Tramer\Index.cshtml" />
     <Content Include="Views\Arac\IlanModal.cshtml" />
+    <Content Include="Views\Ilan\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -17237,6 +17243,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\BireyselUye\" />
+    <Folder Include="Views\Komisyon\" />
+    <Folder Include="Views\KurumsalUye\" />
+    <Folder Include="Views\Noter\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\corona-free-dark-bootstrap-admin-template-1.0.0\template\node_modules\%40gulp-sourcemaps\identity-map\node_modules\source-map\source-map.d.ts" />

@@ -66,19 +66,19 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 
 				var parcaDurumListesi = new List<AracTramerDetayGoruntulemeVM>();
 				var aracIdyeGoreTramerId = db.AracTramerleri.SingleOrDefault(a => a.AracId == aracId);
-				if (aracIdyeGoreTramerId != null)
+				if (aracIdyeGoreTramerId == null) return parcaDurumListesi;
 				{
 					var aracTramerId = aracIdyeGoreTramerId.AracTramerId;
 					var sorgu = db.AracTramerDetaylari.Where(a => a.AracTramerId == aracTramerId).ToList();
 
 					foreach (var parca in aracParcalari)
 					{
-						var parcaId = (int)parca.AracParcaId;
+						var parcaId = parca.AracParcaId;
 						var parcaAdi = parca.ParcaAdi;
 
 						foreach (var tramer in tramerler)
 						{
-							var tramerId = (int)tramer.TramerId;
+							var tramerId = tramer.TramerId;
 							var tramerAdi = tramer.TramerAdi;
 
 
@@ -90,6 +90,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 									{
 										ParcaAdi = parcaAdi,
 										DurumAdi = tramerAdi,
+										Fiyat = aracIdyeGoreTramerId.TramerFiyati
 										
 									});
 								}
@@ -101,8 +102,6 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 
 					return parcaDurumListesi;
 				}
-
-				return parcaDurumListesi;
 
 			}
 		}

@@ -54,7 +54,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		}
 
 		[HttpPost, ValidateAntiForgeryToken]
-		public ActionResult AracGuncelle([Bind(Exclude = "Fotograf")]AracEklemeDetayVM arac)
+		public ActionResult AracGuncelle(/*[Bind(Exclude = "Fotograf")]*/AracEklemeDetayVM arac)
 		{
 			arac.ModifiedBy = (Session["girisYapanKullanici"] as KullaniciRolVM).KullaniciId;
 			AracDAL aracDal = new AracDAL();
@@ -70,18 +70,13 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult IlanEkle([Bind(Include = "AracId, IlanBasligi, IlanAciklama")] AracIlanVM ilanVm)
+		public ActionResult IlanEkle([Bind(Include = "AracId, Baslik, Aciklama")] AracIlanVM ilanVm)
 		{
 			IlanDAL ilan = new IlanDAL();
 			ilan.IlanEkle(ilanVm);
 			return RedirectToAction("Index");
 		}
-		public ActionResult IlanModal(int aracId)
-		{
-			var model = new AracIlanVM { AracId = aracId };
-			ViewBag.IlanModel = model;
-			return PartialView("IlanModal");
-		}
+		
 		[HttpPost]
 		public JsonResult ModelleriGetir(int markaId)
 		{

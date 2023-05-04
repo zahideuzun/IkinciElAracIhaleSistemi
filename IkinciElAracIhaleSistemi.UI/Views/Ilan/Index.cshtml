@@ -1,0 +1,54 @@
+﻿@model List<IkinciElAracIhaleSistemi.Entities.VM.Arac.AracIlanVM>
+@{
+    int sira = 1;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Ilan", FormMethod.Get))
+{
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Aktif İlanlar</h4>
+                <a href="/Arac/Index/" class="btn btn-outline-info float-md-right">Yeni İlan Oluştur</a>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Başlık</th>
+                                <th>Marka</th>
+                                <th>Model</th>
+                                <th>Açıklama</th>
+                                <th>Tarih</th>
+	                            <th>Sil</th>
+                                <th>İşlem Yap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@sira</td>
+                                    <td>@item.Baslik</td>
+                                    <td>@item.AracMarka</td>
+                                    <td>@item.AracModel</td>
+                                    <td>@item.Aciklama</td>
+                                    <td>@item.Tarih</td>
+	                                <td><a href="/Ilan/IlanSil/@item.IlanId" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Arac/AracGuncelle/@item.AracId" class="btn btn-outline-success">İşlem Yap</a></td>
+                                </tr>
+
+                                sira++;
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

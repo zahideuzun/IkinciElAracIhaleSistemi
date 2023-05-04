@@ -14,6 +14,26 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
 	public class IlanDAL
 	{
+		public List<AracIlanVM> AktifIlanlariGetir()
+		{
+			using (AracIhaleContext aracDb = new AracIhaleContext())
+			{
+				return (from u in aracDb.Araclar
+						join il in aracDb.Ilanlar on u.Id equals il.AracId
+						where il.IsActive == true
+						select new AracIlanVM()
+						{
+							AracId = il.AracId,
+							Baslik = il.Baslik,
+							IlanId = il.Id,
+							AracMarka = u.Marka.MarkaAdi,
+							AracModel = u.Model.ModelAdi,
+							Aciklama = il.Aciklama,
+							Tarih = il.Tarih.ToString()
+
+						}).ToList();
+			}
+		}
 		public Result IlanEkle(AracIlanVM ilan)
 		{
 			try

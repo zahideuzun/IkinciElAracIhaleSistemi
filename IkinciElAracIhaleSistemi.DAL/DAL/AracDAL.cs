@@ -276,6 +276,8 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 								AracId = guncellenecekArac.Id,
 								StatuId = arac.StatuId,
 								Tarih = DateTime.Now,
+								IsActive = false,
+								IsDeleted = true,
 								ModifiedBy = arac.ModifiedBy,
 								ModifiedDate = arac.ModifiedDate,
 							});

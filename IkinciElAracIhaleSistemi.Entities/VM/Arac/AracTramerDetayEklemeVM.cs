@@ -20,5 +20,6 @@
 		
 		public string ParcaAdi { get; set; }
 		public string DurumAdi { get; set; }
+		public decimal Fiyat { get; set; }
 	}
 }
