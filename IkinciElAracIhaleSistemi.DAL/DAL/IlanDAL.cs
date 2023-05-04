@@ -44,8 +44,10 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 					{
 						AracId = ilan.AracId,
 						Baslik = ilan.Baslik,
-						Aciklama = ilan.Aciklama
+						Aciklama = ilan.Aciklama,
+						Tarih = DateTime.Now
 					});
+					aracDb.SaveChanges();
 				}
 				return new SuccessResult("Araç kaydedildi");
 			}

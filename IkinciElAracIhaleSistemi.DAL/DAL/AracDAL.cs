@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
+﻿using IkinciElAracIhaleSistemi.App.Results;
 using IkinciElAracIhaleSistemi.App.Results.Bases;
-using IkinciElAracIhaleSistemi.App.Results;
 using IkinciElAracIhaleSistemi.DAL.Context;
 using IkinciElAracIhaleSistemi.Entities.Entities;
-using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
-using System.Web;
-using System.Web.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Transactions;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
