@@ -2,11 +2,11 @@
 {
 	public enum AracOzellikleri
 	{
-		YakitTipi=1,
-		GovdeTipi=2,
+		YakitTipi=2,
+		GovdeTipi=1,
 		VitesTipi=3,
-		Renk=4,
-		Versiyon=5,
+		Renk=5,
+		Versiyon=4,
 		OpsiyonelDonanim=6,
 		AracTuru=7,
 

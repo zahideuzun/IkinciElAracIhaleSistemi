@@ -10,14 +10,14 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
 	public class AracOzellikDAL
 	{
-		public List<AracEklemeDetayVM> AracOzellikleriGetir(AracOzellikleri ozellikAdi)
+		public List<AracEklemeDetayVM> AracOzellikleriGetir(int OzellikId)
 		{
 			using (AracIhaleContext db = new AracIhaleContext())
 			{
 				var ozellikListesi = (from ozd in db.OzellikDetaylari
 								 join oz in db.Ozellikler on ozd.OzellikId equals oz.OzellikId
-								 where oz.OzellikAdi == ozellikAdi.ToString()
-								 select new AracEklemeDetayVM()
+								 where oz.OzellikId == OzellikId
+									  select new AracEklemeDetayVM()
 								 {
 									 OzellikDetayId = ozd.OzellikDetayId,
 									 OzellikDetayAdi = ozd.OzellikDetayi
@@ -25,9 +25,9 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				return ozellikListesi;
 			}
 		}
-		public List<SelectListItem> AracOzellikleriniListeyeDonustur(AracOzellikleri ozellik)
+		public List<SelectListItem> AracOzellikleriniListeyeDonustur(int ozellikId)
 		{
-			var ozellikListesi = new AracOzellikDAL().AracOzellikleriGetir(ozellik)
+			var ozellikListesi = new AracOzellikDAL().AracOzellikleriGetir(ozellikId)
 				.Select(r => new SelectListItem()
 				{
 					Value = r.OzellikDetayId.ToString(),

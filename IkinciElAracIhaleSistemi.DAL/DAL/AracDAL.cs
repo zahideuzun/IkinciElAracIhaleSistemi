@@ -6,7 +6,9 @@ using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
@@ -44,7 +46,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 		{
 			using (AracIhaleContext db = new AracIhaleContext())
 			{
-				AracEklemeDetayVM arac = (from k in db.Araclar
+				var arac = (from k in db.Araclar
 										  join mr in db.Markalar on k.MarkaId equals mr.MarkaId
 										  join md in db.Modeller on k.ModelId equals md.ModelId
 										  join ast in db.AracStatu on k.Id equals ast.AracId
@@ -67,6 +69,8 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 											  Aciklama = k.Aciklama,
 											  BireyselVeyaFirmaId = k.UyeId
 										  }).FirstOrDefault();
+				
+				if(arac == null) return null;
 
 				var guncellenecekAracOzellik = (from ao in db.AracOzellikleri
 												join od in db.OzellikDetaylari on ao.OzellikDetayId equals od.OzellikDetayId
@@ -78,6 +82,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 													ozellikDetay = od,
 													ozellik = oz
 												});
+				
 				foreach (var item in guncellenecekAracOzellik)
 				{
 					switch (item.ozellik.OzellikId)
@@ -116,7 +121,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				{
 					using (AracIhaleContext aracDb = new AracIhaleContext())
 					{
-						Arac eklenenArac = aracDb.Araclar.Add(new Arac()
+						Arac eklenenArac = aracDb.Araclar.Add(new Arac
 						{
 							Yil = arac.Yil,
 							Plaka = arac.Plaka,
@@ -124,7 +129,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							MarkaId = arac.MarkaId,
 							ModelId = arac.ModelId,
 							Km = arac.Km,
-							BireyselMi = arac.AracTuruId == (int)(UyeTurleri.Bireysel),
+							BireyselMi = arac.AracTuruId == (int)UyeTurleri.Bireysel,
 							Aciklama = arac.Aciklama
 						});
 						eklenenArac.UyeId = eklenenArac.BireyselMi ? UyeTipineGoreUyeIdGetir((int)UyeTurleri.Bireysel, arac.BireyselVeyaFirmaId) : UyeTipineGoreUyeIdGetir((int)UyeTurleri.Kurumsal, arac.BireyselVeyaFirmaId);
@@ -438,11 +443,11 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				switch ((UyeTurleri)uyeTipi)
 				{
 					case UyeTurleri.Bireysel:
-						var bireyselUye = db.BireyselUyeler.FirstOrDefault(x => x.Id == uyeId);
-						return bireyselUye != null ? bireyselUye.UyeId : 0;
+						var bireyselUye = db.BireyselUyeler.FirstOrDefault(x => x.UyeId == uyeId);
+						return bireyselUye?.UyeId ?? 0;
 					case UyeTurleri.Kurumsal:
-						var kurumsalUye = db.KurumsalUyeler.FirstOrDefault(x => x.Id == uyeId);
-						return kurumsalUye != null ? kurumsalUye.UyeId : 0;
+						var kurumsalUye = db.KurumsalUyeler.FirstOrDefault(x => x.UyeId == uyeId);
+						return kurumsalUye?.UyeId ?? 0;
 					default:
 						return 0;
 				}
