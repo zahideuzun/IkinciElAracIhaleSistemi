@@ -23,50 +23,51 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="list-group">
-                                            <div class="form-group row">
-                                                <div class="col-sm-10">
-	                                                @Html.LabelFor(a => a.MarkaId, "Marka")
-	                                                @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text"), "Marka", new { @class = "form-control" })
-                                                </div>
-                                            </div>
-                                            @Html.AntiForgeryToken()
-                                        </ul>
-                                    </div>
-                                    <div class="col">
-                                        <ul class="list-group list-group-flush">
-                                            <div class="form-group row">
-                                                <div class="col-sm-10">
-	                                                @Html.LabelFor(a => a.ModelId, "Model")
-	                                                @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text"), "Model", new { @class = "form-control" })
-                                                </div>
-                                            </div>
+	                            <div class="row">
+		                            <div class="col">
+			                            <ul class="list-group">
+				                            <div class="form-group row">
+					                            <div class="col-sm-10">
+						                            @Html.LabelFor(a => a.MarkaId, "Marka")
+						                            @Html.DropDownListFor(a => a.MarkaId, new SelectList(ViewBag.Markalar, "Value", "Text"), "Marka", new { @class = "form-control" })
+					                            </div>
+				                            </div>
+				                            @Html.AntiForgeryToken()
+			                            </ul>
+		                            </div>
+		                            <div class="col">
+			                            <ul class="list-group list-group-flush">
+				                            <div class="form-group row">
+					                            <div class="col-sm-10">
+						                            @Html.LabelFor(a => a.ModelId, "Model")
+						                            @Html.DropDownListFor(a => a.ModelId, new SelectList(ViewBag.Modeller, "Value", "Text"), "Model", new { @class = "form-control" })
+					                            </div>
+				                            </div>
 
-                                        </ul>
-                                    </div>
-                                    <div class="col">
-                                        <ul class="list-group list-group-flush">
-                                            <div class="form-group row">
-                                                <div class="col-sm-10">
-	                                                @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
-	                                                @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control" })
-                                                </div>
-                                            </div>
-                                        </ul>
-                                    </div>
-	                                <div class="col">
-		                                <ul class="list-group list-group-flush">
-			                                <div class="form-group row">
-				                                <div class="col-sm-10">
-					                                @Html.LabelFor(a => a.StatuId, "Statü")
-					                                @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text"), "Statü", new { @class = "form-control" })
-				                                </div>
-			                                </div>
-		                                </ul>
-	                                </div>
-                                </div>
+			                            </ul>
+		                            </div>
+		                            <div class="col">
+			                            <ul class="list-group list-group-flush">
+				                            <div class="form-group row">
+					                            <div class="col-sm-10">
+						                            @Html.LabelFor(a => a.AracTuruId, "Bireysel/Kurumsal")
+						                            @Html.DropDownListFor(a => a.AracTuruId, new SelectList(ViewBag.AracTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control" })
+					                            </div>
+				                            </div>
+			                            </ul>
+		                            </div>
+		                            <div class="col">
+			                            <ul class="list-group list-group-flush">
+				                            <div class="form-group row">
+					                            <div class="col-sm-10">
+						                            @Html.LabelFor(a => a.StatuId, "Statü")
+						                            @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text"), "Statü", new { @class = "form-control" })
+					                            </div>
+				                            </div>
+			                            </ul>
+		                            </div>
+	                            </div>
+	                            <a href="#" id="filter-btn" class="btn btn-outline-info float-md-right">Listele</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +81,7 @@
             <div class="card-body">
                 <h4 class="card-title">Araç Listesi</h4>
                 <a href="/Arac/AracEkle/" class="btn btn-outline-info float-md-right">Yeni Araç Ekle</a>
-                <div class="table-responsive">
+                <div class="table-responsive" id="aracListesi">
                     <table class="table">
                         <thead>
                             <tr>
@@ -150,6 +151,34 @@
             }
         });
     });
+
+    $(document).ready(function () {
+        $("#listeleBtn").click(function () {
+            var selectedMarkaId = $("#MarkaId").val();
+            var selectedModelId = $("#ModelId").val();
+            var selectedAracTuruId = $("#AracTuruId").val();
+            var selectedStatuId = $("#StatuId").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Arac/Index",
+                data: {
+                    MarkaId: selectedMarkaId,
+                    ModelId: selectedModelId,
+                    AracTuruId: selectedAracTuruId,
+                    StatuId: selectedStatuId,
+                },
+                success: function (result) {
+                    $("#aracListesi").html(result);
+                },
+                error: function () {
+                    alert("Araba listesi yüklenirken bir hata oluştu.");
+                },
+            });
+        });
+    });
+
+
 
 </script>
 

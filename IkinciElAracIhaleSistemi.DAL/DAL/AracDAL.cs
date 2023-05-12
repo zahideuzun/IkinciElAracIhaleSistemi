@@ -25,7 +25,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 					join md in db.Modeller on k.ModelId equals md.ModelId
 					join ast in db.AracStatu on k.Id equals ast.AracId
 					join st in db.Status on ast.StatuId equals st.StatuId
-					where k.IsActive
+					where k.IsActive && ast.IsActive
 					orderby k.CreatedDate descending 
 					select new AracBilgileriVM()
 					{
@@ -42,7 +42,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 
 			}
 		}
-		public AracEklemeDetayVM GuncellenecekAracBilgisiniGetir(int? id)
+		public AracEklemeDetayVM GuncellenecekAracBilgisiniGetir(int id)
 		{
 			using (AracIhaleContext db = new AracIhaleContext())
 			{
@@ -276,8 +276,8 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 								AracId = guncellenecekArac.Id,
 								StatuId = arac.StatuId,
 								Tarih = DateTime.Now,
-								IsActive = false,
-								IsDeleted = true,
+								IsActive = true,
+								IsDeleted = false,
 								ModifiedBy = arac.ModifiedBy,
 								ModifiedDate = arac.ModifiedDate,
 							});
@@ -289,6 +289,8 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 							{
 								AracId = guncellenecekArac.Id,
 								Fiyat = arac.Fiyat,
+								IsActive = true,
+								IsDeleted = false,
 								Tarih = DateTime.Now,
 								ModifiedDate = arac.ModifiedDate,
 								ModifiedBy = arac.ModifiedBy
@@ -398,7 +400,8 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				{
 					sonFiyat.IsActive = false;
 					sonFiyat.IsDeleted = true;
-				}
+                    db.SaveChanges();
+                }
 				return true;
 			}
 		}
@@ -422,6 +425,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				{
 					sonStatu.IsActive = false;
 					sonStatu.IsDeleted = true;
+                    db.SaveChanges();
 					return false;
 				}
 

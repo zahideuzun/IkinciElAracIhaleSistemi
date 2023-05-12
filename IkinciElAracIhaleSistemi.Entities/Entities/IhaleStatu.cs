@@ -15,7 +15,11 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public DateTime Tarih { get; set; }
 		public int IhaleId { get; set; }
 		public int StatuId { get; set; }
-		public Ihale Ihale { get; set; }
+        public bool IsActive { get; set; } = true;
+        public bool IsDeleted { get; set; } = false;
+
+
+        public Ihale Ihale { get; set; }
 		public Statu Statu { get; set; }
 	}
 }

@@ -11017,6 +11017,7 @@
     <Compile Include="Controllers\BireyselUyeController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IhaleController.cs" />
     <Compile Include="Controllers\IlanController.cs" />
     <Compile Include="Controllers\KomisyonController.cs" />
     <Compile Include="Controllers\KullaniciController.cs" />
@@ -17233,6 +17234,10 @@
     <Content Include="Views\Tramer\Index.cshtml" />
     <Content Include="Views\Arac\IlanModal.cshtml" />
     <Content Include="Views\Ilan\Index.cshtml" />
+    <Content Include="Views\BireyselUye\Index.cshtml" />
+    <Content Include="Views\BireyselUye\BireyselUyeEkle.cshtml" />
+    <Content Include="Views\BireyselUye\BireyselUyeGuncelle.cshtml" />
+    <Content Include="Views\Ihale\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -17243,7 +17248,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\BireyselUye\" />
     <Folder Include="Views\Komisyon\" />
     <Folder Include="Views\KurumsalUye\" />
     <Folder Include="Views\Noter\" />

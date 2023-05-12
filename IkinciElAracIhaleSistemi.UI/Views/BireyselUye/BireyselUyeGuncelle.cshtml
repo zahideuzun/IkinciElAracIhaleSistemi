@@ -1,0 +1,49 @@
+﻿@model IkinciElAracIhaleSistemi.Entities.VM.BireyselUyeVM
+@{
+    ViewBag.Title = "BireyselUyeGuncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("BireyselUyeGuncelle", "BireyselUye", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description"> Bireysel Üye Güncelleme Paneli </p>
+                <form class="forms-sample" method="post">
+
+                    @Html.HiddenFor(a => a.UyeId)
+
+                    <div class="form-group">
+                        <label>İsim</label>
+                        @Html.TextBoxFor(x => x.Isim, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Soyisim</label>
+                        @Html.TextBoxFor(x => x.Soyisim, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        @Html.TextBoxFor(x => x.Telefon, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Mail Adresi</label>
+                        @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Şifre</label>
+                        @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Tc Kimlik Numarası</label>
+                        @Html.TextBoxFor(x => x.TcKimlik, new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2 float-md-right">Kaydet</button>
+                    <button class="btn btn-dark float-md-right">İptal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,57 @@
+﻿@model List<IkinciElAracIhaleSistemi.Entities.VM.IhaleVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	int sira = 1;
+}
+
+@using (Html.BeginForm("Index", "Ihale", FormMethod.Get))
+{
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">İhaleler</h4>
+                <a href="/Ihale/IhaleEkle/" class="btn btn-outline-info float-md-right">Yeni İhale Oluştur</a>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>İhale Adı</th>
+                                <th>Bireysel/Kurumsal</th>
+                                <th>İhale Başlangıç</th>
+                                <th>İhale Bitiş</th>
+                                <th>Statü</th>
+                                <th>Kaydeden Kullanıcı</th>
+                                <th>Kaydetme Zamanı</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@sira</td>
+                                    <td>@item.IhaleAdi</td>
+                                    <td>@item.IhaleTuru</td>
+                                    <td>@item.BaslangicTarihi</td>
+                                    <td>@item.BitisTarihi</td>
+                                    <td>@item.Statu</td>
+                                    <td>@item.OlusturanKullanici</td>
+                                    <td><a href="/Ihale/IhaleSil/@item.IhaleId" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Ihale/IhaleGuncelle/@item.IhaleId" class="btn btn-outline-success">Güncelle</a></td>
+                                </tr>
+
+                                sira++;
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -132,13 +132,16 @@
     <Compile Include="VM\Enum\AracOzellikleri.cs" />
     <Compile Include="VM\Enum\AracParcalari.cs" />
     <Compile Include="VM\Enum\AracTramerDurumlari.cs" />
+    <Compile Include="VM\Enum\Roller.cs" />
     <Compile Include="VM\Enum\Statuler.cs" />
     <Compile Include="VM\Enum\UyeTurleri.cs" />
     <Compile Include="VM\FirmaVM.cs" />
+    <Compile Include="VM\IhaleVM.cs" />
     <Compile Include="VM\IletisimBilgiVM.cs" />
     <Compile Include="VM\Enum\IletisimTurleri.cs" />
     <Compile Include="VM\KullaniciRolVM.cs" />
     <Compile Include="VM\GirisVM.cs" />
+    <Compile Include="VM\KurumsalUyeVM.cs" />
     <Compile Include="VM\RolSayfaVM.cs" />
     <Compile Include="VM\RolVM.cs" />
     <Compile Include="VM\StatuVM.cs" />
