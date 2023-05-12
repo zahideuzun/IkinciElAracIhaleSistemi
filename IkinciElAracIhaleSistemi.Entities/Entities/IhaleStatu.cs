@@ -17,7 +17,10 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public int StatuId { get; set; }
         public bool IsActive { get; set; } = true;
         public bool IsDeleted { get; set; } = false;
-
+        public int CreatedBy { get; set; } = 1;
+        public DateTime? CreatedDate { get; set; } = DateTime.Now;
+        public int? ModifiedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; } = DateTime.Now;
 
         public Ihale Ihale { get; set; }
 		public Statu Statu { get; set; }

@@ -17,15 +17,13 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		public ActionResult Index()
 		{
 			AracListelemeOzellikleriCache();
-			AracDAL arac = new AracDAL();
-			ViewBag.Araclar = arac.AraclariGetir();
+            ViewBag.Araclar = new AracDAL().AraclariGetir();
 			return View();
 		}
 		[HttpGet]
 		public ActionResult AracEkle()
 		{
-
-			AracOzellikleriCache();
+            AracOzellikleriCache();
 			return View();
 		}
 		[HttpPost, ValidateAntiForgeryToken]
@@ -34,8 +32,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			if (ModelState.IsValid)
 			{
 				arac.CreatedBy = (Session["girisYapanKullanici"] as KullaniciRolVM).KullaniciId;
-				AracDAL aracDal = new AracDAL();
-				aracDal.AracEkle(arac);
+                new AracDAL().AracEkle(arac);
 				return RedirectToAction("Index");
 			}
 

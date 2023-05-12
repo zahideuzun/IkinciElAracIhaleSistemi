@@ -36,7 +36,6 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		public DateTime CreatedDate { get; set; } = DateTime.Now;
 		public DateTime ModifiedDate { get; set; } = DateTime.Now;
 
-		
 		public Marka Marka { get; set; }
 		public Model Model { get; set; }
 		

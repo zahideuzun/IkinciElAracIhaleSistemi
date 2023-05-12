@@ -25,7 +25,7 @@
                                 <th>Kaydeden Kullanıcı</th>
                                 <th>Kaydetme Zamanı</th>
                                 <th>Sil</th>
-                                <th>Güncelle</th>
+                                <th>Detay</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,8 +39,9 @@
                                     <td>@item.BitisTarihi</td>
                                     <td>@item.Statu</td>
                                     <td>@item.OlusturanKullanici</td>
+	                                <td>@item.OlusturulmaTarihi</td>
+	                                <td><a href="/Ihale/IhaleGuncelle/@item.IhaleId" class="btn btn-outline-success">Detay</a></td>
                                     <td><a href="/Ihale/IhaleSil/@item.IhaleId" class="btn btn-outline-danger">Sil</a></td>
-                                    <td><a href="/Ihale/IhaleGuncelle/@item.IhaleId" class="btn btn-outline-success">Güncelle</a></td>
                                 </tr>
 
                                 sira++;

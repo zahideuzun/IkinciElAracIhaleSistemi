@@ -17238,6 +17238,7 @@
     <Content Include="Views\BireyselUye\BireyselUyeEkle.cshtml" />
     <Content Include="Views\BireyselUye\BireyselUyeGuncelle.cshtml" />
     <Content Include="Views\Ihale\Index.cshtml" />
+    <Content Include="Views\Ihale\IhaleEkle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
