@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-using System.Web.Mvc;
-using IkinciElAracIhaleSistemi.App.Results;
+﻿using IkinciElAracIhaleSistemi.App.Results;
 using IkinciElAracIhaleSistemi.App.Results.Bases;
 using IkinciElAracIhaleSistemi.DAL.Context;
 using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Transactions;
+using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
@@ -148,6 +146,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
                     where ih.Id == id
                     select new IhaleEkleVM()
                     {
+                        IhaleId = ih.Id,
                         IhaleAdi = ih.IhaleAdi,
                         IhaleTuru = ih.IhaleTuru.IhaleTuruAdi,
                         BireyselVeyaFirmaId = ih.UyeId,
@@ -156,6 +155,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
                         BitisSaati = ih.BitisSaat,
                         BitisTarihi = ih.IhaleBitisTarihi,
                         StatuId = ist.StatuId,
+                        Statu = ist.Statu.StatuAdi
                     }).FirstOrDefault();
                 return ihale;
             }
@@ -172,13 +172,32 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
                     {
                         AracId = a.Id,
                         Plaka = a.Plaka,
+                    }).ToList();
+                return aracListesi;
+            }
+        }
+
+        public List<AracBilgileriVM> IhaledekiAraclariGetir(int? id)
+        {
+            using (AracIhaleContext db = new AracIhaleContext())
+            {
+                int ihaleyeAitUyeId = (db.Ihaleler.FirstOrDefault(a => a.Id == id).UyeId);
+                var araclar = (from a in db.Araclar
+                    join ast in db.AracStatu on a.Id equals ast.AracId
+                    join st in db.Status on ast.StatuId equals st.StatuId
+                    where a.UyeId == ihaleyeAitUyeId && a.IsActive && ast.IsActive
+                    select new AracBilgileriVM()
+                    {
+                        AracId = a.Id,
+                        Plaka = a.Plaka,
                         MarkaAdi = a.Marka.MarkaAdi,
                         ModelAdi = a.Model.ModelAdi,
                         BireyselMi = a.BireyselMi ? "Bireysel" : "Kurumsal",
+                        Statu = ast.Statu.StatuAdi,
                         KaydedenKullanici = a.Kullanici.Isim,
                         KaydedilmeZamani = (DateTime)a.CreatedDate,
                     }).ToList();
-                return aracListesi;
+                return araclar;
             }
         }
         public List<SelectListItem> FirmayaAitAracListesineDonustur(int? id)
@@ -193,7 +212,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
             return statuVm.IdyeGoreFirmalar;
         }
 
-        public Result IhaleyeAracEkle(IhaleEkleVM vm)
+        public Result IhaleyeAracEkle(List<IhaleEkleVM> vm)
         {
             using (TransactionScope scope = new TransactionScope())
             {
@@ -201,13 +220,27 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
                 {
                     using (AracIhaleContext aracDb = new AracIhaleContext())
                     {
-                        AracIhale ihaleyeEklenenArac = aracDb.AracIhaleleri.Add(new AracIhale()
+                        foreach (var item in vm)
                         {
-                            IhaleId = vm.IhaleId,
-                            AracId = vm.AracId,
-                            MinimumAlimFiyati = vm.MinimumAlimFiyati,
-                            IhaleBaslangicFiyati = vm.IhaleBaslangicFiyati
-                        });
+                            aracDb.AracIhaleleri.Add(new AracIhale()
+                            {
+                                IhaleId = item.IhaleId,
+                                AracId = item.AracId,
+                                MinimumAlimFiyati = item.MinimumAlimFiyati,
+                                IhaleBaslangicFiyati = item.IhaleBaslangicFiyati
+                            });
+
+                           var arac= aracDb.AracStatu.SingleOrDefault(a => a.Id == item.AracId && a.IsActive);
+                           arac.IsActive = false;
+                           arac.IsDeleted = true;
+                           aracDb.AracStatu.Add(new AracStatu()
+                           {
+                               AracId = item.AracId,
+                               StatuId = (int)Statuler.İhalede
+                           });
+                        }
+                       
+                        aracDb.SaveChanges();
                     }
 
                     scope.Complete();

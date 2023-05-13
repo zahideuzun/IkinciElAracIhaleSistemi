@@ -44,7 +44,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
             {
                 IhaleCacheListeleri();
                 ViewBag.FirmaListesi = new IhaleDAL().FirmayaAitAracListesineDonustur(id);
-                ViewBag.IhaledekiAracListesi = new IhaleDAL().IhaleIdyeGoreFirmaBilgileriniGetir(id);
+                ViewBag.IhaledekiAracListesi = new IhaleDAL().IhaledekiAraclariGetir(id);
                 var ihale = new IhaleDAL().IdyeGoreIhaleBilgileriniGetir(id);
                 return View(ihale);
             }
@@ -63,24 +63,15 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-        [HttpGet]
-        public ActionResult IhaleyeAracEkle(int id)
-        {
-            if (id != null)
-            {
-                new IhaleDAL().IhaleIdyeGoreFirmaBilgileriniGetir(id);
-                return RedirectToAction("Index");
-            }
-
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult IhaleyeAracEkle([Bind(Include = "AracId, IhaleId, IhaleBaslangicFiyati, MinimumAlimFiyati")]IhaleEkleVM ihale)
+        
+        [HttpPost]
+        public ActionResult IhaleyeAracEkle(List<IhaleEkleVM> ihale)
         {
             if (ModelState.IsValid && ihale != null)
             {
                 new IhaleDAL().IhaleyeAracEkle(ihale);
-                return RedirectToAction("Index");
+                int ihaleId = ihale[0].IhaleId;
+                return RedirectToAction("IhaleDetay", "Ihale", new { id = ihaleId});
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
