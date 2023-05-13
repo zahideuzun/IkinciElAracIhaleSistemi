@@ -25,9 +25,14 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 			HasRequired(i => i.Kullanici)
 				.WithMany(k => k.Ihaleler)
 				.HasForeignKey(i => i.KullaniciId)
-				.WillCascadeOnDelete(false);
+				.WillCascadeOnDelete(false); 
 
-			HasMany(i => i.AracIhale)
+            HasRequired(i => i.Uye)
+                .WithMany(k => k.Ihaleler)
+                .HasForeignKey(i => i.UyeId)
+                .WillCascadeOnDelete(false);
+
+            HasMany(i => i.AracIhale)
 				.WithRequired(ai => ai.Ihale)
 				.HasForeignKey(ai => ai.IhaleId);
 

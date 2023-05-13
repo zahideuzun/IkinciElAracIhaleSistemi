@@ -1,0 +1,340 @@
+﻿@using IkinciElAracIhaleSistemi.Entities.VM.Arac
+@model IkinciElAracIhaleSistemi.Entities.VM.IhaleEkleVM
+@{
+    ViewBag.Title = "IhaleDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	int sira = 1;
+}
+
+@using (Html.BeginForm("IhaleDetay", "Ihale", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">İhale Genel Bilgiler</h6>
+                    <h5 class="card-title"></h5>
+                </div>
+                @Html.HiddenFor(a => a.IhaleId)
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        İhale Adı
+                                        <ul class="list-group list-group-flush">
+                                            <div class="col-sm-10">
+                                                @Html.TextBoxFor(a => a.IhaleAdi, new { @class = "form-control" })
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.IhaleTuruId, "Bireysel/Kurumsal")
+                                                    @Html.DropDownListFor(a => a.IhaleTuruId, new SelectList(ViewBag.IhaleTurleri, "Value", "Text"), "Bireysel/Kurumsal", new { @class = "form-control", onclick = "onChangeIhaleTuru()" })
+                                                </div>
+                                            </div>
+                                            @Html.AntiForgeryToken()
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.BireyselVeyaFirmaId, "Firma")
+                                                    @Html.DropDownListFor(a => a.BireyselVeyaFirmaId, new SelectList("", "Value", "Text"), "Firma/Bireysel Üye", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="form-group row">
+                                                <div class="col-sm-10">
+                                                    @Html.LabelFor(a => a.StatuId, "Statü")
+                                                    @Html.DropDownListFor(a => a.StatuId, new SelectList(ViewBag.Statuler, "Value", "Text"), "Statü", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="col-sm-10">
+                                                @Html.LabelFor(m => m.BaslangicTarihi, "Başlangıç Tarihi", new { @class = "control-label" })
+                                                @Html.EditorFor(m => m.BaslangicTarihi, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                                @*@Html.ValidationMessageFor(m => m.BaslangicTarihi, "", new { @class = "text-danger" })*@
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="col-sm-10">
+                                                @Html.LabelFor(m => m.BaslangicSaati, "Başlangıç Saati", new { @class = "control-label" })
+                                                @Html.EditorFor(m => m.BaslangicSaati, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+                                                @Html.ValidationMessageFor(m => m.BaslangicSaati, "", new { @class = "text-danger" })
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="col-sm-10">
+                                                @Html.LabelFor(m => m.BitisTarihi, "Bitiş Tarihi", new { @class = "control-label" })
+                                                @Html.EditorFor(m => m.BitisTarihi, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                                @Html.ValidationMessageFor(m => m.BitisTarihi, "", new { @class = "text-danger" })
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="col-sm-10">
+                                                @Html.LabelFor(m => m.BitisSaati, "Bitiş Saati", new { @class = "control-label" })
+                                                @Html.EditorFor(m => m.BitisSaati, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+                                                @Html.ValidationMessageFor(m => m.BitisSaati, "", new { @class = "text-danger" })
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary mr-2">İhale Oluştur</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@using (Html.BeginForm("IhaleyeAracEkle", "Ihale", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">İhale Araç Bilgileri</h6>
+                    <h5 class="card-title"></h5>
+                </div>
+                @Html.HiddenFor(a => a.IhaleId)
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+	                            <div class="row">
+		                            <div class="col">
+			                            <ul class="list-group">
+				                            <div class="form-group row">
+					                            <div class="col-sm-10">
+						                            @Html.LabelFor(a => a.AracId, "Araclar")
+						                            @Html.DropDownListFor(a => a.AracId, new SelectList(ViewBag.FirmaListesi, "Value", "Text"), "Araclar", new { @class = "form-control" })
+					                            </div>
+				                            </div>
+				                            @Html.AntiForgeryToken()
+			                            </ul>
+		                            </div>
+		                            <div class="col">
+			                            İhale Başlangıç Fiyatı
+			                            <ul class="list-group list-group-flush">
+				                            <div class="col-sm-10">
+					                            @Html.TextBoxFor(a => a.IhaleBaslangicFiyati, new { @class = "form-control" })
+				                            </div>
+			                            </ul>
+		                            </div>
+		                            <div class="col">
+			                            Minimum Alım Fiyatı
+			                            <ul class="list-group list-group-flush">
+				                            <div class="col-sm-10">
+					                            @Html.TextBoxFor(a => a.MinimumAlimFiyati, new { @class = "form-control" })
+				                            </div>
+			                            </ul>
+		                            </div>
+	                            </div>
+	                            <div class="col">
+                                    <div>
+                                        <button type="submit" class="btn btn-info mr-2 float-md-right">Araç Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">İhale Araç Listesi</h6>
+                <h5 class="card-title"></h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Plaka</th>
+                            <th>Marka</th>
+                            <th>Model</th>
+                            <th>Bireysel/Kurumsal</th>
+	                        <th>Kaydeden Kullanıcı</th>
+                            <th>Kaydetme Zamanı</th>
+	                        <th>İhaleden Çıkar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @foreach (var item in (List<AracBilgileriVM>)ViewBag.IhaledekiAracListesi)
+                            {
+                                <tr>
+                                    <td>@sira</td>
+                                    <td>@item.Plaka</td>
+                                    <td>@item.MarkaAdi</td>
+                                    <td>@item.ModelAdi</td>
+                                    <td>@item.BireyselMi</td>
+	                                <td>@item.KaydedenKullanici</td>
+                                    <td>@item.KaydedilmeZamani</td>
+                                    <td><a href="/Ihale/AraciIhaledenCikar/@item.AracId" class="btn btn-outline-danger">Çıkar</a></td>
+                                </tr>
+
+                                sira++;
+                            }
+
+                        </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body" disabled>
+                <br />
+                <button type="button" class="btn btn-primary">hede bidi</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#komisyonModal">Komisyon</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tarihceModal">Araç Tarihçe</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aliciModal">Alıcı Bilgileri Ekle</button>
+                <a class="btn btn-info" href="" id="@Model.IhaleId" role="button" data-toggle="modal" data-target="#ilanModal">İhaleye Araç Ekle</a>
+                <a class="btn btn-warning" href="~/Arac/TramerKayit/" role="button" data-toggle="modal" data-target="#tramerModal">Tramer Bilgileri Ekle</a>
+
+                <button type="submit" class="btn btn-dark">Kaydet</button>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("IhaleyeAracEkle", "Ihale", FormMethod.Post))
+    {
+        <div class="modal fade" id="ilanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Araç Ekleme</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <input type="hidden" name="ihaleId" value="@Model.IhaleId" />
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">İhale Başlangıç Fiyatı:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Minimum Alım Fiyatı:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                        <button type="button" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="modal fade" id="tarihceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Araç Tarihçe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Araç tarihçe
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="aliciModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alıcı Bilgileri</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Alıcı
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="komisyonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alıcı Bilgileri</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Araç Komisyon
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.6.4.min.js"></script>
+<script>
+    $("#@Model.IhaleId").on("click", function () {
+        var ihaleId = $(this).attr("id");
+        $.ajax({
+            type: "GET",
+            url: "/ControllerAdi/IhaleyeAracEkle",
+            data: { id: ihaleId },
+            success: function (result) {
+                $("#ilanModal .modal-body").html(result);
+            }
+        });
+    });
+
+
+</script>
+

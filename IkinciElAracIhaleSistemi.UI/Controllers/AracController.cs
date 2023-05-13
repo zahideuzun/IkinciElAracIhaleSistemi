@@ -42,12 +42,9 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		public ActionResult AracGuncelle(int id)
 		{
 			AracOzellikleriCache();
-			AracStatuDAL aracStatu = new AracStatuDAL();
-			ViewBag.AracStatuleri = aracStatu.StatuleriGetir(id);
-			AracTramerDetayDAL aracTramer = new AracTramerDetayDAL();
-			ViewBag.AracTramerDetaylari = aracTramer.TramerDetaylariniGetir(id);
-			AracDAL aracDal = new AracDAL();
-			var arac = aracDal.GuncellenecekAracBilgisiniGetir(id);
+            ViewBag.AracStatuleri = new AracStatuDAL().StatuleriGetir(id);
+            ViewBag.AracTramerDetaylari = new AracTramerDetayDAL().TramerDetaylariniGetir(id);
+            var arac = new AracDAL().GuncellenecekAracBilgisiniGetir(id);
 			return View(arac);
 		}
 
@@ -55,8 +52,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		public ActionResult AracGuncelle(/*[Bind(Exclude = "Fotograf")]*/AracEklemeDetayVM arac)
 		{
 			arac.ModifiedBy = (Session["girisYapanKullanici"] as KullaniciRolVM).KullaniciId;
-			AracDAL aracDal = new AracDAL();
-			aracDal.AracGuncelle(arac);
+            new AracDAL().AracGuncelle(arac);
 			return RedirectToAction("Index");
 		}
 		[HttpGet]

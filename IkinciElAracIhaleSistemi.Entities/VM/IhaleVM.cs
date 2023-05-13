@@ -24,5 +24,6 @@ namespace IkinciElAracIhaleSistemi.Entities.VM
         public int IhaleTuruId { get; set; }
         public List<SelectListItem> IhaleTurleri { get; set; }
         public List<SelectListItem> Statuler { get; set; }
+        public List<SelectListItem> IdyeGoreFirmalar { get; set; }
     }
 }

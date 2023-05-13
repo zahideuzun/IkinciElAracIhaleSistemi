@@ -15,6 +15,8 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public DateTime IhaleBitisTarihi { get; set; }
 		public TimeSpan BaslangicSaat { get; set; }
 		public TimeSpan BitisSaat { get; set; }
+        public int UyeId { get; set; }
+        public Uye Uye { get; set; }
 		public int IhaleTuruId { get; set; }
 		public IhaleTuru IhaleTuru { get; set; }
 		public int KullaniciId { get; set; }

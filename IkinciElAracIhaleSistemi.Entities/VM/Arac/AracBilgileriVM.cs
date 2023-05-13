@@ -17,6 +17,7 @@ namespace IkinciElAracIhaleSistemi.Entities.VM.Arac
 		public string ModelAdi { get; set; }
 		public string BireyselMi { get; set; }
 		public string Statu { get; set; }
+		public decimal Fiyat { get; set; }
 		public string KaydedenKullanici { get; set; }
 		public DateTime KaydedilmeZamani { get; set; }
 		public MarkaVM Marka { get; set; }

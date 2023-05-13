@@ -61,7 +61,11 @@ namespace IkinciElAracIhaleSistemi.DAL.Configuration
 				.WithRequired(fa => fa.Uye)
 				.HasForeignKey(fa => fa.UyeId);
 
-		}
+            HasMany(k => k.Ihaleler)
+                .WithRequired(i => i.Uye)
+                .HasForeignKey(i => i.UyeId);
+
+        }
 	}
 
 }

@@ -24,5 +24,6 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public UyeTuru UyeTuru { get; set; }
 		public ICollection<Mesaj> Mesajlar { get; set; }
 		public ICollection<Arac> Araclar { get; set; }
+		public ICollection<Ihale> Ihaleler { get; set; }
 	}
 }

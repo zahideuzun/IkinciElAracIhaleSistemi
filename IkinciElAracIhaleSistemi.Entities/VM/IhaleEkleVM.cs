@@ -23,5 +23,9 @@ namespace IkinciElAracIhaleSistemi.Entities.VM
         public int OlusturanKullaniciId { get; set; }
         public string OlusturanKullanici { get; set; }
         public DateTime OlusturulmaTarihi { get; set; }
+        public int AracId { get; set; }
+        public decimal IhaleBaslangicFiyati { get; set; }
+        public decimal MinimumAlimFiyati { get; set; }
+        public List<SelectListItem> IdyeGoreFirmalar { get; set; }
     }
 }
