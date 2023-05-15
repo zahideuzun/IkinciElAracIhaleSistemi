@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemi.Entities.Entities.Bases
 {
-	public class BaseEntity
+	public class BaseEntity : IEntity
 	{
 		[Key]
 		public int Id { get; set; }

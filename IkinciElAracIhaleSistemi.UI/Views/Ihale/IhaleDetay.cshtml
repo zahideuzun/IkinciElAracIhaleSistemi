@@ -282,32 +282,32 @@
     });
 
     $(document).ready(function () {
-        var bilgiler = []; // Boş bir dizi tanımla
+        var bilgiler = []; 
 
         $('#aracEkle').click(function (event) {
-            event.preventDefault(); // Formun varsayılan davranışını önle
+            event.preventDefault(); 
             var aracId = $('#AracId').val();
             var aracPlaka = $('#AracId option:selected').text();
             var ihaleBaslangicFiyati = $('#IhaleBaslangicFiyati').val();
             var minimumAlimFiyati = $('#MinimumAlimFiyati').val();
             var ihaleId = $('#IhaleId').val();
 
-            // Tabloya yeni bir satır ekle
+            
             $('#tabloBilgileri').append('<tr><td>' + aracPlaka + '</td><td>' + ihaleBaslangicFiyati + '</td><td>' + minimumAlimFiyati + '</td></tr>');
 
-            // Dizinin sonuna yeni bir öğe ekle
+            
             bilgiler.push({ AracId: aracId, IhaleId: ihaleId, IhaleBaslangicFiyati: ihaleBaslangicFiyati, MinimumAlimFiyati: minimumAlimFiyati });
 
-            // Form alanlarını temizle
+            
             $('#AracId').val('');
             $('#IhaleBaslangicFiyati').val('');
             $('#MinimumAlimFiyati').val('');
         });
 
         $('#gonder').click(function (event) {
-            event.preventDefault(); // Formun varsayılan davranışını önle
+            event.preventDefault(); 
             debugger;
-            // AJAX isteği yaparak diziyi action metoduna gönder
+            
             $.ajax({
                 url: '/Ihale/IhaleyeAracEkle',
                 type: 'POST',
@@ -315,10 +315,10 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (result) {
-                    // AJAX isteği başarılı olursa yapılacak işlemler
+                    
                 },
                 error: function (xhr, status, error) {
-                    console.log("AJAX isteği başarısız oldu: " + error); // Hata mesajını yazdır
+                    console.log("AJAX isteği başarısız oldu: " + error); 
                 }
             });
         });
