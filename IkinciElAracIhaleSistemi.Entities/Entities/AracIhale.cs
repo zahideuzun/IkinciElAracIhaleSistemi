@@ -17,6 +17,6 @@ namespace IkinciElAracIhaleSistemi.Entities.Entities
 		public decimal MinimumAlimFiyati { get; set; }
 		public Arac Arac { get; set; }
 		public Ihale Ihale { get; set; }
-		public ICollection<AracTeklif> AracTeklifler { get; internal set; }
+		public ICollection<AracTeklif> AracTeklifler { get;  set; }
 	}
 }

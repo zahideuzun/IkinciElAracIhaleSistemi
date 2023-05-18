@@ -74,6 +74,7 @@
     <Compile Include="Entities\AracTramerDetay.cs" />
     <Compile Include="Entities\Bases\BaseEntity.cs" />
     <Compile Include="Entities\Bases\IEntity.cs" />
+    <Compile Include="Entities\Bases\IModel.cs" />
     <Compile Include="Entities\BireyselUye.cs" />
     <Compile Include="Entities\BireyselUyeArac.cs" />
     <Compile Include="Entities\Chatbot.cs" />

@@ -255,7 +255,6 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
             }
         }
 
-
         public int UyeTipineGoreUyeIdGetir(int uyeTipi, int uyeId)
         {
             using (var db = new AracIhaleContext())
@@ -274,6 +273,13 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
             }
 
         }
+
+        /// <summary>
+        /// ihale guncellendiginde statu guncellendi mi diye kontrol eden metot.
+        /// </summary>
+        /// <param name="statuId"></param>
+        /// <param name="ihaleId"></param>
+        /// <returns></returns>
         public bool IhaleStatuKontrol(int statuId, int ihaleId)
         {
             using (var db = new AracIhaleContext())

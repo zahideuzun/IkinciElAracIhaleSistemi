@@ -49,7 +49,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 		}
 
 		[HttpPost, ValidateAntiForgeryToken]
-		public ActionResult AracGuncelle(/*[Bind(Exclude = "Fotograf")]*/AracEklemeDetayVM arac)
+		public ActionResult AracGuncelle(AracEklemeDetayVM arac)
 		{
 			arac.ModifiedBy = (Session["girisYapanKullanici"] as KullaniciRolVM).KullaniciId;
             new AracDAL().AracGuncelle(arac);

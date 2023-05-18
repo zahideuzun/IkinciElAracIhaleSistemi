@@ -1,14 +1,8 @@
-﻿using IkinciElAracIhaleSistemi.Entities.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Design.PluralizationServices;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IkinciElAracIhaleSistemi.DAL.Configuration;
+﻿using IkinciElAracIhaleSistemi.DAL.Configuration;
+using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.Entities.Bases;
+using System;
+using System.Data.Entity;
 
 namespace IkinciElAracIhaleSistemi.DAL.Context
 {

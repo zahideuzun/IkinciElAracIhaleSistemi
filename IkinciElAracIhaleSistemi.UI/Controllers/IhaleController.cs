@@ -80,6 +80,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         public void IhaleCacheListeleri()
         {
             ViewBag.Statuler = CacheHelper.GetOrSet("Statuler", () => new IhaleDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
+
             ViewBag.Firmalar = CacheHelper.GetOrSet("Firmalar", () => new FirmaDAL().FirmaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
             ViewBag.BireyselUyeler = CacheHelper.GetOrSet("BireyselUyeler", () => new BireyselUyeDAL().BireyselUyeleriListeyeDonustur(UyeTurleri.Bireysel), DateTimeOffset.Now.AddMinutes(30));
             ViewBag.IhaleTurleri = CacheHelper.GetOrSet("IhaleTurleri", () => new IhaleDAL().IhaleTuruListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));

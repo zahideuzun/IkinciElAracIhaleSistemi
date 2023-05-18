@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemi.Entities.Entities.Bases
 {
-    public interface IModel
-    {
-
-    }
+	public interface IModel
+	{
+	}
 }
