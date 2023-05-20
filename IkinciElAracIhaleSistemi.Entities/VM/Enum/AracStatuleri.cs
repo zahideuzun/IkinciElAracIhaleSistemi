@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemi.Entities.VM.Enum
 {
-	public enum Statuler
+	public enum AracStatuleri
 	{
 		Giris=1,
 		HemenAlSatista=2,

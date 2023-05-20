@@ -241,16 +241,18 @@
                     <tbody>
                         @foreach (var item in (List<AracBilgileriVM>)ViewBag.IhaledekiAracListesi)
                         {
+
                             <tr>
                                 <td>@sira</td>
-                                <td>@item.Plaka</td>
+	                            <td>@item.Plaka</td>
                                 <td>@item.MarkaAdi</td>
                                 <td>@item.ModelAdi</td>
                                 <td>@item.BireyselMi</td>
                                 <td>@item.Statu</td>
                                 <td>@item.KaydedenKullanici</td>
                                 <td>@item.KaydedilmeZamani</td>
-                                <td><a href="/Ihale/AraciIhaledenCikar/@item.AracId" class="btn btn-outline-danger">Çıkar</a></td>
+                                <td> <button class="deleteButton btn btn-outline-danger" data-aracId="@item.AracId">Çıkar</button></td>
+	                           
                             </tr>
 
                             sira++;
@@ -269,7 +271,7 @@
 
 <script src="~/Scripts/jquery-3.6.4.min.js"></script>
 <script>
-    $("#@Model.IhaleId").on("click", function () {
+    @*$("#@Model.IhaleId").on("click", function () {
         var ihaleId = $(this).attr("id");
         $.ajax({
             type: "GET",
@@ -279,7 +281,7 @@
                 $("#ilanModal .modal-body").html(result);
             }
         });
-    });
+    });*@
 
     $(document).ready(function () {
         var bilgiler = []; 
@@ -325,6 +327,21 @@
     });
 
 
+    $(document).on("click", ".deleteButton", function () {
+        var aracId = $(this).data("aracid"); // data-aracid özelliğini kullanın
+
+        $.ajax({
+            url: "/Ihale/IhaledenAraciCikar",
+            type: "POST",
+            data: { aracId: aracId }, // ID'yi normal veri olarak gönderin
+            success: function (funk3) {
+                loadData();
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX hatası:", error);
+            }
+        });
+    });
 
 
 
@@ -344,45 +361,7 @@
 
 
 
-
-    //$(document).ready(function () {
-    //    $('#aracEkle').click(function (e) {
-    //        e.preventDefault(); // prevent the form from submitting
-
-    //        // make an AJAX request to add the vehicle to the auction
-    //        $.ajax({
-    //            type: 'POST',
-    //            url: $('#aracEkleme').attr('action'),
-    //            data: $('#aracEkleme').serialize(),
-    //            success: function (result) {
-    //                // clear the form
-    //                $('#aracEkleme')[0].reset();
-
-
-    //                var tableBody = $('table tbody');
-    //                tableBody.empty();
-
-    //                $.each(result, function (i, item) {
-    //                    var row = '<tr>' +
-    //                        '<td>' + (i + 1) + '</td>' +
-    //                        '<td>' + item.Plaka + '</td>' +
-    //                        '<td>' + item.MarkaAdi + '</td>' +
-    //                        '<td>' + item.ModelAdi + '</td>' +
-    //                        '<td>' + item.BireyselMi + '</td>' +
-    //                        '<td>' + item.Statu + '</td>' +
-    //                        '<td>' + item.KaydedenKullanici + '</td>' +
-    //                        '<td>' + item.KaydedilmeZamani + '</td>' +
-    //                        '<td><a href="/Ihale/AraciIhaledenCikar/' + item.AracId + '" class="btn btn-outline-danger">Çıkar</a></td>' +
-    //                        '</tr>';
-    //                    tableBody.append(row);
-    //                });
-    //            },
-    //            error: function () {
-    //                alert('Error adding vehicle to auction.');
-    //            }
-    //        });
-    //    });
-    //});
+   
 
 
 

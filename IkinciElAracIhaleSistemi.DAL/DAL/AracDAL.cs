@@ -2,6 +2,7 @@
 using IkinciElAracIhaleSistemi.App.Results.Bases;
 using IkinciElAracIhaleSistemi.DAL.Context;
 using IkinciElAracIhaleSistemi.Entities.Entities;
+using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Arac;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
 using System;
@@ -10,12 +11,38 @@ using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
+using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.DAL.DAL
 {
 	public class AracDAL
 	{
+		public List<StatuVM> AracStatuleriniGetir()
+		{
+			using (var db = new AracIhaleContext())
+			{
+				var aracStatuleri = Enum.GetValues(typeof(AracStatuleri)).Cast<int>().ToArray();
 
+				return db.Status
+					.Where(s => s.IsActive && aracStatuleri.Contains(s.StatuId))
+					.Select(s => new StatuVM
+					{
+						StatuId = s.StatuId,
+						StatuAdi = s.StatuAdi
+					}).ToList();
+			}
+		}
+		public List<SelectListItem> StatuListesineDonustur()
+		{
+			var statuVm = new AracEklemeDetayVM();
+			statuVm.Statuler = new AracDAL().AracStatuleriniGetir()
+				.Select(r => new SelectListItem()
+				{
+					Value = r.StatuId.ToString(),
+					Text = r.StatuAdi
+				}).ToList();
+			return statuVm.Statuler;
+		}
 		public List<AracBilgileriVM> AraclariGetir()
 		{
 			using (AracIhaleContext db = new AracIhaleContext())

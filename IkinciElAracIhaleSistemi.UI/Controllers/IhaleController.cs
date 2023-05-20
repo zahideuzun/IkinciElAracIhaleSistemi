@@ -77,9 +77,22 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
+        [HttpPost]
+        public ActionResult IhaledenAraciCikar(int? aracId)
+        {
+	        if (ModelState.IsValid && aracId != null)
+	        {
+		        new IhaleDAL().AraciIhaledenCikar(aracId);
+		        //int ihaleId = ihale[0].IhaleId;
+		        return RedirectToAction("Index", "Ihale" /*new { id = ihaleId }*/);
+	        }
+
+	        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+		}
+
         public void IhaleCacheListeleri()
         {
-            ViewBag.Statuler = CacheHelper.GetOrSet("Statuler", () => new IhaleDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
+            ViewBag.Statuler = CacheHelper.GetOrSet("IhaleStatuleri", () => new IhaleDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 
             ViewBag.Firmalar = CacheHelper.GetOrSet("Firmalar", () => new FirmaDAL().FirmaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
             ViewBag.BireyselUyeler = CacheHelper.GetOrSet("BireyselUyeler", () => new BireyselUyeDAL().BireyselUyeleriListeyeDonustur(UyeTurleri.Bireysel), DateTimeOffset.Now.AddMinutes(30));

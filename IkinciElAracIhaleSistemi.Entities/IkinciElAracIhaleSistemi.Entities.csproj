@@ -137,7 +137,7 @@
     <Compile Include="VM\Enum\IhaleStatuleri.cs" />
     <Compile Include="VM\Enum\IhaleTurleri.cs" />
     <Compile Include="VM\Enum\Roller.cs" />
-    <Compile Include="VM\Enum\Statuler.cs" />
+    <Compile Include="VM\Enum\AracStatuleri.cs" />
     <Compile Include="VM\Enum\UyeTurleri.cs" />
     <Compile Include="VM\FirmaVM.cs" />
     <Compile Include="VM\IhaleEkleVM.cs" />

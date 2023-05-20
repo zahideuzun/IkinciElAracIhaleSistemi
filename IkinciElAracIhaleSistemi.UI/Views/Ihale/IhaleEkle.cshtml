@@ -104,7 +104,7 @@
 
                                 <div class="col">
                                     <div>
-	                                    <button type="submit" class="btn btn-primary mr-2">İhale Oluştur</button>
+                                        <button type="submit" class="btn btn-primary mr-2">İhale Oluştur</button>
                                     </div>
                                 </div>
                             </div>
@@ -123,9 +123,7 @@
 
 <script src="~/Scripts/jquery-3.6.4.min.js"></script>
 <script>
-
-
-function onChangeIhaleTuru() {
+    function onChangeIhaleTuru() {
     var ihaleTuruId = $("#IhaleTuruId").val();
     debugger;
     if (ihaleTuruId == '@((int)IhaleTurleri.Bireysel)') {
@@ -138,7 +136,8 @@ function onChangeIhaleTuru() {
                 .attr("value", bireyselUye.Value)
                 .text(bireyselUye.Text));
         });
-    } else if (ihaleTuruId == '@((int)IhaleTurleri.Kurumsal)') {
+    }
+    else if (ihaleTuruId == '@((int)IhaleTurleri.Kurumsal)') {
 
         var firmalar = @Html.Raw(Json.Encode(ViewBag.Firmalar));
         var selectList = $("#BireyselVeyaFirmaId");
@@ -150,6 +149,32 @@ function onChangeIhaleTuru() {
         });
     }
 }
+
+@*function onChangeIhaleTuru() {
+    var ihaleTuruId = $("#IhaleTuruId").val();
+    debugger;
+    var selectList = $("#BireyselVeyaFirmaId");
+    selectList.empty();
+
+    if (ihaleTuruId == '@((int)IhaleTurleri.Bireysel)') {
+        var bireyselUyeler = @Html.Raw(Json.Encode(ViewBag.BireyselUyeler));
+        selectList.prop("disabled", true);
+        //$.each(bireyselUyeler, function (index, bireyselUye) {
+        //    selectList.append($("<option></option>")
+        //        .attr("value", bireyselUye.Value)
+        //        .text(bireyselUye.Text));
+        //});
+    } else if (ihaleTuruId == '@((int)IhaleTurleri.Kurumsal)') {
+        var firmalar = @Html.Raw(Json.Encode(ViewBag.Firmalar));
+        selectList.prop("disabled", false);
+        $.each(firmalar, function (index, firma) {
+            selectList.append($("<option></option>")
+                .attr("value", firma.Value)
+                .text(firma.Text));
+        });
+    }
+}*@
+
 
 
 

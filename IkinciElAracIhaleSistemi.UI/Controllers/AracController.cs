@@ -106,7 +106,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 			ViewBag.AracTurleri = CacheHelper.GetOrSet("AracTurleri", () => new AracOzellikDAL().AracOzellikleriniListeyeDonustur((int)AracOzellikleri.AracTuru), DateTimeOffset.Now.AddMinutes(30));
 			ViewBag.Modeller = CacheHelper.GetOrSet("Modeller", () => new ModelDAL().ModelListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 			ViewBag.Markalar = CacheHelper.GetOrSet("Markalar", () => new MarkaDAL().MarkaListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
-			ViewBag.Statuler = CacheHelper.GetOrSet("Statuler", () => new StatuDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
+			ViewBag.Statuler = CacheHelper.GetOrSet("AracStatuleri", () => new AracDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 		}
 
 	}
