@@ -340,15 +340,14 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
                     using (AracIhaleContext aracDb = new AracIhaleContext())
                     {
                         Ihale guncellenecekIhaleBilgisi = aracDb.Ihaleler.SingleOrDefault(a => a.Id == ihale.IhaleId);
-                        guncellenecekIhaleBilgisi.IhaleBaslangicTarihi = ihale.BaslangicTarihi;
                         guncellenecekIhaleBilgisi.BaslangicSaat = ihale.BaslangicSaati;
-                        guncellenecekIhaleBilgisi.IhaleBitisTarihi = ihale.BitisTarihi;
                         guncellenecekIhaleBilgisi.BitisSaat = ihale.BitisSaati;
 
                         if (!(IhaleStatuKontrol(ihale.StatuId, ihale.IhaleId)))
                         {
                             aracDb.IhaleStatuleri.Add(new IhaleStatu()
                             {
+                                IhaleId = guncellenecekIhaleBilgisi.Id,
                                 StatuId = ihale.StatuId,
                                 Tarih = DateTime.Now,
                                 IsActive = true,
@@ -396,6 +395,37 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 				{
 					scope.Complete();
 					return new ErrorResult("Araç ihaleden silinemedi!");
+				}
+			}
+		}
+
+		public Result IhaleSil(int? id)
+		{
+			using (TransactionScope scope = new TransactionScope())
+			{
+				try
+				{
+					using (AracIhaleContext aracDb = new AracIhaleContext())
+					{
+
+						var silinecekUye = aracDb.Ihaleler.Find(id);
+						if (silinecekUye != null)
+						{
+							silinecekUye.IsActive = false;
+							silinecekUye.IsDeleted = true;
+							silinecekUye.ModifiedDate = DateTime.Now;
+						}
+
+
+						aracDb.SaveChanges();
+					}
+					scope.Complete();
+					return new SuccessResult("İhale silindi!");
+				}
+				catch (Exception ex)
+				{
+					scope.Complete();
+					return new ErrorResult("İhale silinemedi!");
 				}
 			}
 		}

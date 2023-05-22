@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using IkinciElAracIhaleSistemi.App.Helper;
+﻿using IkinciElAracIhaleSistemi.App.Helper;
 using IkinciElAracIhaleSistemi.DAL.DAL;
-using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace IkinciElAracIhaleSistemi.UI.Controllers
 {
-    public class IhaleController : Controller
+	public class IhaleController : Controller
     {
         // GET: Ihale
         public ActionResult Index()
@@ -54,7 +51,7 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
         [HttpPost]
         public ActionResult IhaleDetay(IhaleEkleVM ihale)
         {
-            if (ModelState.IsValid && ihale != null)
+            if (ihale != null)
             {
                 IhaleCacheListeleri();
                 new IhaleDAL().IhaleBilgileriniGuncelle(ihale);
@@ -89,8 +86,17 @@ namespace IkinciElAracIhaleSistemi.UI.Controllers
 
 	        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 		}
-
-        public void IhaleCacheListeleri()
+        public ActionResult IhaleSil(int? id)
+        {
+	        if (ModelState.IsValid && id != null)
+	        {
+		        new IhaleDAL().IhaleSil(id);
+		        return RedirectToAction("Index");
+	        }
+	        //todo hata mesaji duzenlenecek
+	        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+		public void IhaleCacheListeleri()
         {
             ViewBag.Statuler = CacheHelper.GetOrSet("IhaleStatuleri", () => new IhaleDAL().StatuListesineDonustur(), DateTimeOffset.Now.AddMinutes(30));
 

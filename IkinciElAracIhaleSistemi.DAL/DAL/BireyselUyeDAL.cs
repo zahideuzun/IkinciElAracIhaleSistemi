@@ -25,9 +25,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
 						join ut in aracDb.UyeTurleri on u.UyeTuruId equals ut.UyeTuruId
 						join bu in aracDb.BireyselUyeler on u.Id equals bu.UyeId
 						//todo idye gore uye turu kontrol et
-						where bu.IsActive
-							  && ut.UyeTuruAdi == uyeTurleri.ToString()
-							  && u.IsActive
+						where  ut.UyeTuruAdi == uyeTurleri.ToString()
 						select new BireyselUyeVM()
 						{
 							UyeId = u.Id,
