@@ -295,7 +295,7 @@ namespace IkinciElAracIhaleSistemi.DAL.DAL
                         var bireyselUye = db.BireyselUyeler.FirstOrDefault(x => x.UyeId == uyeId);
                         return bireyselUye?.UyeId ?? 0;
                     case UyeTurleri.Kurumsal:
-                        var kurumsalUye = db.KurumsalUyeler.FirstOrDefault(x => x.UyeId == uyeId);
+                        var kurumsalUye = db.KurumsalUyeler.FirstOrDefault(x => x.FirmaId == uyeId);
                         return kurumsalUye?.UyeId ?? 0;
                     default:
                         return 0;

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IkinciElAracIhaleSistemi.Entities.Entities;
+using IkinciElAracIhaleSistemi.Entities.Entities.Bases;
 
 namespace IkinciElAracIhaleSistemi.Entities.Entities
 {
-	public class IhaleStatu
+	public class IhaleStatu : IEntity
 	{
 		public int IhaleStatuId { get; set; }
 		public DateTime Tarih { get; set; }
